@@ -1,6 +1,8 @@
 package com.ala24.bookstore.domain;
 
 import com.ala24.bookstore.repository.MemberRepository;
+import com.ala24.bookstore.service.CashService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,30 +16,48 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Rollback(value = false)
 class MemberTest {
 
+	private static final long ZERO = 0L;
+	private static Member memberA;
+	private static Member memberB;
+
+	private static Member savedMemberA;
+	private static Member savedMemberB;
+	private static Cash memberACash = Cash.charge(ZERO);
+	private static Cash memberBCash = Cash.charge(ZERO);
+
+
 	@Autowired
 	MemberRepository memberRepository;
+	@Autowired
+	CashService cashService;
 
-	@Test
-	void 멤버_저장_테스트() {
-	    //given
+	@BeforeEach
+	void init() {
 		Address address = Address.builder()
 				.city("서울")
 				.address("은마아파트")
 				.zipCode(22222)
 				.build();
 
-		Member memberA = Member.builder()
+		memberA = Member.builder()
 				.name("사나")
 				.address(address)
+				.cash(memberACash)
 				.build();
 
-		Member memberB = Member.builder()
+		memberB = Member.builder()
 				.name("다현")
 				.address(address)
+				.cash(memberBCash)
 				.build();
 
-		Member savedMemberA = memberRepository.save(memberA);
-		Member savedMemberB = memberRepository.save(memberB);
+		savedMemberA = memberRepository.save(memberA);
+		savedMemberB = memberRepository.save(memberB);
+	}
+
+	@Test
+	void 멤버_저장_테스트() {
+		//given
 
 		//when
 		Member findMemberA = memberRepository.findById(savedMemberA.getId()).get();
@@ -54,4 +74,14 @@ class MemberTest {
 		assertThat(findMemberB.getAddress()).isEqualTo(memberB.getAddress());
 	}
 
+	@Test
+	void 돈_충전_테스트() {
+	    //given
+		cashService.charge(savedMemberA.getId(), 10000L);
+		//when
+		Member findMember = memberRepository.findById(savedMemberA.getId()).get();
+
+		//then
+		assertThat(findMember.remainCash()).isEqualTo(10000L);
+	}
 }

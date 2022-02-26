@@ -23,11 +23,29 @@ public class Member {
 	@Embedded
 	private Address address;
 
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "cash_id")
+	private Cash cash;
+
 	@Builder
-	private Member(String name, Address address) {
+	private Member(String name, Address address, Cash cash) {
 		this.name = name;
 		this.address = address;
+		this.cash = cash;
 	}
 
 
+	public Long remainCash() {
+		return this.cash.all();
+	}
+
+	public void charge(Long cash) {
+		if (this.cash == null) {
+			this.cash = Cash.charge(cash);
+			return;
+		}
+
+		Long leftMoney = this.cash.all();
+		this.cash = Cash.charge(leftMoney + cash);
+	}
 }
