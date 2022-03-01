@@ -1,5 +1,6 @@
 package com.ala24.bookstore.domain;
 
+import com.ala24.bookstore.domain.type.OrderStatus;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,9 +25,18 @@ public class Order {
 
 	LocalDateTime orderDate;
 
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "delivery_id")
+	private Delivery delivery;
+
+	@Enumerated(EnumType.STRING)
+	private OrderStatus orderStatus;
+
 	@Builder
-	public Order(Member member) {
+	public Order(Member member, Delivery delivery) {
 		this.member = member;
+		this.delivery = delivery;
 		this.orderDate = LocalDateTime.now();
+		this.orderStatus = OrderStatus.ORDER;
 	}
 }
