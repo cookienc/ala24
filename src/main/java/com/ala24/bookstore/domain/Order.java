@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -23,6 +25,8 @@ public class Order {
 	@JoinColumn(name = "member_id")
 	Member member;
 
+	@OneToMany(mappedBy = "order")
+	List<OrderItem> orderItems = new ArrayList<>();
 	LocalDateTime orderDate;
 
 	@OneToOne(fetch = FetchType.LAZY)
