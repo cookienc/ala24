@@ -14,15 +14,15 @@ public class OrderItem {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "orderItem_id")
-	Long id;
+	private Long id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "order_id")
-	Order order;
+	private Order order;
 
-	Long orderPrice;
+	private Long orderPrice;
 
-	int count;
+	private int count;
 
 	@Builder
 	public OrderItem(Order order, Long orderPrice, int count) {

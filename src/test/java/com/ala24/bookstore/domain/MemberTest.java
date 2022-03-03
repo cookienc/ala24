@@ -22,8 +22,8 @@ class MemberTest {
 
 	private static Member savedMemberA;
 	private static Member savedMemberB;
-	private static Cash memberACash = Cash.charge(ZERO);
-	private static Cash memberBCash = Cash.charge(ZERO);
+	private static Cash memberACash;
+	private static Cash memberBCash;
 
 
 	@Autowired
@@ -33,6 +33,9 @@ class MemberTest {
 
 	@BeforeEach
 	void init() {
+		memberACash = Cash.charge(ZERO);
+		memberBCash = Cash.charge(ZERO);
+
 		Address address = Address.builder()
 				.city("서울")
 				.address("은마아파트")

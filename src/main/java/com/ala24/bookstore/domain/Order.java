@@ -19,15 +19,15 @@ public class Order {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "order_id")
-	Long id;
+	private Long id;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "member_id")
-	Member member;
+	private Member member;
 
 	@OneToMany(mappedBy = "order")
-	List<OrderItem> orderItems = new ArrayList<>();
-	LocalDateTime orderDate;
+	private List<OrderItem> orderItems = new ArrayList<>();
+	private LocalDateTime orderDate;
 
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "delivery_id")
