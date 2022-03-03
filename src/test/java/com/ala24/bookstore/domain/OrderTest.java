@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
@@ -22,6 +24,7 @@ class OrderTest {
 	private static Member member;
 	private static Order order;
 	private static Delivery delivery;
+	private static OrderItem orderItem;
 
 	@BeforeEach
 	void init() {
@@ -31,6 +34,9 @@ class OrderTest {
 				.cash(Cash.charge(0L))
 				.build();
 
+		orderItem = OrderItem.builder()
+				.build();
+
 		delivery = Delivery.builder()
 				.address(new Address())
 				.order(new Order())
@@ -38,8 +44,8 @@ class OrderTest {
 
 		order = Order.builder()
 				.member(member)
+				.orderItem(Arrays.asList(orderItem))
 				.delivery(delivery)
-				.delivery(new Delivery())
 				.build();
 	}
 	@Test

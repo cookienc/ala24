@@ -37,9 +37,10 @@ public class Order {
 	private OrderStatus orderStatus;
 
 	@Builder
-	public Order(Member member, Delivery delivery) {
+	public Order(Member member, Delivery delivery, List<OrderItem> orderItem) {
 		this.member = member;
 		this.delivery = delivery;
+		this.orderItems = orderItem;
 		this.orderDate = LocalDateTime.now();
 		this.orderStatus = OrderStatus.ORDER;
 	}

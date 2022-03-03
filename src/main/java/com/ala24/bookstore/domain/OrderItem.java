@@ -1,5 +1,6 @@
 package com.ala24.bookstore.domain;
 
+import com.ala24.bookstore.domain.item.Item;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,6 +18,10 @@ public class OrderItem {
 	private Long id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "item_id")
+	private Item item;
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "order_id")
 	private Order order;
 
@@ -25,7 +30,8 @@ public class OrderItem {
 	private int count;
 
 	@Builder
-	public OrderItem(Order order, Long orderPrice, int count) {
+	private OrderItem(Item item, Order order, Long orderPrice, int count) {
+		this.item = item;
 		this.order = order;
 		this.orderPrice = orderPrice;
 		this.count = count;
