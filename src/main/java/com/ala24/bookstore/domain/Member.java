@@ -1,5 +1,6 @@
 package com.ala24.bookstore.domain;
 
+import com.ala24.bookstore.domain.type.MemberStatus;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,13 +28,16 @@ public class Member {
 	@JoinColumn(name = "cash_id")
 	private Cash cash;
 
+	@Enumerated(EnumType.STRING)
+	private MemberStatus authority;
+
 	@Builder
 	private Member(String name, Address address, Cash cash) {
 		this.name = name;
 		this.address = address;
 		this.cash = cash;
+		this.authority = MemberStatus.USER;
 	}
-
 
 	public Long remainCash() {
 		return this.cash.all();

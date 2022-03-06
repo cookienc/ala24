@@ -1,5 +1,6 @@
 package com.ala24.bookstore.domain;
 
+import com.ala24.bookstore.domain.type.MemberStatus;
 import com.ala24.bookstore.repository.MemberRepository;
 import com.ala24.bookstore.service.CashService;
 import org.junit.jupiter.api.BeforeEach;
@@ -75,6 +76,9 @@ class MemberTest {
 
 		assertThat(findMemberA.getAddress()).isEqualTo(memberA.getAddress());
 		assertThat(findMemberB.getAddress()).isEqualTo(memberB.getAddress());
+
+		assertThat(findMemberA.getAuthority()).isEqualTo(MemberStatus.USER);
+		assertThat(findMemberB.getAuthority()).isEqualTo(MemberStatus.USER);
 	}
 
 	@Test
