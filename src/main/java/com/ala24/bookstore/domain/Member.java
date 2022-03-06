@@ -1,6 +1,7 @@
 package com.ala24.bookstore.domain;
 
 import com.ala24.bookstore.domain.type.MemberStatus;
+import com.sun.istack.NotNull;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,6 +19,10 @@ public class Member {
 	@Column(name = "member_id")
 	private Long id;
 
+	@NotNull
+	@Column(unique = true)
+	private String loginId;
+
 	@Column(length = 10, nullable = false)
 	private String name;
 
@@ -32,8 +37,9 @@ public class Member {
 	private MemberStatus authority;
 
 	@Builder
-	private Member(String name, Address address, Cash cash) {
+	private Member(String name, String loginId, Address address, Cash cash) {
 		this.name = name;
+		this.loginId = loginId;
 		this.address = address;
 		this.cash = cash;
 		this.authority = MemberStatus.USER;
