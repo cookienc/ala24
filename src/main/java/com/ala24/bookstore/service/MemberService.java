@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -46,8 +47,8 @@ public class MemberService {
 
 
 	private void validateDuplicateMember(Member member) {
-			Member findMember = memberRepository.findByLoginId(member.getLoginId());
-		if (findMember != null) {
+		Optional<Member> findMember = memberRepository.findByLoginId(member.getLoginId());
+		if (findMember.isPresent()) {
 			throw new IllegalStateException("중복된 아이디로 가입할 수 없습니다.");
 		}
 	}
