@@ -3,6 +3,7 @@ package com.ala24.bookstore.service;
 import com.ala24.bookstore.domain.*;
 import com.ala24.bookstore.exception.NotEnoughCashException;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,7 +66,19 @@ class CashServiceTest {
 				.cash(memberACash)
 				.build();
 	}
-	
+
+	@Test
+	void 돈_충전_테스트() {
+		//given
+		Long memberAId = memberService.join(memberA);
+		cashService.charge(memberAId, 10000L);
+		//when
+		Member findMember = memberService.findMember(memberAId);
+
+		//then
+		assertThat(findMember.account()).isEqualTo(10000L);
+	}
+
 	@ParameterizedTest
 	@CsvSource(value = {"20000,10000,10000", "10001,10000,1", "1,0,1"})
 	void 지불_가능_테스트(Long money, Long price, Long left) {

@@ -78,15 +78,4 @@ class MemberTest {
 		assertThat(findMemberA.getAuthority()).isEqualTo(MemberStatus.USER);
 		assertThat(findMemberB.getAuthority()).isEqualTo(MemberStatus.USER);
 	}
-
-	@Test
-	void 돈_충전_테스트() {
-	    //given
-		cashService.charge(savedMemberA.getId(), 10000L);
-		//when
-		Member findMember = memberRepository.findById(savedMemberA.getId()).get();
-
-		//then
-		assertThat(findMember.account()).isEqualTo(10000L);
-	}
 }
