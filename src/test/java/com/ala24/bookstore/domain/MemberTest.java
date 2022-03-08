@@ -87,6 +87,6 @@ class MemberTest {
 		Member findMember = memberRepository.findById(savedMemberA.getId()).get();
 
 		//then
-		assertThat(findMember.remainCash()).isEqualTo(10000L);
+		assertThat(findMember.account()).isEqualTo(10000L);
 	}
 }

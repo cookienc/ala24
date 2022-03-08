@@ -24,7 +24,7 @@ public class Cash {
 		this.money = cash;
 	}
 
-	public Long all() {
+	public Long left() {
 		return this.money;
 	}
 }

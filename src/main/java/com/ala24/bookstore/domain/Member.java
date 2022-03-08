@@ -45,8 +45,8 @@ public class Member {
 		this.authority = MemberStatus.USER;
 	}
 
-	public Long remainCash() {
-		return this.cash.all();
+	public Long account() {
+		return this.cash.left();
 	}
 
 	public void charge(Long cash) {
@@ -55,7 +55,7 @@ public class Member {
 			return;
 		}
 
-		Long leftMoney = this.cash.all();
+		Long leftMoney = account();
 		this.cash = Cash.charge(leftMoney + cash);
 	}
 }
