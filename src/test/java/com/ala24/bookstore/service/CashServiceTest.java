@@ -1,6 +1,7 @@
 package com.ala24.bookstore.service;
 
 import com.ala24.bookstore.domain.*;
+import com.ala24.bookstore.exception.NotEnoughCashException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -89,6 +90,6 @@ class CashServiceTest {
 		//when
 		//then
 		assertThatThrownBy(() -> cashService.pay(memberAId, price))
-				.isInstanceOf(IllegalStateException.class);
+				.isInstanceOf(NotEnoughCashException.class);
 	}
 }

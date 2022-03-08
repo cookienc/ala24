@@ -1,6 +1,7 @@
 package com.ala24.bookstore.service;
 
 import com.ala24.bookstore.domain.Member;
+import com.ala24.bookstore.exception.NotEnoughCashException;
 import com.ala24.bookstore.repository.CashRepository;
 import com.ala24.bookstore.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,7 @@ public class CashService {
 	public void pay(Long memberId, Long cash) {
 		Long account = findMember(memberId).account();
 		if (account < cash) {
-			throw new IllegalStateException("계좌에 돈이 부족합니다.");
+			throw new NotEnoughCashException("계좌에 돈이 부족합니다.");
 		}
 		charge(memberId, -cash);
 	}
