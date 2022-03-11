@@ -17,20 +17,20 @@ public class CashService {
 	private final CashRepository cashRepository;
 
 	public void charge(Long memberId, Long cash) {
-		Member findMember = findMember(memberId);
+		Member findMember = findOne(memberId);
 		cashRepository.delete(findMember.getCash()); // 기존에 있는 객체를 지우기 위함
 		findMember.charge(cash);
 	}
 
 	public void pay(Long memberId, Long cash) {
-		Long account = findMember(memberId).account();
+		Long account = findOne(memberId).account();
 		if (account < cash) {
 			throw new NotEnoughCashException("계좌에 돈이 부족합니다.");
 		}
 		charge(memberId, -cash);
 	}
 
-	private Member findMember(Long memberId) {
+	private Member findOne(Long memberId) {
 		return memberRepository.findById(memberId).stream()
 				.findFirst()
 				.orElseThrow(() -> new IllegalArgumentException("해당 멤버는 없는 멤버입니다."));

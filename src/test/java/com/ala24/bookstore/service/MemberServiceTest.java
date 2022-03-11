@@ -97,7 +97,7 @@ class MemberServiceTest {
 		memberService.delete(savedId);
 
 		//then
-		assertThatThrownBy(() -> memberService.findMember(savedId))
+		assertThatThrownBy(() -> memberService.findOne(savedId))
 				.isInstanceOf(IllegalStateException.class);
 	}
 }

@@ -73,7 +73,7 @@ class CashServiceTest {
 		Long memberAId = memberService.join(memberA);
 		cashService.charge(memberAId, 10000L);
 		//when
-		Member findMember = memberService.findMember(memberAId);
+		Member findMember = memberService.findOne(memberAId);
 
 		//then
 		assertThat(findMember.account()).isEqualTo(10000L);

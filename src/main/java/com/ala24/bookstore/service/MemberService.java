@@ -36,11 +36,11 @@ public class MemberService {
 	 * 회원 삭제
 	 */
 	public void delete(Long savedId) {
-		Member findMember = findMember(savedId);
+		Member findMember = findOne(savedId);
 		memberRepository.delete(findMember);
 	}
 
-	public Member findMember(Long id) {
+	public Member findOne(Long id) {
 		return memberRepository.findById(id)
 				.orElseThrow(() -> new IllegalStateException("해당 회원은 존재하지 않습니다."));
 	}
