@@ -17,7 +17,7 @@ public class Delivery {
 	@Column(name = "delivery_id")
 	private Long id;
 
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "delivery")
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "delivery", cascade = CascadeType.ALL)
 	@JoinColumn(name = "order_id")
 	private Order order;
 
@@ -29,18 +29,22 @@ public class Delivery {
 
 	@Builder
 	private Delivery(Order order, Address address) {
-		this.order = order;
+		this.address = address;
+		this.deliveryStatus = DeliveryStatus.PREPARING;
+		addOrder(order);
+	}
+
+	private Delivery(Address address) {
 		this.address = address;
 		this.deliveryStatus = DeliveryStatus.PREPARING;
 	}
 
 	public static Delivery createDelivery(Address address) {
-		return Delivery.builder()
-				.address(address)
-				.build();
+		return new Delivery(address);
 	}
 
 	public void addOrder(Order order) {
 		this.order = order;
+		order.addDelivery(this);
 	}
 }
