@@ -1,8 +1,10 @@
 package com.ala24.bookstore.domain;
 
+import com.ala24.bookstore.DataBaseCleanup;
 import com.ala24.bookstore.domain.type.MemberStatus;
 import com.ala24.bookstore.repository.MemberRepository;
 import com.ala24.bookstore.service.CashService;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +26,14 @@ class MemberTest {
 	private static Cash memberACash;
 	private static Cash memberBCash;
 
-
 	@Autowired
 	MemberRepository memberRepository;
+
 	@Autowired
 	CashService cashService;
+
+	@Autowired
+	DataBaseCleanup dataBaseCleanup;
 
 	@BeforeEach
 	void init() {
@@ -55,6 +60,11 @@ class MemberTest {
 
 		savedMemberA = memberRepository.save(memberA);
 		savedMemberB = memberRepository.save(memberB);
+	}
+
+	@AfterEach
+	void tearDown() {
+		dataBaseCleanup.execute();
 	}
 
 	@Test

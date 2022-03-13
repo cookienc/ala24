@@ -1,7 +1,9 @@
 package com.ala24.bookstore.service;
 
+import com.ala24.bookstore.DataBaseCleanup;
 import com.ala24.bookstore.domain.*;
 import com.ala24.bookstore.exception.NotEnoughCashException;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -22,6 +24,9 @@ class CashServiceTest {
 
 	@Autowired
 	MemberService memberService;
+
+	@Autowired
+	DataBaseCleanup dataBaseCleanup;
 
 	private static Member memberA;
 	private static Member memberB;
@@ -65,6 +70,11 @@ class CashServiceTest {
 				.address(address)
 				.cash(memberACash)
 				.build();
+	}
+
+	@AfterEach
+	void tearDown() {
+		dataBaseCleanup.execute();
 	}
 
 	@Test

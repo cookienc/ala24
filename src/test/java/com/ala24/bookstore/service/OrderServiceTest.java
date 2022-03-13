@@ -9,6 +9,7 @@ import com.ala24.bookstore.domain.item.Item;
 import com.ala24.bookstore.domain.item.Poem;
 import com.ala24.bookstore.domain.item.SelfDevelopment;
 import com.ala24.bookstore.repository.OrderItemRepository;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,11 +84,11 @@ class OrderServiceTest {
 		memberAId = memberService.join(memberA);
 		memberBId = memberService.join(memberB);
 	}
-//
-//	@AfterEach
-//	void tearDown() {
-//		dataBaseCleanup.execute();
-//	}
+
+	@AfterEach
+	void tearDown() {
+		dataBaseCleanup.execute();
+	}
 
 	@Test
 	void 상품_주문_테스트() {

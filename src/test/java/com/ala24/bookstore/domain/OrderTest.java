@@ -1,7 +1,9 @@
 package com.ala24.bookstore.domain;
 
+import com.ala24.bookstore.DataBaseCleanup;
 import com.ala24.bookstore.repository.MemberRepository;
 import com.ala24.bookstore.repository.OrderRepository;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +18,24 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Transactional
 class OrderTest {
 
-	@Autowired
-	MemberRepository memberRepository;
-	@Autowired
-	OrderRepository orderRepository;
-
 	private static Member member;
 	private static Order order;
 	private static Delivery delivery;
 	private static OrderItem orderItem;
+
+	@Autowired
+	MemberRepository memberRepository;
+
+	@Autowired
+	OrderRepository orderRepository;
+
+	@Autowired
+	DataBaseCleanup dataBaseCleanup;
+
+	@AfterEach
+	void tearDown() {
+		dataBaseCleanup.execute();
+	}
 
 	@BeforeEach
 	void init() {
@@ -48,6 +59,7 @@ class OrderTest {
 				.delivery(delivery)
 				.build();
 	}
+
 	@Test
 	void 주문_생성_테스트() {
 	    //given

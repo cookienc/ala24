@@ -1,8 +1,10 @@
 package com.ala24.bookstore.domain;
 
+import com.ala24.bookstore.DataBaseCleanup;
 import com.ala24.bookstore.domain.item.Item;
 import com.ala24.bookstore.domain.item.SelfDevelopment;
 import com.ala24.bookstore.repository.OrderItemRepository;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,6 +20,14 @@ class OrderItemTest {
 
 	@Autowired
 	OrderItemRepository orderItemRepository;
+
+	@Autowired
+	DataBaseCleanup dataBaseCleanup;
+
+	@AfterEach
+	void tearDown() {
+		dataBaseCleanup.execute();
+	}
 
 	@Test
 	void 주문_아이템_저장테스트() {

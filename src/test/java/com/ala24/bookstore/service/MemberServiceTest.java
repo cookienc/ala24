@@ -1,6 +1,8 @@
 package com.ala24.bookstore.service;
 
+import com.ala24.bookstore.DataBaseCleanup;
 import com.ala24.bookstore.domain.*;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +18,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @Transactional
 class MemberServiceTest {
 
-	@Autowired
-	MemberService memberService;
 
 	private static Member memberA;
 	private static Member memberB;
@@ -28,6 +28,12 @@ class MemberServiceTest {
 	public static final long ZERO = 0L;
 	private static Cash memberACash;
 	private static Cash memberBCash;
+
+	@Autowired
+	MemberService memberService;
+
+	@Autowired
+	DataBaseCleanup dataBaseCleanup;
 
 	@BeforeEach
 	void init() {
@@ -61,6 +67,11 @@ class MemberServiceTest {
 				.address(address)
 				.cash(memberBCash)
 				.build();
+	}
+
+	@AfterEach
+	void tearDown() {
+		dataBaseCleanup.execute();
 	}
 
 	@Test
