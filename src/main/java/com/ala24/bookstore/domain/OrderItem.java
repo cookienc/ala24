@@ -1,6 +1,7 @@
 package com.ala24.bookstore.domain;
 
 import com.ala24.bookstore.domain.item.Item;
+import com.ala24.bookstore.exception.NoEnoughItemException;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,15 +26,36 @@ public class OrderItem {
 	@JoinColumn(name = "order_id")
 	private Order order;
 
-	private Long orderPrice;
+	private int orderPrice;
 
 	private int count;
 
 	@Builder
-	private OrderItem(Item item, Order order, Long orderPrice, int count) {
+	private OrderItem(Item item, Order order, int orderPrice, int count) {
 		this.item = item;
 		this.order = order;
 		this.orderPrice = orderPrice;
 		this.count = count;
+	}
+
+	public void addOrder(Order order) {
+		this.order = order;
+	}
+
+	public static OrderItem createOrderItem(Item item, int orderPrice, int count) {
+
+		validateItem(item, count);
+
+		return OrderItem.builder()
+				.item(item)
+				.orderPrice(orderPrice)
+				.count(count)
+				.build();
+	}
+
+	private static void validateItem(Item item, int count) {
+		if (item.getStockQuantity() < count) {
+			throw new NoEnoughItemException("상품의 재고가 부족합니다.");
+		}
 	}
 }

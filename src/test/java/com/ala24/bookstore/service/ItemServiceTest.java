@@ -1,8 +1,10 @@
 package com.ala24.bookstore.service;
 
+import com.ala24.bookstore.DataBaseCleanup;
 import com.ala24.bookstore.domain.item.Item;
 import com.ala24.bookstore.domain.item.Poem;
 import com.ala24.bookstore.domain.item.SelfDevelopment;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ class ItemServiceTest {
 	@Autowired
 	ItemService itemService;
 
+	@Autowired
+	private DataBaseCleanup dataBaseCleanup;
+
 	@BeforeEach
 	void init() {
 		book = SelfDevelopment.builder()
@@ -41,6 +46,12 @@ class ItemServiceTest {
 				.stockQuantity(50)
 				.build();
 	}
+
+	@AfterEach
+	void tearDown() {
+		dataBaseCleanup.execute();
+	}
+
 	@Test
 	void 아이템_저장_및_조회_테스트() {
 	    //given

@@ -33,4 +33,14 @@ public class Delivery {
 		this.address = address;
 		this.deliveryStatus = DeliveryStatus.PREPARING;
 	}
+
+	public static Delivery createDelivery(Address address) {
+		return Delivery.builder()
+				.address(address)
+				.build();
+	}
+
+	public void addOrder(Order order) {
+		this.order = order;
+	}
 }

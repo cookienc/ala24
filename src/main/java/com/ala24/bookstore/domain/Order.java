@@ -27,9 +27,10 @@ public class Order {
 
 	@OneToMany(mappedBy = "order")
 	private List<OrderItem> orderItems = new ArrayList<>();
+
 	private LocalDateTime orderDate;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "delivery_id")
 	private Delivery delivery;
 
@@ -40,8 +41,23 @@ public class Order {
 	public Order(Member member, Delivery delivery, List<OrderItem> orderItem) {
 		this.member = member;
 		this.delivery = delivery;
-		this.orderItems = orderItem;
 		this.orderDate = LocalDateTime.now();
 		this.orderStatus = OrderStatus.ORDER;
+	}
+
+	private void addOrderItem(OrderItem orderItem) {
+		this.orderItems.add(orderItem);
+		orderItem.addOrder(this);
+	}
+
+	public static Order createOrder(Member member, Delivery delivery, OrderItem orderItem) {
+		Order order = Order.builder()
+				.member(member)
+				.delivery(delivery)
+				.build();
+
+		order.addOrderItem(orderItem);
+		delivery.addOrder(order);
+		return order;
 	}
 }

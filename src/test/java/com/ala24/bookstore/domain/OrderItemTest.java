@@ -34,7 +34,7 @@ class OrderItemTest {
 		OrderItem orderItem = OrderItem.builder()
 				.order(new Order())
 				.item(book)
-				.orderPrice(10000L)
+				.orderPrice(10000)
 				.count(3)
 				.build();
 
