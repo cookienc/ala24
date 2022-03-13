@@ -8,7 +8,6 @@ import com.ala24.bookstore.domain.item.Item;
 import com.ala24.bookstore.exception.HaveNotItemException;
 import com.ala24.bookstore.repository.ItemRepository;
 import com.ala24.bookstore.repository.MemberRepository;
-import com.ala24.bookstore.repository.OrderItemRepository;
 import com.ala24.bookstore.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,7 +22,6 @@ public class OrderService {
 
 	private final OrderRepository orderRepository;
 	private final ItemRepository itemRepository;
-	private final OrderItemRepository orderItemRepository;
 	private final MemberRepository memberRepository;
 
 	/**
@@ -38,8 +36,6 @@ public class OrderService {
 
 		Delivery delivery = Delivery.createDelivery(member.getAddress());
 		OrderItem orderItem = OrderItem.createOrderItem(item, item.getPrice(), count);
-
-		orderItemRepository.save(orderItem);
 
 		Order order = Order.createOrder(member, delivery, orderItem);
 
