@@ -43,7 +43,7 @@ public class DataBaseCleanup implements InitializingBean {
 		for (String tableName : tableNames) {
 			entityManager.createNativeQuery("TRUNCATE TABLE " + tableName).executeUpdate();
 		}
-		entityManager.createNativeQuery("TRUNCATE  TABLE orders");
+		entityManager.createNativeQuery("TRUNCATE TABLE orders").executeUpdate();
 		entityManager.createNativeQuery("SET REFERENTIAL_INTEGRITY TRUE").executeUpdate();
 	}
 }
