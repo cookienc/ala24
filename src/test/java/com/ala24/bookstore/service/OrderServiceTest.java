@@ -18,8 +18,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -67,7 +68,7 @@ class OrderServiceTest {
 				.name("TestName")
 				.author("TestAuthor")
 				.publisher("TestPublisher")
-				.price(12345)
+				.price(123456)
 				.stockQuantity(100)
 				.build();
 
@@ -80,7 +81,7 @@ class OrderServiceTest {
 		memberB = Member.builder()
 				.name("다현")
 				.address(address)
-				.cash(Cash.charge(10000L))
+				.cash(Cash.charge(1000000L))
 				.build();
 		bookId = itemService.saveItem(book);
 		poemId = itemService.saveItem(poem);
@@ -93,6 +94,9 @@ class OrderServiceTest {
 		dataBaseCleanup.execute();
 	}
 
+	/**
+	 * 주문 테스트
+	 */
 	@Test
 	void 상품_주문_테스트() {
 	    //given
@@ -100,7 +104,7 @@ class OrderServiceTest {
 
 		//when
 		Item findItem = itemService.findOne(bookId);
-		Order findOrder = orderService.findOrder(orderId);
+		Order findOrder = orderService.findOne(orderId);
 
 		//then
 		assertThat(findOrder.getMember()).isEqualTo(memberA);
@@ -132,5 +136,40 @@ class OrderServiceTest {
 
 		//then
 		assertThat(afterMoney).isEqualTo(beforeMoney - findItem.getPrice() * 1);
+	}
+
+	/**
+	 * 조회 테스트
+	 */
+	@Test
+	void 단건_주문_조회_테스트() {
+	    //given
+		Long orderId = orderService.order(memberAId, bookId, 1);
+
+		//when
+		Order findOrder = orderService.findOne(orderId);
+		Member findMember = memberService.findOne(memberAId);
+		Item findItem = itemService.findOne(bookId);
+
+		//then
+		assertThat(findOrder.getMember()).isEqualTo(findMember);
+		assertThat(findOrder.getOrderItems().size()).isEqualTo(1);
+		assertThat(findOrder.getOrderItems().get(0).getItem()).isEqualTo(findItem);
+	}
+
+	@Test
+	void 모든_주문_조회_테스트() {
+	    //given
+		Long orderAId = orderService.order(memberAId, bookId, 1);
+		Long orderBId = orderService.order(memberBId, poemId, 1);
+
+	    //when
+		List<Order> orderList = orderService.findAll();
+		Order findOrderA = orderService.findOne(orderAId);
+		Order findOrderB = orderService.findOne(orderBId);
+
+		//then
+		assertThat(orderList.size()).isEqualTo(2);
+		assertThat(orderList).contains(findOrderA, findOrderB);
 	}
 }

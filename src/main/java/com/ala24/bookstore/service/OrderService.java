@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -49,9 +50,13 @@ public class OrderService {
 	/**
 	 * 조회
 	 */
-	public Order findOrder(Long orderId) {
+	public Order findOne(Long orderId) {
 		return orderRepository.findById(orderId)
 				.orElseThrow(() -> new NoSuchElementException("해당 아이템은 없습니다."));
+	}
+
+	public List<Order> findAll() {
+		return orderRepository.findAll();
 	}
 
 	/**
