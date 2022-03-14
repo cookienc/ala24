@@ -34,14 +34,14 @@ public class OrderService {
 		Item item = itemRepository.findById(itemId)
 				.orElseThrow(() -> new HaveNotItemException("해당 아이템은 존재하지 않습니다."));
 
+		item.validateOrder(count);
+
 		Delivery delivery = Delivery.createDelivery(member.getAddress());
 		OrderItem orderItem = OrderItem.createOrderItem(item, item.getPrice(), count);
 
-		Order order = Order.createOrder(member, delivery, orderItem);
+		member.validateOrder(orderItem);
 
-		/**
-		 * 검증 로직 추가
-		 */
+		Order order = Order.createOrder(member, delivery, orderItem);
 
 		return orderRepository.save(order).getId();
 	}

@@ -1,5 +1,6 @@
 package com.ala24.bookstore.domain.item;
 
+import com.ala24.bookstore.exception.NotEnoughItemException;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,5 +31,17 @@ public abstract class Item {
 		this.publisher = publisher;
 		this.price = price;
 		this.stockQuantity = stockQuantity;
+	}
+
+	public void validateOrder(int orderCount) {
+		if (this.stockQuantity < orderCount) {
+			throw new NotEnoughItemException("재고가 부족합니다.");
+		}
+		removeStock(orderCount);
+	}
+
+	private int removeStock(int count) {
+		this.stockQuantity -= count;
+		return this.stockQuantity;
 	}
 }

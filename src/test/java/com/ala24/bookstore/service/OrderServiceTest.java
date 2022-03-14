@@ -8,6 +8,8 @@ import com.ala24.bookstore.domain.Order;
 import com.ala24.bookstore.domain.item.Item;
 import com.ala24.bookstore.domain.item.Poem;
 import com.ala24.bookstore.domain.item.SelfDevelopment;
+import com.ala24.bookstore.exception.NotEnoughCashException;
+import com.ala24.bookstore.exception.NotEnoughItemException;
 import com.ala24.bookstore.repository.OrderItemRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,6 +19,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest
 @Transactional
@@ -65,19 +68,19 @@ class OrderServiceTest {
 				.author("TestAuthor")
 				.publisher("TestPublisher")
 				.price(12345)
-				.stockQuantity(50)
+				.stockQuantity(100)
 				.build();
 
 		memberA = Member.builder()
 				.name("사나")
 				.address(address)
-				.cash(Cash.charge(100000L))
+				.cash(Cash.charge(1000000L))
 				.build();
 
 		memberB = Member.builder()
 				.name("다현")
 				.address(address)
-				.cash(Cash.charge(100000L))
+				.cash(Cash.charge(10000L))
 				.build();
 		bookId = itemService.saveItem(book);
 		poemId = itemService.saveItem(poem);
@@ -105,12 +108,29 @@ class OrderServiceTest {
 		assertThat(findOrder.getDelivery().getAddress()).isEqualTo(memberA.getAddress());
 	}
 
-//	@Test
-//	void 초과_수량_주문_테스트() {
-//	    //given
-//
-//	    //when
-//
-//	    //then
-//	}
+	@Test
+	void 돈이_부족한_주문() {
+		assertThatThrownBy(() -> orderService.order(memberBId, poemId, 50))
+				.isInstanceOf(NotEnoughCashException.class);
+	}
+
+	@Test
+	void 초과_주문_테스트() {
+		assertThatThrownBy(() -> orderService.order(memberBId, poemId, 10000))
+				.isInstanceOf(NotEnoughItemException.class);
+	}
+
+	@Test
+	void 잔돈_테스트() {
+	    //given
+		Long beforeMoney = memberA.account();
+		orderService.order(memberAId, bookId, 1);
+
+		//when|
+		Long afterMoney = memberService.findOne(memberAId).account();
+		Item findItem = itemService.findOne(bookId);
+
+		//then
+		assertThat(afterMoney).isEqualTo(beforeMoney - findItem.getPrice() * 1);
+	}
 }

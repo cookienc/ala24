@@ -1,7 +1,7 @@
 package com.ala24.bookstore.domain;
 
 import com.ala24.bookstore.domain.item.Item;
-import com.ala24.bookstore.exception.NoEnoughItemException;
+import com.ala24.bookstore.exception.NotEnoughItemException;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -55,7 +55,7 @@ public class OrderItem {
 
 	private static void validateItem(Item item, int count) {
 		if (item.getStockQuantity() < count) {
-			throw new NoEnoughItemException("상품의 재고가 부족합니다.");
+			throw new NotEnoughItemException("상품의 재고가 부족합니다.");
 		}
 	}
 }

@@ -58,4 +58,8 @@ public class Member {
 		Long leftMoney = account();
 		this.cash = Cash.charge(leftMoney + cash);
 	}
+
+	public void validateOrder(OrderItem orderItem) {
+		this.cash.validate(orderItem);
+	}
 }
