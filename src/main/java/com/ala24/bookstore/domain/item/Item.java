@@ -40,8 +40,12 @@ public abstract class Item {
 		removeStock(orderCount);
 	}
 
-	private int removeStock(int count) {
+	public int removeStock(int count) {
 		this.stockQuantity -= count;
 		return this.stockQuantity;
+	}
+
+	public int addStock(int count) {
+		return this.stockQuantity += count;
 	}
 }

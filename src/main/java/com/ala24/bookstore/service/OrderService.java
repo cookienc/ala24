@@ -60,4 +60,10 @@ public class OrderService {
 		return orderRepository.findAll();
 	}
 
+	/**
+	 * 취소
+	 */
+	public void cancel(Long orderId) {
+		findOne(orderId).cancel();
+	}
 }

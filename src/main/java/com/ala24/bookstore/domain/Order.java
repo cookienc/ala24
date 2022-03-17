@@ -11,6 +11,11 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.ala24.bookstore.domain.type.DeliveryStatus.*;
+import static com.ala24.bookstore.domain.type.OrderStatus.*;
+import static com.ala24.bookstore.exception.utils.Sentence.ALREADY_CANCELD;
+import static com.ala24.bookstore.exception.utils.Sentence.NOW_DELIVERING;
+
 @Entity
 @Getter
 @Table(name = "orders")
@@ -42,7 +47,7 @@ public class Order {
 		this.member = member;
 		this.delivery = delivery;
 		this.orderDate = LocalDateTime.now();
-		this.orderStatus = OrderStatus.ORDER;
+		this.orderStatus = ORDER;
 	}
 
 	private void addOrderItem(OrderItem orderItem) {
@@ -63,5 +68,31 @@ public class Order {
 
 	public void addDelivery(Delivery delivery) {
 		this.delivery = delivery;
+	}
+
+	public void cancel() {
+		if (isItDelivering()) {
+			throw new IllegalStateException(NOW_DELIVERING.toString());
+		}
+
+		if (isItAlreadyCancel()) {
+			throw new IllegalStateException(ALREADY_CANCELD.toString());
+		}
+
+		this.delivery.cancel();
+
+		this.orderStatus = OrderStatus.CANCEL;
+		for (OrderItem orderItem : orderItems) {
+			orderItem.cancel();
+		}
+	}
+
+	private boolean isItAlreadyCancel() {
+		return this.orderStatus == OrderStatus.CANCEL;
+	}
+
+	private boolean isItDelivering() {
+		return this.delivery.getDeliveryStatus() == SHIPPING
+				|| this.delivery.getDeliveryStatus() == COMPLETE;
 	}
 }

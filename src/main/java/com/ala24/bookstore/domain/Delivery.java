@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+import static com.ala24.bookstore.domain.type.DeliveryStatus.*;
+
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -30,13 +32,13 @@ public class Delivery {
 	@Builder
 	private Delivery(Order order, Address address) {
 		this.address = address;
-		this.deliveryStatus = DeliveryStatus.PREPARING;
+		this.deliveryStatus = PREPARING;
 		addOrder(order);
 	}
 
 	private Delivery(Address address) {
 		this.address = address;
-		this.deliveryStatus = DeliveryStatus.PREPARING;
+		this.deliveryStatus = PREPARING;
 	}
 
 	public static Delivery createDelivery(Address address) {
@@ -46,5 +48,9 @@ public class Delivery {
 	public void addOrder(Order order) {
 		this.order = order;
 		order.addDelivery(this);
+	}
+
+	public void cancel() {
+		this.deliveryStatus = CANCEL;
 	}
 }

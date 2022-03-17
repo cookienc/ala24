@@ -8,6 +8,8 @@ import com.ala24.bookstore.domain.Order;
 import com.ala24.bookstore.domain.item.Item;
 import com.ala24.bookstore.domain.item.Poem;
 import com.ala24.bookstore.domain.item.SelfDevelopment;
+import com.ala24.bookstore.domain.type.DeliveryStatus;
+import com.ala24.bookstore.domain.type.OrderStatus;
 import com.ala24.bookstore.exception.NotEnoughCashException;
 import com.ala24.bookstore.exception.NotEnoughItemException;
 import com.ala24.bookstore.repository.OrderItemRepository;
@@ -20,7 +22,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest
 @Transactional
@@ -171,5 +174,21 @@ class OrderServiceTest {
 		//then
 		assertThat(orderList.size()).isEqualTo(2);
 		assertThat(orderList).contains(findOrderA, findOrderB);
+	}
+	
+	@Test
+	void 주문_취소_테스트() {
+	    //given
+		int beforeStock = itemService.findOne(bookId).getStockQuantity();
+		Long orderId = orderService.order(memberAId, bookId, 10);
+
+		//when
+		orderService.cancel(orderId);
+		Order findOrder = orderService.findOne(orderId);
+		Item findItem = itemService.findOne(bookId);
+		//then
+		assertThat(findOrder.getOrderStatus()).isEqualTo(OrderStatus.CANCEL);
+		assertThat(findOrder.getDelivery().getDeliveryStatus()).isEqualTo(DeliveryStatus.CANCEL);
+		assertThat(findItem.getStockQuantity()).isEqualTo(beforeStock);
 	}
 }

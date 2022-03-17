@@ -53,6 +53,10 @@ public class OrderItem {
 				.build();
 	}
 
+	public void cancel() {
+		item.addStock(this.count);
+	}
+
 	private static void validateItem(Item item, int count) {
 		if (item.getStockQuantity() < count) {
 			throw new NotEnoughItemException("상품의 재고가 부족합니다.");
