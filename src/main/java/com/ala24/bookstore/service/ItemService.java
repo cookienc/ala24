@@ -1,13 +1,15 @@
 package com.ala24.bookstore.service;
 
 import com.ala24.bookstore.domain.item.Item;
-import com.ala24.bookstore.exception.HaveNotItemException;
 import com.ala24.bookstore.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+
+import static com.ala24.bookstore.exception.utils.Sentence.NO_ITEM;
 
 @Service
 @Transactional(readOnly = true)
@@ -23,7 +25,7 @@ public class ItemService {
 
 	public Item findOne(Long itemId) {
 		return itemRepository.findById(itemId)
-				.orElseThrow(() -> new HaveNotItemException("해당 아이템은 존재하지 않습니다."));
+				.orElseThrow(() -> new NoSuchElementException(NO_ITEM.toString()));
 	}
 
 	public List<Item> findAll() {

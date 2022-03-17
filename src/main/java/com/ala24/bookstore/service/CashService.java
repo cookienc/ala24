@@ -8,6 +8,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.NoSuchElementException;
+
+import static com.ala24.bookstore.exception.utils.Sentence.NOT_ENOUGH_CASH;
+import static com.ala24.bookstore.exception.utils.Sentence.NO_MEMBER;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -25,7 +30,7 @@ public class CashService {
 	public void pay(Long memberId, Long cash) {
 		Long account = findOne(memberId).account();
 		if (account < cash) {
-			throw new NotEnoughCashException("계좌에 돈이 부족합니다.");
+			throw new NotEnoughCashException(NOT_ENOUGH_CASH.toString());
 		}
 		charge(memberId, -cash);
 	}
@@ -33,6 +38,6 @@ public class CashService {
 	private Member findOne(Long memberId) {
 		return memberRepository.findById(memberId).stream()
 				.findFirst()
-				.orElseThrow(() -> new IllegalArgumentException("해당 멤버는 없는 멤버입니다."));
+				.orElseThrow(() -> new NoSuchElementException(NO_MEMBER.toString()));
 	}
 }

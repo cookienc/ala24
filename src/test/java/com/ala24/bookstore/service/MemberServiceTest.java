@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -109,6 +110,6 @@ class MemberServiceTest {
 
 		//then
 		assertThatThrownBy(() -> memberService.findOne(savedId))
-				.isInstanceOf(IllegalStateException.class);
+				.isInstanceOf(NoSuchElementException.class);
 	}
 }

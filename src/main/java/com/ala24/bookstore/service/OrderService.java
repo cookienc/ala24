@@ -5,7 +5,6 @@ import com.ala24.bookstore.domain.Member;
 import com.ala24.bookstore.domain.Order;
 import com.ala24.bookstore.domain.OrderItem;
 import com.ala24.bookstore.domain.item.Item;
-import com.ala24.bookstore.exception.HaveNotItemException;
 import com.ala24.bookstore.repository.ItemRepository;
 import com.ala24.bookstore.repository.MemberRepository;
 import com.ala24.bookstore.repository.OrderRepository;
@@ -15,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+
+import static com.ala24.bookstore.exception.utils.Sentence.*;
 
 @Service
 @Transactional(readOnly = true)
@@ -31,9 +32,9 @@ public class OrderService {
 	@Transactional
 	public Long order(Long memberId, Long itemId, int count) {
 		Member member = memberRepository.findById(memberId)
-				.orElseThrow(() -> new IllegalStateException("해당 회원은 존재하지 않습니다."));
+				.orElseThrow(() -> new NoSuchElementException(NO_MEMBER.toString()));
 		Item item = itemRepository.findById(itemId)
-				.orElseThrow(() -> new HaveNotItemException("해당 아이템은 존재하지 않습니다."));
+				.orElseThrow(() -> new NoSuchElementException(NO_ITEM.toString()));
 
 		item.validateOrder(count);
 
@@ -52,14 +53,11 @@ public class OrderService {
 	 */
 	public Order findOne(Long orderId) {
 		return orderRepository.findById(orderId)
-				.orElseThrow(() -> new NoSuchElementException("해당 아이템은 없습니다."));
+				.orElseThrow(() -> new NoSuchElementException(NO_ORDER.toString()));
 	}
 
 	public List<Order> findAll() {
 		return orderRepository.findAll();
 	}
 
-	/**
-	 * 취소
-	 */
 }
