@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+import static com.ala24.bookstore.exception.utils.Sentence.NOT_ENOUGH_ITEM;
+
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn
@@ -35,9 +37,8 @@ public abstract class Item {
 
 	public void validateOrder(int orderCount) {
 		if (this.stockQuantity < orderCount) {
-			throw new NotEnoughItemException("재고가 부족합니다.");
+			throw new NotEnoughItemException(NOT_ENOUGH_ITEM.toString());
 		}
-		removeStock(orderCount);
 	}
 
 	public int removeStock(int count) {

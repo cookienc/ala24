@@ -10,6 +10,7 @@ public enum Sentence {
 
 	NOT_DUPLICATE_MEMBER("중복된 아이디로 가입할 수 없습니다."),
 	NOT_ENOUGH_CASH("계좌에 돈이 부족합니다."),
+	NOT_ENOUGH_ITEM("재고가 부족합니다."),
 
 	NOW_DELIVERING("배숭 중인 상품은 취소할 수 없습니다.");
 

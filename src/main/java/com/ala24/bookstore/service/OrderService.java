@@ -36,9 +36,9 @@ public class OrderService {
 		Item item = itemRepository.findById(itemId)
 				.orElseThrow(() -> new NoSuchElementException(NO_ITEM.toString()));
 
-		item.validateOrder(count);
 
 		Delivery delivery = Delivery.createDelivery(member.getAddress());
+
 		OrderItem orderItem = OrderItem.createOrderItem(item, item.getPrice(), count);
 
 		member.validateOrder(orderItem);
