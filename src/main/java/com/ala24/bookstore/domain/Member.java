@@ -23,6 +23,9 @@ public class Member {
 	@Column(unique = true)
 	private String loginId;
 
+	@NotNull
+	private String password;
+
 	@Column(length = 10, nullable = false)
 	private String name;
 
@@ -37,9 +40,10 @@ public class Member {
 	private MemberStatus authority;
 
 	@Builder
-	private Member(String name, String loginId, Address address, Cash cash) {
+	private Member(String name, String password, String loginId, Address address, Cash cash) {
 		this.name = name;
 		this.loginId = loginId;
+		this.password = password;
 		this.address = address;
 		this.cash = cash;
 		this.authority = MemberStatus.USER;

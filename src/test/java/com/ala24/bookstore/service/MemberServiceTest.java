@@ -22,7 +22,7 @@ class MemberServiceTest {
 
 	private static Member memberA;
 	private static Member memberB;
-	private static Member testMember;
+	private static Member duplicateMember;
 	private static Order order;
 	private static Delivery delivery;
 	private static OrderItem orderItem;
@@ -51,13 +51,15 @@ class MemberServiceTest {
 		memberA = Member.builder()
 				.name("사나")
 				.loginId("sana")
+				.password("1234")
 				.address(address)
 				.cash(memberACash)
 				.build();
 
-		testMember = Member.builder()
+		duplicateMember = Member.builder()
 				.name("사나")
 				.loginId("sana")
+				.password("1234")
 				.address(address)
 				.cash(memberACash)
 				.build();
@@ -65,6 +67,7 @@ class MemberServiceTest {
 		memberB = Member.builder()
 				.name("다현")
 				.loginId("dahyun")
+				.password("1234")
 				.address(address)
 				.cash(memberBCash)
 				.build();
@@ -82,7 +85,7 @@ class MemberServiceTest {
 
 		//when
 		//then
-		assertThatThrownBy(() -> memberService.join(testMember))
+		assertThatThrownBy(() -> memberService.join(duplicateMember))
 				.isInstanceOf(IllegalStateException.class);
 	}
 
@@ -103,7 +106,7 @@ class MemberServiceTest {
 	@Test
 	void 존재하지_않는_회원_찾는_경우() {
 		//given
-		Long savedId = memberService.join(testMember);
+		Long savedId = memberService.join(duplicateMember);
 
 		//when
 		memberService.delete(savedId);
