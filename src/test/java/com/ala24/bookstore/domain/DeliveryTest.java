@@ -33,7 +33,7 @@ class DeliveryTest {
 		Address address = Address.builder()
 				.city("서울")
 				.zipCode(12345)
-				.address("은마아파트")
+				.specificAddress("은마아파트")
 				.build();
 
 		Delivery delivery = Delivery.builder()

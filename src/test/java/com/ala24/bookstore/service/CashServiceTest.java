@@ -46,7 +46,7 @@ class CashServiceTest {
 
 		Address address = Address.builder()
 				.city("서울")
-				.address("은마아파트")
+				.specificAddress("은마아파트")
 				.zipCode(22222)
 				.build();
 

@@ -25,7 +25,7 @@ public class MemberFormDto {
 	private String name;
 
 	private String city;
-	private String address;
+	private String specificAddress;
 	private Integer zipcode;
 
 	public MemberFormDto() {
@@ -38,7 +38,7 @@ public class MemberFormDto {
 				.loginId(this.loginId)
 				.password(this.password)
 				.address(Address.builder()
-						.address(this.address)
+						.specificAddress(this.specificAddress)
 						.city(this.city)
 						.zipCode(this.zipcode)
 						.build())

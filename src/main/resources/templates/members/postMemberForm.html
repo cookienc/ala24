@@ -43,8 +43,8 @@
             <input type="text" th:field="*{city}" class="form-control">
         </div>
         <div class="form-group">
-            <label th:for="address">주소</label>
-            <input type="text" th:field="*{address}" class="form-control">
+            <label th:for="specificAddress">주소</label>
+            <input type="text" th:field="*{specificAddress}" class="form-control">
         </div>
         <button type="submit">가입</button>
         <button type="button" th:onclick="|location.href='@{/}'|">취소</button>

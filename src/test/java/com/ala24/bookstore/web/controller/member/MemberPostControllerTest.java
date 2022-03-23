@@ -1,4 +1,4 @@
-package com.ala24.bookstore.web.controller;
+package com.ala24.bookstore.web.controller.member;
 
 import com.ala24.bookstore.DataBaseCleanup;
 import com.ala24.bookstore.service.MemberService;
@@ -23,10 +23,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @AutoConfigureMockMvc
-class MemberControllerTest {
+class MemberPostControllerTest {
 
 	@Autowired
-	private MemberController memberController;
+	private MemberPostController memberPostController;
 
 	private MockMvc mvc;
 
@@ -51,7 +51,7 @@ class MemberControllerTest {
 
 	@BeforeEach
 	public void setMvc() {
-		mvc = MockMvcBuilders.standaloneSetup(memberController).build();
+		mvc = MockMvcBuilders.standaloneSetup(memberPostController).build();
 	}
 
 	@BeforeEach

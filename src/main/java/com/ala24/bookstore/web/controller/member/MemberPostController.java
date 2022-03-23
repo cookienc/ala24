@@ -1,4 +1,4 @@
-package com.ala24.bookstore.web.controller;
+package com.ala24.bookstore.web.controller.member;
 
 import com.ala24.bookstore.service.MemberService;
 import com.ala24.bookstore.web.memberdto.MemberFormDto;
@@ -18,10 +18,13 @@ import javax.validation.Valid;
 @Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/members")
-public class MemberController {
+public class MemberPostController {
 
 	private final MemberService memberService;
 
+	/**
+	 * 회원 등록
+	 */
 	@GetMapping("/post")
 	public String postForm(Model model) {
 		model.addAttribute("memberForm", new MemberFormDto());
