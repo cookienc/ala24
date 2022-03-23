@@ -8,8 +8,16 @@
     <div>Ala24.com</div>
     <div class="nav">
         <div>로그인</div>
-        <a href="/members/post">회원 가입</a>
-        <a href="/members/list"/>회원 조회</a>
+        <div>
+            <button type="button" th:onclick="|location.href='@{/members/post}|'|">
+                회원 가입
+            </button>
+        </div>
+        <div>
+            <button type="button" th:onclick="|location.href='@{/members/list}'|">
+                회원 조회
+            </button>
+        </div>
     </div>
 </body>
 </html>
