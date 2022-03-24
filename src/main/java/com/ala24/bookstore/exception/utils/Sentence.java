@@ -4,6 +4,8 @@ public enum Sentence {
 
 	ALREADY_CANCELD("이미 취소된 주문입니다."),
 
+	DO_NOT_MATCH_PW("비밀번호가 일치하지 않습니다."),
+
 	NO_ORDER("해당 주문은 없습니다."),
 	NO_MEMBER("해당 회원은 존재하지 않습니다."),
 	NO_ITEM("해당 아이템은 존재하지 않습니다."),

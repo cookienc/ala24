@@ -7,9 +7,13 @@
 <body>
     <div>Ala24.com</div>
     <div class="nav">
-        <div>로그인</div>
         <div>
-            <button type="button" th:onclick="|location.href='@{/members/post}|'|">
+            <button type="button" th:onclick="|location.href='@{/login}'|">
+                로그인
+            </button>
+        </div>
+        <div>
+            <button type="button" th:onclick="|location.href='@{/members/post}'|">
                 회원 가입
             </button>
         </div>

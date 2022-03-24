@@ -1,7 +1,9 @@
 package com.ala24.bookstore.web.memberdto;
 
 import com.ala24.bookstore.domain.Address;
+import com.ala24.bookstore.domain.Cash;
 import com.ala24.bookstore.domain.Member;
+import com.ala24.bookstore.domain.strategy.InitialCashStrategy;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -37,6 +39,7 @@ public class MemberFormDto {
 				.name(this.name)
 				.loginId(this.loginId)
 				.password(this.password)
+				.cash(Cash.charge(InitialCashStrategy.NORMAl.getCash()))
 				.address(Address.builder()
 						.specificAddress(this.specificAddress)
 						.city(this.city)

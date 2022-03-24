@@ -32,6 +32,12 @@ public class MemberService {
 	/**
 	 * 회원 조회
 	 */
+
+	public Member findOne(Long id) {
+		return memberRepository.findById(id)
+				.orElseThrow(() -> new NoSuchElementException(NO_MEMBER.toString()));
+	}
+
 	public List<Member> findMembers() {
 		return memberRepository.findAll();
 	}
@@ -42,11 +48,6 @@ public class MemberService {
 	public void delete(Long savedId) {
 		Member findMember = findOne(savedId);
 		memberRepository.delete(findMember);
-	}
-
-	public Member findOne(Long id) {
-		return memberRepository.findById(id)
-				.orElseThrow(() -> new NoSuchElementException(NO_MEMBER.toString()));
 	}
 
 
