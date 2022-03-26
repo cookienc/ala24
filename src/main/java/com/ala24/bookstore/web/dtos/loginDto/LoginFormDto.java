@@ -4,17 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
 @AllArgsConstructor
 public class LoginFormDto {
 
-	@NotEmpty(message = "아이디는 필수입니다.")
+	@NotBlank
 	private String loginId;
 
-	@NotEmpty(message = "비밀번호는 필수입니다.")
+	@NotBlank
 	private String password;
 
 }

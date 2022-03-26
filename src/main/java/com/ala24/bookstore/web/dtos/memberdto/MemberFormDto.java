@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Getter
@@ -16,14 +16,14 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 public class MemberFormDto {
 
-	@NotEmpty(message = "회원 이름은 필수 입니다.")
+	@NotBlank
 	private String loginId;
 
-	@NotEmpty(message = "비밀번호는 4 ~ 16 자리여야 합니다.")
+	@NotBlank
 	@Size(min = 4, max = 16)
 	private String password;
 
-	@NotEmpty(message = "이름은 필수 입니다.")
+	@NotBlank
 	private String name;
 
 	private String city;
