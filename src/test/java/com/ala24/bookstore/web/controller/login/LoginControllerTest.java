@@ -22,6 +22,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class LoginControllerTest {
 
+	public static final String DIFFERENT_PASSWORD = "DifferentPassword";
+	public static final String DIFFERENT_LOGIN_ID = "DifferentLoginId";
+	private static Member testMember;
+
 	@Autowired
 	MockMvc mvc;
 
@@ -33,8 +37,6 @@ class LoginControllerTest {
 
 	@Autowired
 	DataBaseCleanup dataBaseCleanup;
-
-	private static Member testMember;
 
 	@BeforeEach
 	void init() {
@@ -66,12 +68,19 @@ class LoginControllerTest {
 				.andExpect(redirectedUrl("/"));
 	}
 
-	/*@Test
+	@Test
 	void 비밀번호_틀림_테스트() throws Exception {
 		mvc.perform(post("/login")
-				.flashAttr("loginForm", new LoginFormDto(testMember.getLoginId(), "DifferentPassword")))
+						.flashAttr("loginForm", new LoginFormDto(testMember.getLoginId(), DIFFERENT_PASSWORD)))
 				.andExpect(status().isOk())
-				.andExpect(view().name("login/loginForm"))
+				.andExpect(view().name("login/loginForm"));
+	}
 
-	}*/
+	@Test
+	void 아이디_틀림_테스트() throws Exception {
+		mvc.perform(post("/login")
+						.flashAttr("loginForm", new LoginFormDto(DIFFERENT_LOGIN_ID, testMember.getPassword())))
+				.andExpect(status().isOk())
+				.andExpect(view().name("login/loginForm"));
+	}
 }

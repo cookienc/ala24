@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.util.NoSuchElementException;
+
+import static com.ala24.bookstore.exception.utils.Sentence.DO_NOT_MATCH_PW;
+import static com.ala24.bookstore.exception.utils.Sentence.NO_MEMBER;
 
 @Slf4j
 @Controller
@@ -22,24 +26,28 @@ public class LoginController {
 
 	@GetMapping("/login")
 	public String loginForm(@ModelAttribute("loginForm") LoginFormDto loginForm) {
-		System.out.println("==============================GetMapping");
-		log.info("GetMapping loginForm id : {}, pw : {}", loginForm.getLoginId(), loginForm.getPassword());
 		return "login/loginForm";
 	}
 
 	@PostMapping("/login")
 	public String login(@Valid @ModelAttribute("loginForm") LoginFormDto loginForm, BindingResult result) {
-		System.out.println("==============================PostMapping");
-		log.info("PostMapping loginForm id : {}, pw : {}", loginForm.getLoginId(), loginForm.getPassword());
-
 		if (result.hasErrors()) {
 			log.info("login 검증 오류 errors={}", result);
 			return "login/loginForm";
 		}
 
-		//TODO validator 만들어서 아이다와 비밀번호 틀렸을 경우 controller 단에서 해결하기
+		try {
+			Member member = loginService.login(loginForm.getLoginId(), loginForm.getPassword());
+		} catch (NoSuchElementException e) {
+			result.rejectValue("loginId", "missMatch", NO_MEMBER.toString());
+		} catch (IllegalArgumentException e) {
+			result.rejectValue("password", "missMatch", DO_NOT_MATCH_PW.toString());
+		}
 
-		Member member = loginService.login(loginForm.getLoginId(), loginForm.getPassword());
+		if (result.hasErrors()) {
+			log.info("loginId/password 오류 errors={}", result);
+			return "login/loginForm";
+		}
 
 		//로그인 성공
 
