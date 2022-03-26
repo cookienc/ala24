@@ -2,7 +2,7 @@ package com.ala24.bookstore.web.controller.member;
 
 import com.ala24.bookstore.domain.Member;
 import com.ala24.bookstore.service.MemberService;
-import com.ala24.bookstore.web.memberdto.MemberListDto;
+import com.ala24.bookstore.web.dtos.memberdto.MemberListDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;

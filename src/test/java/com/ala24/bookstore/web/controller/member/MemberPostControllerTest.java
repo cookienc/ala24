@@ -2,7 +2,7 @@ package com.ala24.bookstore.web.controller.member;
 
 import com.ala24.bookstore.DataBaseCleanup;
 import com.ala24.bookstore.service.MemberService;
-import com.ala24.bookstore.web.memberdto.MemberFormDto;
+import com.ala24.bookstore.web.dtos.memberdto.MemberFormDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

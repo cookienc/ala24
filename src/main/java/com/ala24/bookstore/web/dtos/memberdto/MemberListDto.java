@@ -1,4 +1,4 @@
-package com.ala24.bookstore.web.memberdto;
+package com.ala24.bookstore.web.dtos.memberdto;
 
 import com.ala24.bookstore.domain.Address;
 import com.ala24.bookstore.domain.Cash;
