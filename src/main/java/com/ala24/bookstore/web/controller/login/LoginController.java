@@ -39,9 +39,9 @@ public class LoginController {
 		try {
 			Member member = loginService.login(loginForm.getLoginId(), loginForm.getPassword());
 		} catch (NoSuchElementException e) {
-			result.rejectValue("loginId", "missMatch", NO_MEMBER.toString());
+			result.rejectValue("loginId", "mismatch", NO_MEMBER.toString());
 		} catch (IllegalArgumentException e) {
-			result.rejectValue("password", "missMatch", DO_NOT_MATCH_PW.toString());
+			result.rejectValue("password", "mismatch", DO_NOT_MATCH_PW.toString());
 		}
 
 		if (result.hasErrors()) {
