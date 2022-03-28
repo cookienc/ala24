@@ -8,9 +8,11 @@
     <div>Ala24.com</div>
     <div class="nav">
         <div>
-            <button type="button" th:onclick="|location.href='@{/logout}'|">
-                로그아웃
-            </button>
+            <form role="form" action="/logout" method="post">
+                <button type="submit">
+                    로그아웃
+                </button>
+            </form>
         </div>
         <div>
             <button type="button" th:onclick="|location.href='@{/members/list}'|">
