@@ -3,6 +3,7 @@ package com.ala24.bookstore.web.controller.login;
 import com.ala24.bookstore.domain.Member;
 import com.ala24.bookstore.service.LoginService;
 import com.ala24.bookstore.web.dtos.loginDto.LoginFormDto;
+import com.ala24.bookstore.web.session.SessionName;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.NoSuchElementException;
 
@@ -30,14 +33,16 @@ public class LoginController {
 	}
 
 	@PostMapping("/login")
-	public String login(@Valid @ModelAttribute("loginForm") LoginFormDto loginForm, BindingResult result) {
+	public String login(@Valid @ModelAttribute("loginForm") LoginFormDto loginForm, BindingResult result,
+						HttpServletRequest request) {
 		if (result.hasErrors()) {
 			log.info("login 검증 오류 errors={}", result);
 			return "login/loginForm";
 		}
 
+		Member loginMember = null;
 		try {
-			Member member = loginService.login(loginForm.getLoginId(), loginForm.getPassword());
+			loginMember = loginService.login(loginForm.getLoginId(), loginForm.getPassword());
 		} catch (NoSuchElementException e) {
 			result.rejectValue("loginId", "mismatch", NO_MEMBER.toString());
 		} catch (IllegalArgumentException e) {
@@ -51,7 +56,19 @@ public class LoginController {
 
 		//로그인 성공
 
+		HttpSession session = request.getSession();
+		session.setAttribute(SessionName.LOGIN_MEMBER.getName(), loginMember);
+
 		return "redirect:/";
 	}
 
+	@PostMapping("/logout")
+	public String logout(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+
+		if (session != null) {
+			session.invalidate();
+		}
+		return "redirect:/";
+	}
 }
