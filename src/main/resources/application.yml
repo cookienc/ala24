@@ -18,7 +18,7 @@ spring:
 server:
   servlet:
     session:
-      timeout=1800
+      timeout: 1800
 
 logging.level:
   org.hibernate.SQL: debug
