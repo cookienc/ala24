@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>아이템 목록 조회</title>
+</head>
+<body>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>번호</th>
+            <th>이름</th>
+            <th>저자</th>
+            <th>출판사</th>
+            <th>가격</th>
+            <th>재고</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${items}">
+            <td th:text="${itemStat.count}"></td>
+            <td th:text="${item.name}"></td>
+            <td th:text="${item.author}"></td>
+            <td th:text="${item.publisher}"></td>
+            <td th:text="${item.price}"></td>
+            <td th:text="${item.stockQuantity}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
