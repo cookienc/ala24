@@ -39,6 +39,6 @@ class MemberListControllerTest {
 	@Test
 	void 회원_조회_화면으로_이동() throws Exception {
 		mvc.perform(get("/members/list"))
-				.andExpect(view().name("members/memberList"));
+				.andExpect(view().name("members/list"));
 	}
 }

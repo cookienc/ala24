@@ -27,6 +27,6 @@ public class MemberListController {
 	public String list(Model model) {
 		List<Member> members = memberService.findMembers();
 		model.addAttribute("members", new MemberListDto().toDto(members));
-		return "members/memberList";
+		return "members/list";
 	}
 }
