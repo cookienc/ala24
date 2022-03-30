@@ -1,4 +1,4 @@
-package com.ala24.bookstore.web.dtos.loginDto;
+package com.ala24.bookstore.web.dtos.logindto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
