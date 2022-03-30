@@ -1,11 +1,10 @@
-package com.ala24.bookstore.web.controller.login;
+package com.ala24.bookstore.web.controller;
 
 import com.ala24.bookstore.DataBaseCleanup;
 import com.ala24.bookstore.domain.Address;
 import com.ala24.bookstore.domain.Cash;
 import com.ala24.bookstore.domain.Member;
 import com.ala24.bookstore.service.MemberService;
-import com.ala24.bookstore.web.dtos.loginDto.LoginFormDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,15 +13,14 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class LoginControllerTest {
+class HomeControllerTest {
 
-	public static final String DIFFERENT_PASSWORD = "DifferentPassword";
-	public static final String DIFFERENT_LOGIN_ID = "DifferentLoginId";
 	private static Member testMember;
 
 	@Autowired
@@ -56,27 +54,27 @@ class LoginControllerTest {
 		dataBaseCleanup.execute();
 	}
 
+
 	@Test
-	void 로그인_성공_테스트() throws Exception {
-		mvc.perform(post("/login")
-						.flashAttr("loginForm", new LoginFormDto(testMember.getLoginId(), testMember.getPassword())))
+	void 회원들은_로그인_홈으로_이동() throws Exception {
+		mvc.perform(get("/")
+				.sessionAttr("loginMember", testMember))
+				.andExpect(status().isOk())
+				.andExpect(view().name("loginHome"));
+	}
+
+	@Test
+	void 로그아웃_테스트() throws Exception {
+		mvc.perform(post("/logout")
+						.sessionAttr("loginMember", testMember))
 				.andExpect(status().is3xxRedirection())
 				.andExpect(redirectedUrl("/"));
 	}
 
 	@Test
-	void 비밀번호_틀림_테스트() throws Exception {
-		mvc.perform(post("/login")
-						.flashAttr("loginForm", new LoginFormDto(testMember.getLoginId(), DIFFERENT_PASSWORD)))
-				.andExpect(status().isOk())
-				.andExpect(view().name("login/loginForm"));
-	}
-
-	@Test
-	void 아이디_틀림_테스트() throws Exception {
-		mvc.perform(post("/login")
-						.flashAttr("loginForm", new LoginFormDto(DIFFERENT_LOGIN_ID, testMember.getPassword())))
-				.andExpect(status().isOk())
-				.andExpect(view().name("login/loginForm"));
+	void 세션이_없을때_로그아웃_테스트() throws Exception {
+		mvc.perform(post("/logout"))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(redirectedUrl("/"));
 	}
 }
