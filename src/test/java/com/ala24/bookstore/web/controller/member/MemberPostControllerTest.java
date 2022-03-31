@@ -10,24 +10,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
-import java.util.Set;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+@SpringBootTest
 @AutoConfigureMockMvc
 class MemberPostControllerTest {
 
 	@Autowired
 	private MemberPostController memberPostController;
 
+	@Autowired
 	private MockMvc mvc;
 
 	@Autowired
@@ -50,18 +47,7 @@ class MemberPostControllerTest {
 	private MemberFormDto normal;
 
 	@BeforeEach
-	public void setMvc() {
-		mvc = MockMvcBuilders.standaloneSetup(memberPostController).build();
-	}
-
-	@BeforeEach
 	public void setUp() {
-		noLoginId = new MemberFormDto("", "12345",
-				"test", "Seoul", "GangNam", 12345);
-		noPassword = new MemberFormDto("test", "",
-				"test", "Seoul", "GangNam", 12345);
-		noName = new MemberFormDto("test", "12345",
-				"", "Seoul", "GangNam", 12345);
 		normal = new MemberFormDto("test", "12345",
 				"test", "Seoul", "GangNam", 12345);
 	}
@@ -88,20 +74,5 @@ class MemberPostControllerTest {
 				.andExpect(status().isOk())
 				.andExpect(view().name("members/postMemberForm"));
 	}
-	
-	@Test
-	void 회원가입_제한_사항_테스트() {
-	    //given
-		//when
-		Set<ConstraintViolation<MemberFormDto>> violationsOfNoLoginId = validator.validate(noLoginId);
-		Set<ConstraintViolation<MemberFormDto>> violationsOfNoPassword = validator.validate(noPassword);
-		Set<ConstraintViolation<MemberFormDto>> violationsOfNoName = validator.validate(noName);
-		Set<ConstraintViolation<MemberFormDto>> violationsOfNormal = validator.validate(normal);
 
-		//then
-		assertThat(violationsOfNoLoginId.size()).isEqualTo(1);
-		assertThat(violationsOfNoPassword.size()).isEqualTo(2);//비밀번호는 2개의 제약사항이 존재
-		assertThat(violationsOfNoName.size()).isEqualTo(1);
-		assertThat(violationsOfNormal.size()).isEqualTo(0);
-	}
 }

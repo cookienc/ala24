@@ -6,6 +6,7 @@ import com.ala24.bookstore.domain.Member;
 import com.ala24.bookstore.domain.strategy.InitialCashStrategy;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
@@ -14,6 +15,7 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class MemberFormDto {
 
 	@NotBlank
@@ -29,10 +31,6 @@ public class MemberFormDto {
 	private String city;
 	private String specificAddress;
 	private Integer zipcode;
-
-	public MemberFormDto() {
-
-	}
 
 	public Member toEntity() {
 		return Member.builder()
