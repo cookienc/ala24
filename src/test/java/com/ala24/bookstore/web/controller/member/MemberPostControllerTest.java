@@ -2,17 +2,26 @@ package com.ala24.bookstore.web.controller.member;
 
 import com.ala24.bookstore.DataBaseCleanup;
 import com.ala24.bookstore.service.MemberService;
+import com.ala24.bookstore.web.dtos.memberdto.MemberFormDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.util.LinkedMultiValueMap;
 
+import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
+import java.util.Set;
+import java.util.stream.Stream;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -23,9 +32,32 @@ class MemberPostControllerTest {
 
 	private static LinkedMultiValueMap<String, String> params;
 
+	private static Stream<Arguments> sampleData() {
+		MemberFormDto memberForm = new MemberFormDto("test", "12345", "test", "Seoul",
+				"GangNam", 12345);
+		MemberFormDto noId = new MemberFormDto("", "12345", "test", "Seoul",
+				"GangNam", 12345);
+		MemberFormDto noPassword = new MemberFormDto("test", "", "test", "Seoul",
+				"GangNam", 12345);
+		MemberFormDto outOfMaxRangePassword = new MemberFormDto("test", "01234567891234567", "test", "Seoul",
+				"GangNam", 12345);
+		MemberFormDto outOfMinRangePassword = new MemberFormDto("test", "111", "test", "Seoul",
+				"GangNam", 12345);
+		MemberFormDto noName = new MemberFormDto("test", "12345", "", "Seoul",
+				"GangNam", 12345);
+
+		return Stream.of(
+				Arguments.of(memberForm, 0),
+				Arguments.of(noId, 1),
+				Arguments.of(noPassword, 2),
+				Arguments.of(outOfMaxRangePassword, 1),
+				Arguments.of(outOfMinRangePassword, 1),
+				Arguments.of(noName, 1)
+		);
+	}
+
 	@Autowired
 	private MockMvc mvc;
-
 	@Autowired
 	private Validator validator;
 
@@ -83,5 +115,15 @@ class MemberPostControllerTest {
 		//then
 				.andExpect(status().isOk())
 				.andExpect(view().name("members/postMemberForm"));
+	}
+
+	@ParameterizedTest
+	@MethodSource("sampleData")
+	void 검증_테스트(MemberFormDto memberForm, int count) {
+		//given
+		//when
+		Set<ConstraintViolation<MemberFormDto>> violations = validator.validate(memberForm);
+		//then
+		assertThat(violations.size()).isEqualTo(count);
 	}
 }
