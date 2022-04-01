@@ -14,31 +14,42 @@
     <form role="form" action="/items/post" th:object="${itemForm}" method="post">
         <div class="form-group">
             <label th:for="name">책 제목</label>
-            <input type="text" th:field="*{name}" class="form-control" placeholder="책 제목을 입력해주세요.">
+            <input type="text" th:field="*{name}" class="form-control" th:errorclass="field-error"
+                   placeholder="책 제목을 입력해주세요.">
+            <p class="field-error" th:errors="*{name}">다시 입력해주세요.</p>
         </div>
         <div class="form-group">
-            <label th:for="author">저자</label>
-            <input type="text" th:field="*{author}" class="form-control" placeholder="저자을 입력해주세요">
+            <label th:for="author">작가</label>
+            <input type="text" th:field="*{author}" class="form-control" th:errorclass="field-error"
+                   placeholder="저자을 입력해주세요">
+            <p class="field-error" th:errors="*{author}">다시 입력해주세요.</p>
         </div>
         <div class="form-group">
             <label th:for="publisher">출판사</label>
-            <input type="text" th:field="*{publisher}" class="form-control" placeholder="출판사를 입력해주세요">
+            <input type="text" th:field="*{publisher}" class="form-control" th:errorclass="field-error"
+                   placeholder="출판사를 입력해주세요">
+            <p class="field-error" th:errors="*{publisher}">다시 입력해주세요.</p>
         </div>
         <div>
             <label th:for="category">카테고리</label>
-            <select th:field="*{category}" class="form-select">
-                <option value="">===카테고리 선택===</option>
-                <option th:each="itemCategory : ${itemCategories}" th:value="${itemCategory.name()}"
+            <select th:field="*{category}" class="form-select" th:errorclass="field-error">
+                <option value="" selected hidden>===카테고리 선택===</option>
+                <option th:each="itemCategory : ${itemCategories}" th:value="${itemCategory}"
                         th:text="${itemCategory.description}"></option>
             </select>
+            <p class="field-error" th:errors="*{category}">다시 입력해주세요.</p>
         </div>
         <div class="form-group">
             <label th:for="price">가격</label>
-            <input type="text" th:field="*{price}" class="form-control" placeholder="가격을 입력해주세요">
+            <input type="text" th:field="*{price}" class="form-control" th:errorclass="field-error"
+                   placeholder="가격을 입력해주세요">
+            <p class="field-error" th:errors="*{price}">다시 입력해주세요.</p>
         </div>
         <div class="form-group">
             <label th:for="stockQuantity">재고 수량</label>
-            <input type="text" th:field="*{stockQuantity}" class="form-control" placeholder="재고 수량을 입력해주세요">
+            <input type="text" th:field="*{stockQuantity}" class="form-control" th:errorclass="field-error"
+                   placeholder="재고 수량을 입력해주세요">
+            <p class="field-error" th:errors="*{stockQuantity}">다시 입력해주세요.</p>
         </div>
         <button type="submit">등록</button>
         <button type="button" th:onclick="|location.href='history.back'|">취소</button>

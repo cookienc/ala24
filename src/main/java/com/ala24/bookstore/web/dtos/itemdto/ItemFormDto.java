@@ -4,10 +4,11 @@ import com.ala24.bookstore.domain.item.Item;
 import com.ala24.bookstore.domain.item.Novel;
 import com.ala24.bookstore.domain.item.Poem;
 import com.ala24.bookstore.domain.item.SelfDevelopment;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.validator.constraints.Range;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import static com.ala24.bookstore.web.dtos.itemdto.ItemCategory.NOVEL;
 import static com.ala24.bookstore.web.dtos.itemdto.ItemCategory.POEM;
@@ -18,20 +19,25 @@ import static com.ala24.bookstore.web.dtos.itemdto.ItemCategory.POEM;
 @AllArgsConstructor
 public class ItemFormDto {
 
+	@NotBlank
 	private String name;
 
+	@NotBlank
 	private String author;
 
-
+	@NotBlank
 	private String publisher;
 
+	@NotNull
 	private ItemCategory category;
 
+	@NotNull
+	@Range(min = 1000, max = 100_000)
 	private int price;
 
+	@NotNull
+	@Range(min = 10, max = 9999)
 	private int stockQuantity;
-
-
 
 	public Item toEntity() {
 		if (isIt(POEM)) {
