@@ -1,27 +1,30 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>Ala24</title>
+<head th:replace="fragments/header :: header">
+    <meta charset="utf-8">
+    <title>Ala24 서점</title>
 </head>
 <body>
-    <div>Ala24.com</div>
-    <div class="nav">
-        <div>
-            <button type="button" th:onclick="|location.href='@{/login}'|">
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+    <div class="jumbotron">
+        <p>
+            <p class="lead">회원 기능</p>
+            <a class="btn btn-lg btn-info" th:href="@{/login}" role="button">
                 로그인
-            </button>
-        </div>
-        <div>
-            <button type="button" th:onclick="|location.href='@{/members/post}'|">
+            </a>
+            <a class="btn btn-lg btn-info" th:href="@{/members/post}" role="button">
                 회원 가입
-            </button>
-        </div>
-        <div>
-            <button type="button" th:onclick="|location.href='@{/items/list}'|">
+            </a>
+        </p>
+        <p>
+            <p class="lead">상품 기능</p>
+            <a class="btn btn-lg btn-secondary" th:href="@{/items/list}" role="button">
                 상품 조회
-            </button>
-        </div>
+            </a>
+        </p>
     </div>
+    <div th:replace="fragments/footer :: footer" />
+</div>
 </body>
 </html>
