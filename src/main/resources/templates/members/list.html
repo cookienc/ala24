@@ -1,37 +1,42 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ko">
-<head>
+<head th:replace="/fragments/header :: header">
     <meta charset="UTF-8">
     <title>회원 목록 조회</title>
 </head>
 <body>
-    <div>
-        <table>
-            <thead>
-            <tr>
-                <th>번호</th>
-                <th>이름</th>
-                <th>아이디</th>
-                <th>도시</th>
-                <th>우편번호</th>
-                <th>주소</th>
-                <th>권한</th>
-                <th>계좌</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="member : ${members}">
-                <td th:text="${memberStat.count}"></td>
-                <td th:text="${member.name}"></td>
-                <td th:text="${member.loginId}"></td>
-                <td th:text="${member.address?.city}"></td>
-                <td th:text="${member.address?.zipCode}"></td>
-                <td th:text="${member.address?.specificAddress}"></td>
-                <td th:text="${member.authority}"></td>
-                <td th:text="${member.cash?.left}"></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+<div th:replace="fragments/bodyHeader :: bodyHeader"/>
+<div class="container">
+    <h3>
+        회원 목록
+    </h3>
+    <table class="table table-striped table-bordered table-light">
+        <thead>
+        <tr>
+            <th>번호</th>
+            <th>이름</th>
+            <th>아이디</th>
+            <th>도시</th>
+            <th>우편번호</th>
+            <th>주소</th>
+            <th>권한</th>
+            <th>계좌</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="member : ${members}">
+            <td th:text="${memberStat.count}"></td>
+            <td th:text="${member.name}"></td>
+            <td th:text="${member.loginId}"></td>
+            <td th:text="${member.address?.city}"></td>
+            <td th:text="${member.address?.zipCode}"></td>
+            <td th:text="${member.address?.specificAddress}"></td>
+            <td th:text="${member.authority}"></td>
+            <td th:text="${member.cash?.left}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:replace="fragments/footer :: footer"/>
+</div>
 </body>
 </html>

@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
+<head th:replace="/fragments/header :: header">
     <meta charset="UTF-8">
     <title>아이템 목록 조회</title>
 </head>
 <body>
-<div>
-    <table>
+<div th:replace="fragments/bodyHeader :: bodyHeader"/>
+<div class="container">
+    <table class="table table-striped table-bordered table-light">
+        <h3>
+            상품 목록
+        </h3>
         <thead>
         <tr>
             <th>번호</th>
@@ -34,6 +38,7 @@
         </tr>
         </tbody>
     </table>
+    <div th:replace="fragments/footer :: footer"/>
 </div>
 </body>
 </html>

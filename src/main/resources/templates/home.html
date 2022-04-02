@@ -8,23 +8,27 @@
 <div class="container">
     <div th:replace="fragments/bodyHeader :: bodyHeader"/>
     <div class="jumbotron">
-        <p>
-            <p class="lead">회원 기능</p>
+        <div>
+            <p class="lead">
+                <h3>회원 기능</h3>
+            </p>
             <a class="btn btn-lg btn-info" th:href="@{/login}" role="button">
                 로그인
             </a>
             <a class="btn btn-lg btn-info" th:href="@{/members/post}" role="button">
                 회원 가입
             </a>
-        </p>
-        <p>
-            <p class="lead">상품 기능</p>
+        </div>
+        <div>
+            <p class="lead">
+                <h3>상품 기능</h3>
+            </p>
             <a class="btn btn-lg btn-secondary" th:href="@{/items/list}" role="button">
                 상품 조회
             </a>
-        </p>
+        </div>
     </div>
-    <div th:replace="fragments/footer :: footer" />
+    <div th:replace="fragments/footer :: footer"/>
 </div>
 </body>
 </html>
