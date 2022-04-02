@@ -6,7 +6,7 @@ spring:
       password:
       driver-class-name: org.h2.Driver
   messages:
-    basename: errors
+    basename: messages, errors
 
   jpa:
     hibernate:

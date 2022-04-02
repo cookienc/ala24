@@ -11,7 +11,7 @@ import static com.ala24.bookstore.exception.utils.Sentence.NOT_ENOUGH_ITEM;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn
+@DiscriminatorColumn(name = "category")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class Item {
@@ -27,7 +27,8 @@ public abstract class Item {
 	private int price;
 	private int stockQuantity;
 
-	protected Item(String name, String author, String publisher, int price, int stockQuantity) {
+	protected Item(Long id, String name, String author, String publisher, int price, int stockQuantity) {
+		this.id = id;
 		this.name = name;
 		this.author = author;
 		this.publisher = publisher;
@@ -48,5 +49,13 @@ public abstract class Item {
 
 	public int addStock(int count) {
 		return this.stockQuantity += count;
+	}
+
+	public void updateInfo(Item item) {
+		this.name = item.getName();
+		this.author = item.getAuthor();
+		this.publisher = item.getPublisher();
+		this.price = item.getPrice();
+		this.stockQuantity = item.getStockQuantity();
 	}
 }

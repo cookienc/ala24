@@ -32,4 +32,21 @@ public class ItemService {
 		return itemRepository.findAll();
 	}
 
+	@Transactional
+	public void updateItem(Long itemId, Item item) {
+		Item findItem = findOne(itemId);
+		System.out.println("findItem.getClass() = " + findItem.getClass());
+		System.out.println("Item.getClass() = " + item.getClass());
+		if (doesItChangeCategory(item, findItem)) {
+			itemRepository.delete(findItem);
+			saveItem(item);
+			return;
+		}
+
+		findItem.updateInfo(item);
+	}
+
+	private boolean doesItChangeCategory(Item item, Item findItem) {
+		return !findItem.getClass().equals(item.getClass());
+	}
 }

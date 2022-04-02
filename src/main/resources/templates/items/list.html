@@ -19,12 +19,18 @@
         </thead>
         <tbody>
         <tr th:each="item : ${items}">
+            <td th:text="${item.itemId}" hidden></td>
             <td th:text="${itemStat.count}"></td>
             <td th:text="${item.name}"></td>
             <td th:text="${item.author}"></td>
             <td th:text="${item.publisher}"></td>
             <td th:text="${item.price}"></td>
             <td th:text="${item.stockQuantity}"></td>
+            <td>
+                <a th:href="@{/items/{itemId}/edit (itemId=${item.itemId})}" th:text="#{button.update}" role="button">
+                    수정
+                </a>
+            </td>
         </tr>
         </tbody>
     </table>

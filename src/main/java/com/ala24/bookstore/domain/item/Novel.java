@@ -11,7 +11,7 @@ import javax.persistence.Entity;
 public class Novel extends Item{
 
 	@Builder
-	private Novel(String name, String author, String publisher, int price, int stockQuantity) {
-		super(name, author, publisher, price, stockQuantity);
+	private Novel(Long id, String name, String author, String publisher, int price, int stockQuantity) {
+		super(id, name, author, publisher, price, stockQuantity);
 	}
 }

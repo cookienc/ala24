@@ -12,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 public class ItemListDto {
 
+	private Long itemId;
 	private String name;
 	private String author;
 	private String publisher;
@@ -19,7 +20,8 @@ public class ItemListDto {
 	private int stockQuantity;
 
 	@Builder
-	private ItemListDto(String name, String author, String publisher, int price, int stockQuantity) {
+	private ItemListDto(Long itemId, String name, String author, String publisher, int price, int stockQuantity) {
+		this.itemId = itemId;
 		this.name = name;
 		this.author = author;
 		this.publisher = publisher;
@@ -32,6 +34,7 @@ public class ItemListDto {
 
 		for (Item item : items) {
 			itemForm.add(ItemListDto.builder()
+					.itemId(item.getId())
 					.name(item.getName())
 					.author(item.getAuthor())
 					.publisher(item.getPublisher())
