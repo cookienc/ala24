@@ -84,7 +84,7 @@ body {
     display: inline-block;
 }
 
-.fieldError {
+.field-error {
     border-color: #bd2130;
 }
 
