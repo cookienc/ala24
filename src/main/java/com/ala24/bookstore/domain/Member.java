@@ -53,6 +53,10 @@ public class Member {
 		return this.cash.left();
 	}
 
+	public void changeAuthority(MemberStatus status) {
+		this.authority = status;
+	}
+
 	public void charge(Long cash) {
 		if (this.cash == null) {
 			this.cash = Cash.charge(cash);

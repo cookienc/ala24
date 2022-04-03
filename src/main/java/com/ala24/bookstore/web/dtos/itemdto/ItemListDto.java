@@ -33,16 +33,20 @@ public class ItemListDto {
 		List<ItemListDto> itemForm = new ArrayList<>();
 
 		for (Item item : items) {
-			itemForm.add(ItemListDto.builder()
-					.itemId(item.getId())
-					.name(item.getName())
-					.author(item.getAuthor())
-					.publisher(item.getPublisher())
-					.price(item.getPrice())
-					.stockQuantity(item.getStockQuantity())
-					.build());
+			itemForm.add(toDto(item));
 		}
 
 		return itemForm;
+	}
+
+	private ItemListDto toDto(Item item) {
+		return ItemListDto.builder()
+				.itemId(item.getId())
+				.name(item.getName())
+				.author(item.getAuthor())
+				.publisher(item.getPublisher())
+				.price(item.getPrice())
+				.stockQuantity(item.getStockQuantity())
+				.build();
 	}
 }

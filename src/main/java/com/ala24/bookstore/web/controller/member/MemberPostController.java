@@ -38,7 +38,14 @@ public class MemberPostController {
 			return "members/postMemberForm";
 		}
 
-		memberService.join(memberForm.toEntity());
+		try {
+			memberService.join(memberForm.toEntity());
+		} catch (IllegalStateException e) {
+			log.info("중복된 회원으로 회원 가입 error={}", result);
+			result.rejectValue("loginId", "duplicate", "해당 아이디는 이미 사용중입니다.");
+			return "members/postMemberForm";
+		}
+
 		return "redirect:/";
 	}
 }

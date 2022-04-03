@@ -4,8 +4,8 @@ import com.ala24.bookstore.domain.Address;
 import com.ala24.bookstore.domain.Cash;
 import com.ala24.bookstore.domain.Member;
 import com.ala24.bookstore.domain.type.MemberStatus;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import java.util.List;
 
 @Getter
 @Setter
-@NoArgsConstructor
+
 public class MemberListDto {
 
 	private String name;
@@ -22,19 +22,37 @@ public class MemberListDto {
 	private Cash cash;
 	private MemberStatus authority;
 
+	public MemberListDto() {
+
+	}
+
+	@Builder
+	public MemberListDto(String name, String loginId, Address address, Cash cash, MemberStatus authority) {
+		this.name = name;
+		this.loginId = loginId;
+		this.address = address;
+		this.cash = cash;
+		this.authority = authority;
+	}
+
 	public List<MemberListDto> toDto(List<Member> members) {
 
 		List<MemberListDto> list = new ArrayList<>();
 
 		for (Member member : members) {
-			this.name = member.getName();
-			this.loginId = member.getLoginId();
-			this.address = member.getAddress();
-			this.cash = member.getCash();
-			this.authority = member.getAuthority();
-			list.add(this);
+			list.add(toDto(member));
 		}
 
 		return list;
+	}
+
+	private MemberListDto toDto(Member member) {
+		return MemberListDto.builder()
+				.name(member.getName())
+				.loginId(member.getLoginId())
+				.address(member.getAddress())
+				.cash(member.getCash())
+				.authority(member.getAuthority())
+				.build();
 	}
 }

@@ -25,6 +25,7 @@
         </thead>
         <tbody>
         <tr th:each="member : ${members}">
+            <td th:text="${member}" hidden></td>
             <td th:text="${memberStat.count}"></td>
             <td th:text="${member.name}"></td>
             <td th:text="${member.loginId}"></td>
