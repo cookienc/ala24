@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Getter
@@ -28,8 +29,11 @@ public class MemberFormDto {
 	@NotBlank
 	private String name;
 
+	@NotBlank
 	private String city;
+	@NotBlank
 	private String specificAddress;
+	@NotNull
 	private Integer zipcode;
 
 	public Member toEntity() {
