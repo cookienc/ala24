@@ -34,6 +34,9 @@
                 <a th:href="@{/items/{itemId}/edit (itemId=${item.itemId})}" th:text="#{button.update}" role="button">
                     수정
                 </a>
+                <a th:href="@{/order/{itemId} (itemId=${item.itemId})}" th:text="#{button.order}" role="button">
+                    수정
+                </a>
             </td>
         </tr>
         </tbody>

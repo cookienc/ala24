@@ -54,6 +54,11 @@ public class DbSetUp {
 				.name("admin")
 				.loginId("admin")
 				.password("admin")
+				.address(Address.builder()
+						.zipCode(12345)
+						.city("admin")
+						.specificAddress("admin")
+						.build())
 				.build();
 		admin.changeAuthority(MemberStatus.ADMIN);
 
