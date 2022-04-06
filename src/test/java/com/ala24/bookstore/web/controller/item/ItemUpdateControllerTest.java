@@ -1,9 +1,13 @@
 package com.ala24.bookstore.web.controller.item;
 
 import com.ala24.bookstore.DataBaseCleanup;
+import com.ala24.bookstore.domain.Address;
+import com.ala24.bookstore.domain.Cash;
+import com.ala24.bookstore.domain.Member;
 import com.ala24.bookstore.domain.item.Item;
 import com.ala24.bookstore.domain.item.SelfDevelopment;
 import com.ala24.bookstore.service.ItemService;
+import com.ala24.bookstore.service.MemberService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,6 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class ItemUpdateControllerTest {
 
 	private static Item book;
+	private static Member test;
 
 	@Autowired
 	private MockMvc mvc;
@@ -32,10 +37,24 @@ class ItemUpdateControllerTest {
 	private ItemService itemService;
 
 	@Autowired
+	private MemberService memberService;
+
+	@Autowired
 	private DataBaseCleanup dataBaseCleanup;
 
 	@BeforeEach
 	void setUp() {
+		test = Member.builder()
+				.name("test")
+				.loginId("test")
+				.password("test")
+				.cash(Cash.charge(0L))
+				.address(Address.builder()
+						.zipcode(12345)
+						.city("Seoul")
+						.specificAddress("Apartment")
+						.build())
+				.build();
 		book = SelfDevelopment.builder()
 				.name("JPA")
 				.author("김영한")
@@ -43,6 +62,8 @@ class ItemUpdateControllerTest {
 				.price(38700)
 				.stockQuantity(100)
 				.build();
+
+		memberService.join(test);
 	}
 
 	@AfterEach
@@ -55,7 +76,8 @@ class ItemUpdateControllerTest {
 	    //given
 		Long itemId = itemService.saveItem(book);
 		//when
-		mvc.perform(get("/items/" + itemId + "/edit"))
+		mvc.perform(get("/items/" + itemId + "/edit")
+						.sessionAttr("loginMember", test))
 		//then
 				.andExpect(status().isOk())
 				.andExpect(view().name("items/updateForm"));
@@ -75,6 +97,7 @@ class ItemUpdateControllerTest {
 		Long itemId = itemService.saveItem(book);
 		//when
 		mvc.perform(post("/items/" + itemId + "/edit")
+						.sessionAttr("loginMember", test)
 						.params(params))
 		//then
 				.andExpect(status().is3xxRedirection())
