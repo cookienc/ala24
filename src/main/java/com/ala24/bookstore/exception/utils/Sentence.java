@@ -9,6 +9,7 @@ public enum Sentence {
 	NO_ORDER("해당 주문은 없습니다."),
 	NO_MEMBER("해당 회원은 존재하지 않습니다."),
 	NO_ITEM("해당 아이템은 존재하지 않습니다."),
+	NO_ID("해당 ID를 가진 상품이나 회원은 없습니다."),
 
 	NOT_DUPLICATE_MEMBER("중복된 아이디로 가입할 수 없습니다."),
 	NOT_ENOUGH_CASH("계좌에 돈이 부족합니다."),

@@ -11,37 +11,47 @@
         <h3 class="text-center">[상품 주문]</h3>
     </div>
     <form role="form" th:object="${orderForm}" th:action="@{/order}" method="post">
-        <input th:for="itemId" th:field="${itemForm.itemId}" hidden>
+        <input th:for="itemId" th:field="*{itemId}" hidden>
+        <input th:for="stockQuantity" th:field="*{stockQuantity}" hidden>
         <div class="form-group">
             <label th:for="itemName" th:text="#{order.itemName}">주문 상품</label>
-            <input type="text" th:field="${itemForm.itemName}" readonly class="form-control">
+            <input type="text" th:field="*{itemName}" readonly class="form-control">
         </div>
         <div class="form-group">
             <label th:for="itemPrice" th:text="#{item.price}">가격</label>
-            <input type="text" th:field="${itemForm.price}" readonly class="form-control">
+            <input type="text" th:field="*{price}" readonly class="form-control">
         </div>
         <div class="form-group">
             <label th:for="itemQuantity" th:text="#{order.quantity}">주문 수량</label>
-            <input type="text" th:field="${itemForm.quantity}" class="form-control">
+            <input type="text" th:field="*{quantity}" class="form-control" th:errorclass="field-error"
+                   placeholder="수량을 입력해주세요.">
+            <p class="field-error" th:errors="${orderForm.quantity}">주문 수량 오류</p>
         </div>
         <h3 class="text-center">[주문자 정보]</h3>
-        <input th:for="memberId" th:field="${memberForm.memberId}" hidden>
+        <input th:for="memberId" th:field="*{memberId}" hidden>
         <div class="form-group">
             <label th:name="memberName" th:text="#{order.memberName}">주문자</label>
-            <input type="text" th:field="${memberForm.memberName}" readonly class="form-control">
+            <input type="text" th:field="*{memberName}" readonly class="form-control">
         </div>
         <div class="form-group">
             <label th:for="city" th:text="#{order.city}">배송 주소</label>
-            <input type="text" th:field="${memberForm.address.city}" class="form-control">
+            <input type="text" th:field="*{city}" class="form-control" th:errorclass="field-error"
+                   placeholder="주소를 입력 해주세요.">
+            <p class="field-error" th:errors="*{city}">배송 주소 오류</p>
         </div>
         <div class="form-group">
             <label th:for="specificAddress" th:text="#{order.specificAddress}">상세 주소</label>
-            <input type="text" th:field="${memberForm.address.specificAddress}" class="form-control">
+            <input type="text" th:field="*{specificAddress}" class="form-control" th:errorclass="field-error"
+                    placeholder="상세 주소를 입력해주세요.">
+            <p class="field-error" th:errors="*{specificAddress}">상세 주소 오류</p>
         </div>
         <div class="form-group">
             <label th:for="zipcode" th:text="#{order.zipcode}">우편 번호</label>
-            <input type="text" th:field="${memberForm.address.zipcode}" class="form-control">
+            <input type="text" th:field="*{zipcode}" class="form-control" th:errorclass="field-error"
+                    placeholder="우편 번호는 필수입니다.">
+            <p class="field-error" th:errors="*{zipcode}">우편 번호 오류</p>
         </div>
+        <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">전체 오류 메시지</p>
         <button class="btn btn-sm btn-info" type="submit" th:text="#{button.order}">주문</button>
         <button class="btn btn-sm btn-secondary" type="button" th:onclick="|location.href='history.back'|">취소</button>
     </form>
