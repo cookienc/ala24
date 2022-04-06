@@ -32,7 +32,7 @@ class DeliveryTest {
 	    //given
 		Address address = Address.builder()
 				.city("서울")
-				.zipCode(12345)
+				.zipcode(12345)
 				.specificAddress("은마아파트")
 				.build();
 

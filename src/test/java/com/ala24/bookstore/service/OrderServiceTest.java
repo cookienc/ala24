@@ -56,7 +56,7 @@ class OrderServiceTest {
 		Address address = Address.builder()
 				.city("서울")
 				.specificAddress("은마아파트")
-				.zipCode(22222)
+				.zipcode(22222)
 				.build();
 
 		book = SelfDevelopment.builder()

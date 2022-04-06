@@ -42,7 +42,7 @@ class HomeControllerTest {
 				.address(Address.builder()
 						.city("서울")
 						.specificAddress("강남")
-						.zipCode(12345)
+						.zipcode(12345)
 						.build()
 				).build();
 

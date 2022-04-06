@@ -1,9 +1,6 @@
 package com.ala24.bookstore.domain;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Embeddable;
 
@@ -13,13 +10,13 @@ import javax.persistence.Embeddable;
 public class Address {
 
 	private String city;
-	private Integer zipCode;
+	private Integer zipcode;
 	private String specificAddress;
 
 	@Builder
-	public Address(String city, int zipCode, String specificAddress) {
+	public Address(String city, Integer zipcode, String specificAddress) {
 		this.city = city;
-		this.zipCode = zipCode;
+		this.zipcode = zipcode;
 		this.specificAddress = specificAddress;
 	}
 }

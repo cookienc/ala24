@@ -13,12 +13,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class MemberOrderFormDto {
 
-	private String name;
+	private Long memberId;
+	private String memberName;
 	private Address address;
 
 	public MemberOrderFormDto toDto(Member member) {
 		MemberOrderFormDto memberOrderForm = new MemberOrderFormDto();
-		memberOrderForm.setName(member.getName());
+		memberOrderForm.setMemberId(member.getId());
+		memberOrderForm.setMemberName(member.getName());
 		memberOrderForm.setAddress(member.getAddress());
 
 		return memberOrderForm;

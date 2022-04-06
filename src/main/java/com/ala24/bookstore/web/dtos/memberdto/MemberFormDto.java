@@ -45,7 +45,7 @@ public class MemberFormDto {
 				.address(Address.builder()
 						.specificAddress(this.specificAddress)
 						.city(this.city)
-						.zipCode(this.zipcode)
+						.zipcode(this.zipcode)
 						.build())
 				.build();
 	}

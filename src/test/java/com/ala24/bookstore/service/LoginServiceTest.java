@@ -39,7 +39,7 @@ class LoginServiceTest {
 				.address(Address.builder()
 						.city("서울")
 						.specificAddress("강남")
-						.zipCode(12345)
+						.zipcode(12345)
 						.build()
 				).build();
 	}
@@ -62,7 +62,7 @@ class LoginServiceTest {
 		assertThat(loginMember.getPassword()).isEqualTo(testMember.getPassword());
 		assertThat(loginMember.getName()).isEqualTo(testMember.getName());
 		assertThat(loginMember.getAddress().getCity()).isEqualTo(testMember.getAddress().getCity());
-		assertThat(loginMember.getAddress().getZipCode()).isEqualTo(testMember.getAddress().getZipCode());
+		assertThat(loginMember.getAddress().getZipcode()).isEqualTo(testMember.getAddress().getZipcode());
 		assertThat(loginMember.getAddress().getSpecificAddress()).isEqualTo(testMember.getAddress().getSpecificAddress());
 	}
 	

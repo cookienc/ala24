@@ -48,7 +48,7 @@ class OrderControllerTest {
 				.password("test")
 				.cash(Cash.charge(0L))
 				.address(Address.builder()
-						.zipCode(12345)
+						.zipcode(12345)
 						.city("Seoul")
 						.specificAddress("Apartment")
 						.build())
@@ -62,9 +62,9 @@ class OrderControllerTest {
 				.build();
 
 		memberService.join(test);
-		itemService.saveItem(novel);
-	    //when
-		mvc.perform(get("/order/1")
+		Long itemId = itemService.saveItem(novel);
+		//when
+		mvc.perform(get("/order/" + itemId)
 						.sessionAttr("loginMember", test))
 				//then
 				.andExpect(status().isOk())
