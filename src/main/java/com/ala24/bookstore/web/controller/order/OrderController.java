@@ -8,6 +8,7 @@ import com.ala24.bookstore.service.ItemService;
 import com.ala24.bookstore.service.MemberService;
 import com.ala24.bookstore.service.OrderService;
 import com.ala24.bookstore.web.dtos.orderdto.OrderFormDto;
+import com.ala24.bookstore.web.dtos.orderdto.OrderServiceDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -56,14 +57,16 @@ public class OrderController {
 			return "order/orderForm";
 		}
 
+		OrderServiceDto serviceDto = new OrderServiceDto().toDto(orderForm);
+
 		try {
 
-			orderService.order(orderForm.getMemberId(), orderForm.getItemId(), orderForm.getQuantity());
+			orderService.order(serviceDto.getMemberId(), serviceDto.getItemId(), serviceDto.getItemQuantity());
 
 		} catch (NotEnoughCashException e) {
 			log.info("잔액이 부족합니다. error = {}", result);
 
-			Long left = memberService.findOne(orderForm.getMemberId())
+			Long left = memberService.findOne(serviceDto.getMemberId())
 					.getCash().left();
 
 			result.reject("notEnoughMoney", NOT_ENOUGH_CASH.toString() +
