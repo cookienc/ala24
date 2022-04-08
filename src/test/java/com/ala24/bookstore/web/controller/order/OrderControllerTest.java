@@ -7,10 +7,13 @@ import com.ala24.bookstore.domain.Member;
 import com.ala24.bookstore.domain.item.Novel;
 import com.ala24.bookstore.service.ItemService;
 import com.ala24.bookstore.service.MemberService;
-import org.assertj.core.api.Assertions;
+import com.ala24.bookstore.web.dtos.orderdto.OrderFormDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,6 +21,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
+import java.util.Set;
+import java.util.stream.Stream;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -32,8 +41,32 @@ class OrderControllerTest {
 	private static Novel novel;
 	private static LinkedMultiValueMap<String, String> params;
 
+	private static Stream<Arguments> sampleData() {
+		OrderFormDto orderForm = new OrderFormDto().toDto(novel, test);
+		OrderFormDto noQuantity = new OrderFormDto().toDto(novel, test);
+		noQuantity.setQuantity(0);
+		OrderFormDto noCity = new OrderFormDto().toDto(novel, test);
+		noCity.setCity("");
+		OrderFormDto noSpecificAddress = new OrderFormDto().toDto(novel, test);
+		noSpecificAddress.setSpecificAddress("");
+		OrderFormDto noZipcode = new OrderFormDto().toDto(novel, test);
+		noZipcode.setCity(null);
+
+
+		return Stream.of(
+				Arguments.of(orderForm, 0),
+				Arguments.of(noQuantity, 1),
+				Arguments.of(noCity, 1),
+				Arguments.of(noSpecificAddress, 1),
+				Arguments.of(noZipcode, 1)
+		);
+	}
+
 	@Autowired
 	MockMvc mvc;
+
+	@Autowired
+	Validator validator;
 
 	@Autowired
 	MemberService memberService;
@@ -97,7 +130,13 @@ class OrderControllerTest {
 		params = new LinkedMultiValueMap<>();
 		params.add("itemId", String.valueOf(itemId));
 		params.add("memberId", String.valueOf(memberId));
-		params.add("price", "14670");
+		params.add("memberName", test.getName());
+		params.add("city", test.getAddress().getCity());
+		params.add("specificAddress", test.getAddress().getSpecificAddress());
+		params.add("zipcode", String.valueOf(test.getAddress().getZipcode()));
+		params.add("stockQuantity", String.valueOf(novel.getStockQuantity()));
+		params.add("itemName", novel.getName());
+		params.add("price", String.valueOf(novel.getPrice()));
 		params.add("quantity", String.valueOf(1));
 
 		//when
@@ -108,6 +147,16 @@ class OrderControllerTest {
 				.andExpect(status().is3xxRedirection())
 				.andExpect(redirectedUrl("/"));
 
-		Assertions.assertThat(memberService.findOne(memberId).getCash().left()).isEqualTo(100_000 - 14670);
+		assertThat(memberService.findOne(memberId).getCash().left()).isEqualTo(100_000 - 14670);
+	}
+	
+	@ParameterizedTest
+	@MethodSource("sampleData")
+	void 검증_테스트(OrderFormDto orderForm, int count) {
+	    //given
+	    //when
+		Set<ConstraintViolation<OrderFormDto>> violations = validator.validate(orderForm);
+		//then
+		assertThat(violations.size()).isEqualTo(count);
 	}
 }
