@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="/fragments/header :: header">
+    <meta charset="UTF-8">
+    <title>주문 조회</title>
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+    <h3 class="text-center">
+        [주문 조회]
+    </h3>
+    <table class="table table-striped table-bordered table-light">
+        <thead>
+        <tr>
+            <th>번호</th>
+            <th>주문 시각</th>
+            <th>상품 이름</th>
+            <th>주문자</th>
+            <th colspan="3">배송 주소</th>
+<!--            <th>우편번호</th>-->
+<!--            <th>주소</th>-->
+            <th>배송 상태</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order : ${orders}">
+            <td th:text="${orderStat.count}"></td>
+            <td th:text="${#temporals.format(order.orderDate, 'yyyy년 MM월 dd일 HH시 mm분')}"></td>
+            <td th:text="${order.orderItems.get(0).getItemName()}"></td>
+            <td th:text="${order.member.name}"></td>
+            <td colspan="3" th:text="|${order.delivery.address.city}, ${order.member.address.specificAddress},
+             (${order.member.address.zipcode})|"></td>
+            <td th:text="${order.delivery.deliveryStatus.getDescription()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -8,12 +8,14 @@ import com.ala24.bookstore.domain.item.Item;
 import com.ala24.bookstore.repository.ItemRepository;
 import com.ala24.bookstore.repository.MemberRepository;
 import com.ala24.bookstore.repository.OrderRepository;
+import com.ala24.bookstore.web.dtos.orderdto.OrderListDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 import static com.ala24.bookstore.exception.utils.Sentence.*;
 
@@ -58,6 +60,12 @@ public class OrderService {
 
 	public List<Order> findAll() {
 		return orderRepository.findAll();
+	}
+
+	public List<OrderListDto> findAllAsList() {
+		return findAll().stream()
+				.map(OrderListDto::new)
+				.collect(Collectors.toList());
 	}
 
 	/**

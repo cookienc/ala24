@@ -58,6 +58,10 @@ public class OrderItem {
 		item.addStock(this.count);
 	}
 
+	public String getItemName() {
+		return this.item.getName();
+	}
+
 	private static void validateItem(Item item, int count) {
 		item.validateOrder(count);
 	}
