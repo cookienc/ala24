@@ -41,7 +41,7 @@ public class DbSetUp {
 				.name("test")
 				.loginId("test")
 				.password("test")
-				.cash(Cash.charge(0L))
+				.cash(Cash.charge(100000L))
 				.address(Address.builder()
 						.zipcode(12345)
 						.city("Seoul")
@@ -92,7 +92,7 @@ public class DbSetUp {
 				.name("윤동주 전 시집 하늘과 바람과 별과 시")
 				.author("윤동주")
 				.publisher("스타북스")
-				.price(117000)
+				.price(11700)
 				.stockQuantity(1500)
 				.build();
 
