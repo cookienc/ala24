@@ -4,6 +4,7 @@ import com.ala24.bookstore.DataBaseCleanup;
 import com.ala24.bookstore.domain.Address;
 import com.ala24.bookstore.domain.Cash;
 import com.ala24.bookstore.domain.Member;
+import com.ala24.bookstore.domain.type.MemberStatus;
 import com.ala24.bookstore.service.MemberService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -57,23 +58,41 @@ class HomeControllerTest {
 
 	@Test
 	void 회원들은_로그인_홈으로_이동() throws Exception {
+		//when
 		mvc.perform(get("/")
 				.sessionAttr("loginMember", testMember))
+		//then
 				.andExpect(status().isOk())
 				.andExpect(view().name("loginHome"));
 	}
 
 	@Test
+	void 어드민일_경우_어드민_홈으로_이동() throws Exception {
+	    //given
+	    testMember.changeAuthority(MemberStatus.ADMIN);
+		//when
+		mvc.perform(get("/")
+				.sessionAttr("loginMember", testMember))
+		//then
+				.andExpect(status().isOk())
+				.andExpect(view().name("adminHome"));
+	}
+
+	@Test
 	void 로그아웃_테스트() throws Exception {
+		//when
 		mvc.perform(post("/logout")
 						.sessionAttr("loginMember", testMember))
+		//then
 				.andExpect(status().is3xxRedirection())
 				.andExpect(redirectedUrl("/"));
 	}
 
 	@Test
 	void 세션이_없을때_로그아웃_테스트() throws Exception {
+		//when
 		mvc.perform(post("/logout"))
+		//then
 				.andExpect(status().is3xxRedirection())
 				.andExpect(redirectedUrl("/"));
 	}

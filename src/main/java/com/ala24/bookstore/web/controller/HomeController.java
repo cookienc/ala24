@@ -11,16 +11,12 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 @Slf4j
 @Controller
+@RequestMapping("/")
 public class HomeController {
 
 	public static final String LOGIN_MEMBER = "loginMember";
 
-	@RequestMapping("/")
-	public String home() {
-		return "home";
-	}
-
-	@GetMapping("/")
+	@GetMapping
 	public String homeLogin(@SessionAttribute(name = LOGIN_MEMBER, required = false) Member loginMember, Model model) {
 
 		log.info("로그인 확인 : {}", loginMember);
