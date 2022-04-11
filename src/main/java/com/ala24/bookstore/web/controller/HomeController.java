@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import static com.ala24.bookstore.web.session.SessionAttributeName.LOGIN_MEMBER;
+
 @Slf4j
 @Controller
 @RequestMapping("/")
 public class HomeController {
-
-	public static final String LOGIN_MEMBER = "loginMember";
 
 	@GetMapping
 	public String homeLogin(@SessionAttribute(name = LOGIN_MEMBER, required = false) Member loginMember, Model model) {

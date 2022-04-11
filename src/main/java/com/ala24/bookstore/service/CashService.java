@@ -4,6 +4,7 @@ import com.ala24.bookstore.domain.Member;
 import com.ala24.bookstore.exception.NotEnoughCashException;
 import com.ala24.bookstore.repository.CashRepository;
 import com.ala24.bookstore.repository.MemberRepository;
+import com.ala24.bookstore.web.dtos.memberdto.CashFormDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,5 +40,15 @@ public class CashService {
 		return memberRepository.findById(memberId).stream()
 				.findFirst()
 				.orElseThrow(() -> new NoSuchElementException(NO_MEMBER.toString()));
+	}
+
+	public CashFormDto toCashFormDto(Long loginId) {
+		Member loginMember = findOne(loginId);
+		return CashFormDto.builder()
+				.name(loginMember.getName())
+				.loginId(loginMember.getLoginId())
+				.currentAccount(loginMember.getCash().left())
+				.chargeMoney(0L)
+				.build();
 	}
 }
