@@ -1,6 +1,7 @@
 package com.ala24.bookstore.web.controller;
 
 import com.ala24.bookstore.domain.Member;
+import com.ala24.bookstore.domain.type.MemberStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +27,10 @@ public class HomeController {
 
 		if (loginMember == null) {
 			return "home";
+		}
+
+		if (loginMember.getAuthority().equals(MemberStatus.ADMIN)) {
+			return "adminHome";
 		}
 
 		model.addAttribute("member", loginMember);
