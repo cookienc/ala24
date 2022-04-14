@@ -12,15 +12,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@Transactional
 class MemberCashControllerTest {
 
+	public static final long CHARGE_MONEY = 10000L;
 	private static Member testMember;
 
 	@Autowired
@@ -62,5 +68,24 @@ class MemberCashControllerTest {
 	    //then
 				.andExpect(status().isOk())
 				.andExpect(view().name("members/cash"));
+	}
+
+	@Test
+	void 충전_테스트() throws Exception {
+	    //given
+		Long memberId = memberService.join(testMember);
+		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+		params.add("chargeMoney", String.valueOf(CHARGE_MONEY));
+
+		//when
+		mvc.perform(post("/members/cash")
+						.sessionAttr("loginMember", testMember)
+						.params(params))
+		//then
+				.andExpect(status().is3xxRedirection())
+				.andExpect(redirectedUrl("/"));
+
+		assertThat(memberService.findOne(memberId).getCash().left())
+				.isEqualTo(CHARGE_MONEY);
 	}
 }
