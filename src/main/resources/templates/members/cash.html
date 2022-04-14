@@ -8,7 +8,7 @@
 <div class="container">
     <div th:replace="fragments/bodyHeader :: bodyHeader"/>
     <h3>현금 충전</h3>
-    <div th:object="${cashForm}">
+    <form role="form" action="/members/cash" th:object="${cashForm}" method="post">
         <div class="form-group">
             <label th:for="memberName" th:text="#{member.memberName}">회원 이름</label>
             <input type="text" th:field="*{name}" class="form-control" readonly>
@@ -21,17 +21,15 @@
             <label th:for="account" th:text="#{member.account}">계좌 잔고</label>
             <input type="text" th:field="*{currentAccount}" class="form-control" readonly>
         </div>
-    </div>
-    <div>
-        <form role="form" action="/members/cash" th:object="${cashForm}" method="post">
-            <div class="form-group">
-                <label th:for="chargeMoney" th:text="#{member.chargeMoney}">충전할 금액</label>
-                <input type="text" th:field="*{chargeMoney}" class="form-control">
-            </div>
-            <button class="btn btn-sm btn-info" type="submit" th:text="#{button.charge}">수정</button>
-            <button class="btn btn-sm btn-secondary" th:onclick="|location.href='history.back'|"
-                    th:text="#{button.cancel}">취소</button>
-        </form>
+        <div class="form-group">
+            <label th:for="chargeMoney" th:text="#{member.chargeMoney}">충전할 금액</label>
+            <input type="text" th:field="*{chargeMoney}" class="form-control" th:errorclass="field-error">
+            <p class="field-error" th:errors="*{chargeMoney}">다시 입력해주세요.</p>
+        </div>
+        <button class="btn btn-sm btn-info" type="submit" th:text="#{button.charge}">수정</button>
+        <button class="btn btn-sm btn-secondary" th:onclick="|location.href='history.back'|"
+                th:text="#{button.cancel}">취소</button>
+    </form>
 
     </div>
 </div>

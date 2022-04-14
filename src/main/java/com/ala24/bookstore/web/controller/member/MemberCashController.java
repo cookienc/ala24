@@ -4,16 +4,18 @@ import com.ala24.bookstore.domain.Member;
 import com.ala24.bookstore.service.CashService;
 import com.ala24.bookstore.web.dtos.memberdto.CashFormDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 import static com.ala24.bookstore.web.session.SessionAttributeName.LOGIN_MEMBER;
 
 @Controller
+@Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/members/cash")
 public class MemberCashController {
@@ -29,7 +31,13 @@ public class MemberCashController {
 	}
 
 	@PostMapping
-	public String charge(@SessionAttribute(name = LOGIN_MEMBER) Member loginMember, CashFormDto cashForm) {
+	public String charge(@SessionAttribute(name = LOGIN_MEMBER) Member loginMember,
+						 @Valid @ModelAttribute("cashForm") CashFormDto cashForm, BindingResult result) {
+
+		if (result.hasErrors()) {
+			log.info("CashCharge 검증 오류:{}", result);
+			return "members/cash";
+		}
 
 		cashService.charge(loginMember.getId(), cashForm.getChargeMoney());
 		return "redirect:/";
