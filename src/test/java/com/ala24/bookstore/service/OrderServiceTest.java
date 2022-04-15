@@ -110,6 +110,7 @@ class OrderServiceTest {
 		Order findOrder = orderService.findOne(orderId);
 
 		//then
+		assertThat(findItem.getStockQuantity()).isEqualTo(97);
 		assertThat(findOrder.getMember()).isEqualTo(memberA);
 		assertThat(findOrder.getOrderItems().size()).isEqualTo(1);
 		assertThat(findOrder.getDelivery().getAddress()).isEqualTo(memberA.getAddress());
