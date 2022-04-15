@@ -5,6 +5,7 @@ import com.ala24.bookstore.domain.Address;
 import com.ala24.bookstore.domain.Cash;
 import com.ala24.bookstore.domain.Member;
 import com.ala24.bookstore.service.MemberService;
+import com.ala24.bookstore.web.dtos.memberdto.CashFormDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,6 +16,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -31,6 +36,9 @@ class MemberCashControllerTest {
 
 	@Autowired
 	MockMvc mvc;
+
+	@Autowired
+	Validator validator;
 
 	@Autowired
 	MemberService memberService;
@@ -87,5 +95,18 @@ class MemberCashControllerTest {
 
 		assertThat(memberService.findOne(memberId).getCash().left())
 				.isEqualTo(CHARGE_MONEY);
+	}
+
+	@Test
+	void 충전_폼_검증_테스트() {
+	    //given
+		CashFormDto cashForm = CashFormDto.builder()
+				.build();
+
+	    //when
+		Set<ConstraintViolation<CashFormDto>> violations = validator.validate(cashForm);
+
+		//then
+		assertThat(violations.size()).isEqualTo(1);
 	}
 }
