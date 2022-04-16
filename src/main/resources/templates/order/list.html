@@ -32,6 +32,11 @@
             <td colspan="3" th:text="|${order.delivery.address.city}, ${order.member.address.specificAddress},
              (${order.member.address.zipcode})|"></td>
             <td th:text="${order.delivery.deliveryStatus.getDescription()}"></td>
+            <td>
+                <form role="form" th:action="@{/order/{orderId}/cancel (orderId=${order.orderId})}" method="post">
+                    <button class="btn btn-danger" th:text="#{button.cancel}"></button>
+                </form>
+            </td>
         </tr>
         </tbody>
     </table>

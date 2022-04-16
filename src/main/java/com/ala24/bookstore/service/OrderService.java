@@ -71,6 +71,7 @@ public class OrderService {
 	/**
 	 * 취소
 	 */
+	@Transactional
 	public void cancel(Long orderId) {
 		findOne(orderId).cancel();
 	}

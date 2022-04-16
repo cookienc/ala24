@@ -25,6 +25,7 @@ public class OrderListDto {
 	private OrderStatus orderStatus;
 
 	public OrderListDto(Order order) {
+		this.orderId = order.getId();
 		this.orderItems = order.getOrderItems();
 		this.delivery = order.getDelivery();
 		this.member = order.getMember();
