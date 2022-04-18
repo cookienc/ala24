@@ -63,7 +63,7 @@ public class OrderService {
 	}
 
 	public List<OrderListDto> findAllAsList() {
-		return findAll().stream()
+		return orderRepository.findAllEntity().stream()
 				.map(OrderListDto::new)
 				.collect(Collectors.toList());
 	}
