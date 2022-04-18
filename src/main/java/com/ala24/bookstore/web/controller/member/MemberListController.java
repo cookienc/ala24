@@ -25,7 +25,7 @@ public class MemberListController {
 	 */
 	@GetMapping("/list")
 	public String list(Model model) {
-		List<Member> members = memberService.findMembers();
+		List<Member> members = memberService.findAllWithCash();
 		model.addAttribute("members", new MemberListDto().toDto(members));
 		return "members/list";
 	}

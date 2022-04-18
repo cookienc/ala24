@@ -54,6 +54,7 @@ public class DbSetUp {
 				.name("admin")
 				.loginId("admin")
 				.password("admin")
+				.cash(Cash.charge(100_000_000L))
 				.address(Address.builder()
 						.zipcode(12345)
 						.city("admin")

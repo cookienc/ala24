@@ -57,4 +57,8 @@ public class MemberService {
 			throw new IllegalStateException(NOT_DUPLICATE_MEMBER.toString());
 		}
 	}
+
+	public List<Member> findAllWithCash() {
+		return memberRepository.findAllWithCash();
+	}
 }
