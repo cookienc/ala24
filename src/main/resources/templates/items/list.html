@@ -30,14 +30,14 @@
             <td th:text="${item.publisher}"></td>
             <td th:text="${item.price}"></td>
             <td th:text="${item.stockQuantity}"></td>
-            <td th:if="${loginMember.authority.toString()} == 'ADMIN'">
-                <a th:href="@{/items/{itemId}/edit (itemId=${item.itemId})}" th:text="#{button.update}" role="button">
-                    수정
-                </a>
-            </td>
             <td>
-                <a th:href="@{/order/{itemId} (itemId=${item.itemId})}" th:text="#{button.order}" role="button">
+                <a class="btn btn-info"
+                   th:href="@{/order/{itemId} (itemId=${item.itemId})}" th:text="#{button.order}" role="button">
                     주문
+                </a>
+                <a class="btn btn-warning" th:if="${loginMember.authority.toString()} == 'ADMIN'"
+                   th:href="@{/items/{itemId}/edit (itemId=${item.itemId})}" th:text="#{button.update}" role="button">
+                    수정
                 </a>
             </td>
         </tr>
