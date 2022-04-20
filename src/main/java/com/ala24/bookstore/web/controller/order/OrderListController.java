@@ -19,16 +19,9 @@ public class OrderListController {
 
 	private final OrderService orderService;
 
-//	@GetMapping("/list")
-//	public String list(Model model) {
-//		List<OrderListDto> orders = orderService.findAllAsList();
-//		model.addAttribute("orders", orders);
-//		return "order/list";
-//	}
-
 	@GetMapping("/list")
 	public String list(Pageable pageable, Model model) {
-		Page<OrderListDto> orders = orderService.findAll(pageable);
+		Page<OrderListDto> orders = orderService.findAllFetch(pageable);
 		model.addAttribute("orders", orders);
 		model.addAttribute("maxPage", DEFAULT_PAGE_BUTTON_RANGE.getPageNum());
 		return "order/list";

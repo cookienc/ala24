@@ -17,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
 
 import static com.ala24.bookstore.exception.utils.Sentence.*;
 
@@ -64,14 +63,8 @@ public class OrderService {
 		return orderRepository.findAll();
 	}
 
-	public List<OrderListDto> findAllAsList() {
-		return orderRepository.findAllEntity().stream()
-				.map(OrderListDto::new)
-				.collect(Collectors.toList());
-	}
-
-	public Page<OrderListDto> findAll(Pageable pageable) {
-		return orderRepository.findAll(pageable)
+	public Page<OrderListDto> findAllFetch(Pageable pageable) {
+		return orderRepository.findAllFetch(pageable)
 				.map(OrderListDto::new);
 	}
 
