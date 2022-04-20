@@ -1,5 +1,6 @@
 package com.ala24.bookstore.web.controller.item;
 
+import com.ala24.bookstore.domain.Member;
 import com.ala24.bookstore.service.ItemService;
 import com.ala24.bookstore.web.dtos.itemdto.ItemListDto;
 import lombok.RequiredArgsConstructor;
@@ -9,8 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import static com.ala24.bookstore.web.pages.DefaultPageButtonSize.DEFAULT_PAGE_BUTTON_RANGE;
+import static com.ala24.bookstore.web.session.SessionAttributeName.LOGIN_MEMBER;
 
 @Controller
 @RequiredArgsConstructor
@@ -27,10 +30,11 @@ public class ItemListController {
 //	}
 
 	@GetMapping("/list")
-	public String list(Pageable pageable, Model model) {
+	public String list(Pageable pageable, @SessionAttribute(name = LOGIN_MEMBER) Member loginMember, Model model) {
 		Page<ItemListDto> items = itemService.findAll(pageable);
 		model.addAttribute("items", items);
 		model.addAttribute("maxPage", DEFAULT_PAGE_BUTTON_RANGE.getPageNum());
+		model.addAttribute("loginMember", loginMember);
 		return "items/list";
 	}
 }
