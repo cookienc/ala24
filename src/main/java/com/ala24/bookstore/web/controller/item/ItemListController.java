@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import static com.ala24.bookstore.web.pages.DefaultPageButtonSize.DEFAULT_PAGE_SIZE;
+import static com.ala24.bookstore.web.pages.DefaultPageButtonSize.DEFAULT_PAGE_BUTTON_RANGE;
 
 @Controller
 @RequiredArgsConstructor
@@ -30,7 +30,7 @@ public class ItemListController {
 	public String list(Pageable pageable, Model model) {
 		Page<ItemListDto> items = itemService.findAll(pageable);
 		model.addAttribute("items", items);
-		model.addAttribute("maxPage", DEFAULT_PAGE_SIZE.getPageNum());
+		model.addAttribute("maxPage", DEFAULT_PAGE_BUTTON_RANGE.getPageNum());
 		return "items/list";
 	}
 }

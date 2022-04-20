@@ -2,7 +2,10 @@ package com.ala24.bookstore.service;
 
 import com.ala24.bookstore.domain.Member;
 import com.ala24.bookstore.repository.MemberRepository;
+import com.ala24.bookstore.web.dtos.memberdto.MemberListDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -58,7 +61,14 @@ public class MemberService {
 		}
 	}
 
-	public List<Member> findAllWithCash() {
-		return memberRepository.findAllWithCash();
+	public Page<MemberListDto> findAllWithCash(Pageable pageable) {
+		return memberRepository.findAll(pageable)
+				.map(member -> MemberListDto.builder()
+						.name(member.getName())
+						.loginId(member.getLoginId())
+						.address(member.getAddress())
+						.cash(member.getCash())
+						.authority(member.getAuthority())
+						.build());
 	}
 }

@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum DefaultPageButtonSize {
-	DEFAULT_PAGE_SIZE(5);
+	DEFAULT_PAGE_BUTTON_RANGE(5);
 
 	private Integer pageNum;
 

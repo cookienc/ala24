@@ -37,6 +37,30 @@
         </tr>
         </tbody>
     </table>
+    <!--페이지 버튼-->
+    <nav aria-label="Page navigation example" th:with="start=${(members.number / maxPage) * maxPage + 1}">
+        <ul class="pagination justify-content-center" th:object="${members}"
+            th:with="end=${(members.totalPages == 0)? 1 :
+                (start + (maxPage - 1) < members.totalPages?
+                start + (maxPage - 1) : members.totalPages)}">
+            <li th:class="page-item" th:if="${start > 1}">
+                <a th:class="page-link" th:href="@{/members/list(page=0)}" th:text="'<<'"></a>
+            </li>
+            <li th:class="page-item" th:if="${start > 1}">
+                <a th:class="page-link" th:href="@{/members/list(page=${start - maxPage})}" th:text="'<'"></a>
+            </li>
+            <li th:class="page-item" th:each="page: ${#numbers.sequence(start, end)}">
+                <a th:class="page-link" th:href="@{/members/list(page=(${page} - 1))}" th:text="${page}"></a></li>
+            </li>
+
+            <li th:class="page-item" th:if="${end < members.totalPages}">
+                <a th:class="page-link" th:href="@{/items/list(page=${start + maxPage} - 1)}" th:text="'>'"></a>
+            </li>
+            <li th:class="page-item" th:if="${end < members.totalPages}">
+                <a th:class="page-link" th:href="@{/members/list(page=(${members.totalPages} - 1))}" th:text="'>>'"></a></li>
+            </li>
+        </ul>
+    </nav>
     <div th:replace="fragments/footer :: footer"/>
 </div>
 </body>
