@@ -134,8 +134,8 @@ public class DbSetUp {
 					.name("TEST ITEM" + i)
 					.author("TEST AUTHOR" + i)
 					.publisher("TEST PUBLISHER" + i)
-					.price((int)Math.random() * 10000)
-					.stockQuantity((int)Math.random() * 100)
+					.price(10000)
+					.stockQuantity(100)
 					.build());
 		}
 	}
