@@ -2,6 +2,7 @@ package com.ala24.bookstore.web.dtos.memberdto;
 
 import com.ala24.bookstore.domain.Address;
 import com.ala24.bookstore.domain.Cash;
+import com.ala24.bookstore.domain.Member;
 import com.ala24.bookstore.domain.type.MemberStatus;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,22 +13,20 @@ import lombok.Setter;
 
 public class MemberListDto {
 
+	private Long id;
 	private String name;
 	private String loginId;
 	private Address address;
 	private Cash cash;
 	private MemberStatus authority;
 
-	public MemberListDto() {
-
-	}
-
 	@Builder
-	public MemberListDto(String name, String loginId, Address address, Cash cash, MemberStatus authority) {
-		this.name = name;
-		this.loginId = loginId;
-		this.address = address;
-		this.cash = cash;
-		this.authority = authority;
+	public MemberListDto(Member member) {
+		this.id = member.getId();
+		this.name = member.getName();
+		this.loginId = member.getLoginId();
+		this.address = member.getAddress();
+		this.cash = member.getCash();
+		this.authority = member.getAuthority();
 	}
 }

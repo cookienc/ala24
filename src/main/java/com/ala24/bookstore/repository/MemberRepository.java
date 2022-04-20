@@ -14,5 +14,8 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 	@Query("select m from Member m where m.loginId = :loginId")
 	Optional<Member> findByLoginId(@Param("loginId") String loginId);
 
-	Page<Member> findAll(Pageable pageable);
+	@Query(value = "select m from Member m" +
+			" join fetch m.cash",
+			countQuery = "select count(m) from Member m")
+	Page<Member> findAllFetch(Pageable pageable);
 }

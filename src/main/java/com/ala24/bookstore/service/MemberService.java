@@ -62,13 +62,7 @@ public class MemberService {
 	}
 
 	public Page<MemberListDto> findAllWithCash(Pageable pageable) {
-		return memberRepository.findAll(pageable)
-				.map(member -> MemberListDto.builder()
-						.name(member.getName())
-						.loginId(member.getLoginId())
-						.address(member.getAddress())
-						.cash(member.getCash())
-						.authority(member.getAuthority())
-						.build());
+		return memberRepository.findAllFetch(pageable)
+				.map(MemberListDto::new);
 	}
 }
