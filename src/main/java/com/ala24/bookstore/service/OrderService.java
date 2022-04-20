@@ -10,6 +10,8 @@ import com.ala24.bookstore.repository.MemberRepository;
 import com.ala24.bookstore.repository.OrderRepository;
 import com.ala24.bookstore.web.dtos.orderdto.OrderListDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -66,6 +68,11 @@ public class OrderService {
 		return orderRepository.findAllEntity().stream()
 				.map(OrderListDto::new)
 				.collect(Collectors.toList());
+	}
+
+	public Page<OrderListDto> findAll(Pageable pageable) {
+		return orderRepository.findAll(pageable)
+				.map(OrderListDto::new);
 	}
 
 	/**

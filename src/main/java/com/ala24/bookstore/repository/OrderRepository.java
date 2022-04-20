@@ -1,6 +1,8 @@
 package com.ala24.bookstore.repository;
 
 import com.ala24.bookstore.domain.Order;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -13,4 +15,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 			" join fetch o.orderItems oi" +
 			" join fetch o.delivery d")
 	List<Order> findAllEntity();
+
+
+	Page<Order> findAll(Pageable pageable);
 }
