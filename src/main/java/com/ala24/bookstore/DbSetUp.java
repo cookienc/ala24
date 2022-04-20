@@ -128,6 +128,16 @@ public class DbSetUp {
 		itemService.saveItem(sd1);
 		itemService.saveItem(sd2);
 		itemService.saveItem(sd3);
+
+		for (int i = 0; i < 100; i++) {
+			itemService.saveItem(SelfDevelopment.builder()
+					.name("TEST ITEM" + i)
+					.author("TEST AUTHOR" + i)
+					.publisher("TEST PUBLISHER" + i)
+					.price((int)Math.random() * 10000)
+					.stockQuantity((int)Math.random() * 100)
+					.build());
+		}
 	}
 
 }
