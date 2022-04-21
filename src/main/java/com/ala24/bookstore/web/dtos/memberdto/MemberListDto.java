@@ -6,11 +6,12 @@ import com.ala24.bookstore.domain.Member;
 import com.ala24.bookstore.domain.type.MemberStatus;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-
+@NoArgsConstructor
 public class MemberListDto {
 
 	private Long id;
