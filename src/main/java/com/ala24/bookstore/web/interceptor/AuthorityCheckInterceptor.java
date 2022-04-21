@@ -26,7 +26,7 @@ public class AuthorityCheckInterceptor implements HandlerInterceptor {
 
 		if (hasNotAuthority(member)) {
 			log.info("권한 없는 사용자 요청");
-			response.sendRedirect("/redirectURL=" + requestURI);
+			response.sendRedirect("/login?redirectURL=" + requestURI);
 			return false;
 		}
 
