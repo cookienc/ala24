@@ -23,7 +23,7 @@
         </thead>
         <tbody>
         <tr th:each="item : ${items}">
-            <td th:text="${item.itemId}" hidden></td>
+            <td th:text="*{item.itemId}" hidden></td>
             <td th:text="${itemStat.count} + ${items.getSize()} * ${items.getNumber()}"></td>
             <td th:text="${item.name}"></td>
             <td th:text="${item.author}"></td>
@@ -56,14 +56,14 @@
                 <a th:class="page-link" th:href="@{/items/list(page=${start - maxPage})}" th:text="'<'"></a>
             </li>
             <li th:class="page-item" th:each="page: ${#numbers.sequence(start, end)}">
-                <a th:class="page-link" th:href="@{/items/list(page=(${page} - 1))}" th:text="${page}"></a></li>
+                <a th:class="page-link" th:href="@{/items/list(page=(${page} - 1))}" th:text="${page}"></a>
             </li>
 
             <li th:class="page-item" th:if="${end < items.totalPages}">
                 <a th:class="page-link" th:href="@{/items/list(page=${start + maxPage} - 1)}" th:text="'>'"></a>
             </li>
             <li th:class="page-item" th:if="${end < items.totalPages}">
-                <a th:class="page-link" th:href="@{/items/list(page=(${items.totalPages} - 1))}" th:text="'>>'"></a></li>
+                <a th:class="page-link" th:href="@{/items/list(page=(${items.totalPages} - 1))}" th:text="'>>'"></a>
             </li>
         </ul>
     </nav>

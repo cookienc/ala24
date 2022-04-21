@@ -13,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static com.ala24.bookstore.web.session.SessionAttributeName.LOGIN_MEMBER;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -60,7 +61,7 @@ class OrderListControllerTest {
 		memberService.join(test);
 	    //when
 		mvc.perform(get("/order/list")
-						.sessionAttr("loginMember", test))
+						.sessionAttr(LOGIN_MEMBER, test))
 		//then
 				.andExpect(status().isOk())
 				.andExpect(view().name("order/list"));

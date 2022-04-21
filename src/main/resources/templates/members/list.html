@@ -50,14 +50,14 @@
                 <a th:class="page-link" th:href="@{/members/list(page=${start - maxPage})}" th:text="'<'"></a>
             </li>
             <li th:class="page-item" th:each="page: ${#numbers.sequence(start, end)}">
-                <a th:class="page-link" th:href="@{/members/list(page=(${page} - 1))}" th:text="${page}"></a></li>
+                <a th:class="page-link" th:href="@{/members/list(page=(${page} - 1))}" th:text="${page}"></a>
             </li>
 
             <li th:class="page-item" th:if="${end < members.totalPages}">
                 <a th:class="page-link" th:href="@{/items/list(page=${start + maxPage} - 1)}" th:text="'>'"></a>
             </li>
             <li th:class="page-item" th:if="${end < members.totalPages}">
-                <a th:class="page-link" th:href="@{/members/list(page=(${members.totalPages} - 1))}" th:text="'>>'"></a></li>
+                <a th:class="page-link" th:href="@{/members/list(page=(${members.totalPages} - 1))}" th:text="'>>'"></a>
             </li>
         </ul>
     </nav>
