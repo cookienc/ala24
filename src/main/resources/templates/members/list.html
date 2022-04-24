@@ -38,7 +38,7 @@
         </tbody>
     </table>
     <!--페이지 버튼-->
-    <nav aria-label="Page navigation example" th:with="start=${(members.number / maxPage) * maxPage + 1}">
+    <nav th:with="start=${(members.number / maxPage) * maxPage + 1}">
         <ul class="pagination justify-content-center" th:object="${members}"
             th:with="end=${(members.totalPages == 0)? 1 :
                 (start + (maxPage - 1) < members.totalPages?
