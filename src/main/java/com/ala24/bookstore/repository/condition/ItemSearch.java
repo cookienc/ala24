@@ -10,5 +10,5 @@ import lombok.Setter;
 public class ItemSearch {
 
 	private ItemSearchCondition condition;
-	private String name;
+	private String data;
 }

@@ -2,6 +2,7 @@ package com.ala24.bookstore.repository.item;
 
 import com.ala24.bookstore.domain.item.Item;
 import com.ala24.bookstore.repository.condition.ItemSearch;
+import com.ala24.bookstore.repository.condition.ItemSearchCondition;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -41,7 +42,15 @@ public class ItemSearchRepositoryImpl implements ItemSearchRepository{
 
 	private BooleanExpression findName(ItemSearch condition) {
 
-		return (condition.getName() != null) && (condition.getCondition().equals(NAME))?
-				item.name.containsIgnoreCase(condition.getName()) : null;
+		return isItSameCondition(condition, NAME) && isNotNullData(condition) ?
+				item.name.containsIgnoreCase(condition.getData()) : null;
+	}
+
+	private boolean isNotNullData(ItemSearch condition) {
+		return condition.getData() != null;
+	}
+
+	private boolean isItSameCondition(ItemSearch condition, ItemSearchCondition cond) {
+		return condition.getCondition().equals(cond);
 	}
 }
