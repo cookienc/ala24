@@ -11,6 +11,22 @@
         <h3 class="text-center">
             [상품 목록]
         </h3>
+        <!--검색 기능-->
+        <div class="form-group pull-right">
+            <form th:object="${condition}">
+                <div class="input-group mb-3">
+                    <select th:field="*{condition}" class="btn btn-outline-secondary dropdown-toggle"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <option class="dropdown-menu" value="">검색</option>
+                        <option th:each="status : ${T(com.ala24.bookstore.repository.condition.ItemSearchCondition).values()}"
+                                th:value="${status}" th:text="${status.description}">선택
+                        </option>
+                    </select>
+                    <input type="text" th:field="*{name}" class="w-50"/>
+                    <button type="submit" class="btn btn-outline-secondary">검색</button>
+                </div>
+            </form>
+        </div>
         <thead>
         <tr>
             <th>번호</th>
@@ -18,7 +34,7 @@
             <th>저자</th>
             <th>출판사</th>
             <th>가격</th>
-            <th>재고</th>
+            <th th:if="${loginMember.authority.toString()} == 'ADMIN'">재고</th>
         </tr>
         </thead>
         <tbody>
@@ -29,7 +45,7 @@
             <td th:text="${item.author}"></td>
             <td th:text="${item.publisher}"></td>
             <td th:text="${item.price}"></td>
-            <td th:text="${item.stockQuantity}"></td>
+            <td th:if="${loginMember.authority.toString()} == 'ADMIN'" th:text="${item.stockQuantity}"></td>
             <td>
                 <a class="btn btn-info"
                    th:href="@{/order/{itemId} (itemId=${item.itemId})}" th:text="#{button.order}" role="button">
@@ -43,8 +59,9 @@
         </tr>
         </tbody>
     </table>
+
     <!--페이지 버튼-->
-    <nav aria-label="Page navigation example" th:with="start=${(items.number / maxPage) * maxPage + 1}">
+    <nav th:with="start=${(items.number / maxPage) * maxPage + 1}">
         <ul class="pagination justify-content-center" th:object="${items}"
             th:with="end=${(items.totalPages == 0)? 1 :
                 (start + (maxPage - 1) < items.totalPages?

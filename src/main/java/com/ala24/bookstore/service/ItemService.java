@@ -1,7 +1,8 @@
 package com.ala24.bookstore.service;
 
 import com.ala24.bookstore.domain.item.Item;
-import com.ala24.bookstore.repository.ItemRepository;
+import com.ala24.bookstore.repository.condition.ItemSearch;
+import com.ala24.bookstore.repository.item.ItemRepository;
 import com.ala24.bookstore.web.dtos.itemdto.ItemListDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import static com.ala24.bookstore.exception.utils.Sentence.NO_ITEM;
+import static com.ala24.bookstore.repository.condition.ItemSearchCondition.NAME;
 
 @Service
 @Transactional(readOnly = true)
@@ -35,11 +37,19 @@ public class ItemService {
 		return itemRepository.findAll();
 	}
 
+	public Page<ItemListDto> search(ItemSearch condition, Pageable pageable) {
+
+		if (condition.getCondition() == null) {
+			condition.setCondition(NAME);
+		}
+
+		return itemRepository.searchPage(condition, pageable)
+				.map(ItemListDto::new);
+	}
+
 	@Transactional
 	public void updateItem(Long itemId, Item item) {
 		Item findItem = findOne(itemId);
-		System.out.println("findItem.getClass() = " + findItem.getClass());
-		System.out.println("Item.getClass() = " + item.getClass());
 		if (doesItChangeCategory(item, findItem)) {
 			itemRepository.delete(findItem);
 			saveItem(item);
@@ -55,14 +65,6 @@ public class ItemService {
 
 	public Page<ItemListDto> findAll(Pageable pageable) {
 		return itemRepository.findAll(pageable)
-				.map(item ->
-						ItemListDto.builder()
-								.itemId(item.getId())
-								.name(item.getName())
-								.author(item.getAuthor())
-								.publisher(item.getPublisher())
-								.price(item.getPrice())
-								.stockQuantity(item.getStockQuantity())
-						.build());
+				.map(ItemListDto::new);
 	}
 }

@@ -1,6 +1,6 @@
 package com.ala24.bookstore.domain.item;
 
-import com.ala24.bookstore.repository.ItemRepository;
+import com.ala24.bookstore.repository.item.ItemRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
