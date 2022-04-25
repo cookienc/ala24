@@ -16,7 +16,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 import static com.ala24.bookstore.domain.QCash.cash;
-import static com.ala24.bookstore.domain.QMember.member;
+import static com.ala24.bookstore.domain.member.QMember.member;
 import static com.ala24.bookstore.domain.member.condition.MemberSearchCondition.*;
 import static com.ala24.bookstore.domain.type.MemberStatus.*;
 
