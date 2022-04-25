@@ -17,12 +17,12 @@
                 <div class="input-group mb-3">
                     <select th:field="*{condition}" class="btn btn-outline-secondary dropdown-toggle"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                        <option class="dropdown-menu" value="">검색</option>
+                        <option class="dropdown-menu" value="" selected hidden>검색</option>
                         <option th:each="status : ${T(com.ala24.bookstore.repository.condition.ItemSearchCondition).values()}"
                                 th:value="${status}" th:text="${status.description}">선택
                         </option>
                     </select>
-                    <input type="text" th:field="*{getData}" class="w-50"/>
+                    <input type="text" th:field="*{data}" class="w-50"/>
                     <button type="submit" class="btn btn-outline-secondary">검색</button>
                 </div>
             </form>

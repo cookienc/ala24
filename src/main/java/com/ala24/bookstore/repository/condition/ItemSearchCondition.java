@@ -4,7 +4,8 @@ import lombok.Getter;
 
 @Getter
 public enum ItemSearchCondition {
-	NAME("이름");
+	NORMAL("분류"), NAME("이름"),
+	AUTHOR("저자"), PUBLISHER("출판사");
 
 	private String description;
 

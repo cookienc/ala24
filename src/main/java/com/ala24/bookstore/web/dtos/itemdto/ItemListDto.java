@@ -34,7 +34,7 @@ public class ItemListDto {
 		this.itemId = item.getId();
 		this.name = item.getName();
 		this.author = item.getAuthor();
-		this.publisher = item.getAuthor();
+		this.publisher = item.getPublisher();
 		this.price = item.getPrice();
 		this.stockQuantity = item.getStockQuantity();
 	}

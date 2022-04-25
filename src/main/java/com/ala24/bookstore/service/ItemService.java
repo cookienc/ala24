@@ -2,6 +2,7 @@ package com.ala24.bookstore.service;
 
 import com.ala24.bookstore.domain.item.Item;
 import com.ala24.bookstore.repository.condition.ItemSearch;
+import com.ala24.bookstore.repository.condition.ItemSearchCondition;
 import com.ala24.bookstore.repository.item.ItemRepository;
 import com.ala24.bookstore.web.dtos.itemdto.ItemListDto;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +15,6 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import static com.ala24.bookstore.exception.utils.Sentence.NO_ITEM;
-import static com.ala24.bookstore.repository.condition.ItemSearchCondition.NAME;
 
 @Service
 @Transactional(readOnly = true)
@@ -40,7 +40,7 @@ public class ItemService {
 	public Page<ItemListDto> search(ItemSearch condition, Pageable pageable) {
 
 		if (condition.getCondition() == null) {
-			condition.setCondition(NAME);
+			condition.setCondition(ItemSearchCondition.NORMAL);
 		}
 
 		return itemRepository.searchPage(condition, pageable)

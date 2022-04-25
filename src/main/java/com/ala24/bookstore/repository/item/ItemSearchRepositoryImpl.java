@@ -14,7 +14,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 import static com.ala24.bookstore.domain.item.QItem.item;
-import static com.ala24.bookstore.repository.condition.ItemSearchCondition.NAME;
+import static com.ala24.bookstore.repository.condition.ItemSearchCondition.*;
 
 public class ItemSearchRepositoryImpl implements ItemSearchRepository{
 
@@ -29,7 +29,7 @@ public class ItemSearchRepositoryImpl implements ItemSearchRepository{
 
 		QueryResults<Item> results = queryFactory
 				.selectFrom(item)
-				.where(findName(condition))
+				.where(findName(condition), findAuthor(condition), findPublisher(condition))
 				.offset(pageable.getOffset())
 				.limit(pageable.getPageSize())
 				.fetchResults();
@@ -41,9 +41,18 @@ public class ItemSearchRepositoryImpl implements ItemSearchRepository{
 	}
 
 	private BooleanExpression findName(ItemSearch condition) {
-
 		return isItSameCondition(condition, NAME) && isNotNullData(condition) ?
 				item.name.containsIgnoreCase(condition.getData()) : null;
+	}
+
+	private BooleanExpression findAuthor(ItemSearch condition) {
+		return isItSameCondition(condition, AUTHOR) && isNotNullData(condition) ?
+				item.author.containsIgnoreCase(condition.getData()) : null;
+	}
+
+	private BooleanExpression findPublisher(ItemSearch condition) {
+		return isItSameCondition(condition, PUBLISHER) && isNotNullData(condition) ?
+				item.publisher.containsIgnoreCase(condition.getData()) : null;
 	}
 
 	private boolean isNotNullData(ItemSearch condition) {
