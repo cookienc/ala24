@@ -25,7 +25,7 @@
         </thead>
         <tbody>
         <tr th:each="order : ${orders}">
-            <td th:text="${orderStat.count}"></td>
+            <td th:text="${orderStat.count} + ${orders.getSize()} * ${orders.getNumber()}"></td>
             <td th:text="${#temporals.format(order.orderDate, 'yyyy년 MM월 dd일 HH시 mm분')}"></td>
             <td th:text="${order.orderItems.get(0).getItemName()}"></td>
             <td th:text="${order.member.name}"></td>
