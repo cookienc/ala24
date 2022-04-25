@@ -43,9 +43,6 @@ public class ItemListController {
 	public String search(@ModelAttribute(value = "condition") ItemSearch condition,
 						 @SessionAttribute(name = LOGIN_MEMBER) Member loginMember, Pageable pageable, Model model) {
 
-		log.info("condition.sortCondition : {}", condition.getSortCondition().getDescription());
-		log.info("condition.sortName : {}", condition.getSort());
-
 		Page<ItemListDto> items = itemService.search(condition, pageable);
 		model.addAttribute("items", items);
 		model.addAttribute("loginMember", loginMember);

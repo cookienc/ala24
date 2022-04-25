@@ -13,9 +13,11 @@
         </h3>
     <!--정렬 기능-->
             <div class="form-group float-start" style="margin-top: 30px">
-                <a class="link-secondary" th:href="@{/items/list(sortCondition='PRICE',sort='ASC')}"
+                <a class="link-secondary" th:href="@{/items/list
+                (sortCondition=${T(com.ala24.bookstore.repository.condition.ItemSortCondition).PRICE}, sort='ASC')}"
                    th:text="최저가순"></a>
-                <a class="link-secondary" th:href="@{/items/list(sortCondition='PRICE',sort='DESC')}"
+                <a class="link-secondary" th:href="@{/items/list
+                (sortCondition=${T(com.ala24.bookstore.repository.condition.ItemSortCondition).PRICE}, sort='DESC')}"
                    th:text="최고가순"></a>
             </div>
 
