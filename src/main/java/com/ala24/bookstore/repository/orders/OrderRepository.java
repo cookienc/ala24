@@ -1,6 +1,6 @@
-package com.ala24.bookstore.repository;
+package com.ala24.bookstore.repository.orders;
 
-import com.ala24.bookstore.domain.Order;
+import com.ala24.bookstore.domain.orders.Order;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

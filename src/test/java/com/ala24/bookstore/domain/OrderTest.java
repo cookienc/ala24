@@ -2,8 +2,10 @@ package com.ala24.bookstore.domain;
 
 import com.ala24.bookstore.DataBaseCleanup;
 import com.ala24.bookstore.domain.member.Member;
+import com.ala24.bookstore.domain.orders.Order;
+import com.ala24.bookstore.domain.orders.OrderItem;
 import com.ala24.bookstore.repository.member.MemberRepository;
-import com.ala24.bookstore.repository.OrderRepository;
+import com.ala24.bookstore.repository.orders.OrderRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

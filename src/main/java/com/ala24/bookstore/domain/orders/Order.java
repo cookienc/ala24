@@ -1,5 +1,6 @@
-package com.ala24.bookstore.domain;
+package com.ala24.bookstore.domain.orders;
 
+import com.ala24.bookstore.domain.Delivery;
 import com.ala24.bookstore.domain.member.Member;
 import com.ala24.bookstore.domain.type.OrderStatus;
 import lombok.AccessLevel;

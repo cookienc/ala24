@@ -2,8 +2,8 @@ package com.ala24.bookstore.web.dtos.orderdto;
 
 import com.ala24.bookstore.domain.Delivery;
 import com.ala24.bookstore.domain.member.Member;
-import com.ala24.bookstore.domain.Order;
-import com.ala24.bookstore.domain.OrderItem;
+import com.ala24.bookstore.domain.orders.Order;
+import com.ala24.bookstore.domain.orders.OrderItem;
 import com.ala24.bookstore.domain.type.OrderStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

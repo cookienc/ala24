@@ -1,5 +1,6 @@
 package com.ala24.bookstore.domain;
 
+import com.ala24.bookstore.domain.orders.Order;
 import com.ala24.bookstore.domain.type.DeliveryStatus;
 import lombok.AccessLevel;
 import lombok.Builder;

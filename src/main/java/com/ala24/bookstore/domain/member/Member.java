@@ -2,7 +2,7 @@ package com.ala24.bookstore.domain.member;
 
 import com.ala24.bookstore.domain.Address;
 import com.ala24.bookstore.domain.Cash;
-import com.ala24.bookstore.domain.OrderItem;
+import com.ala24.bookstore.domain.orders.OrderItem;
 import com.ala24.bookstore.domain.type.MemberStatus;
 import com.sun.istack.NotNull;
 import lombok.AccessLevel;

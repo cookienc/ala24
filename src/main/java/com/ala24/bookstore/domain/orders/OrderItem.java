@@ -1,4 +1,4 @@
-package com.ala24.bookstore.domain;
+package com.ala24.bookstore.domain.orders;
 
 import com.ala24.bookstore.domain.item.Item;
 import lombok.AccessLevel;

@@ -1,5 +1,6 @@
 package com.ala24.bookstore.domain;
 
+import com.ala24.bookstore.domain.orders.OrderItem;
 import com.ala24.bookstore.exception.NotEnoughCashException;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
