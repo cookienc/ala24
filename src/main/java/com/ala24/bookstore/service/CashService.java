@@ -1,9 +1,9 @@
 package com.ala24.bookstore.service;
 
-import com.ala24.bookstore.domain.Member;
+import com.ala24.bookstore.domain.member.Member;
 import com.ala24.bookstore.exception.NotEnoughCashException;
 import com.ala24.bookstore.repository.CashRepository;
-import com.ala24.bookstore.repository.MemberRepository;
+import com.ala24.bookstore.repository.member.MemberRepository;
 import com.ala24.bookstore.web.dtos.memberdto.CashFormDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 package com.ala24.bookstore.service;
 
-import com.ala24.bookstore.domain.Member;
-import com.ala24.bookstore.repository.MemberRepository;
+import com.ala24.bookstore.domain.member.Member;
+import com.ala24.bookstore.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

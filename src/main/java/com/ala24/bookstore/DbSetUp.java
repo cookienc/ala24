@@ -2,7 +2,7 @@ package com.ala24.bookstore;
 
 import com.ala24.bookstore.domain.Address;
 import com.ala24.bookstore.domain.Cash;
-import com.ala24.bookstore.domain.Member;
+import com.ala24.bookstore.domain.member.Member;
 import com.ala24.bookstore.domain.item.Novel;
 import com.ala24.bookstore.domain.item.Poem;
 import com.ala24.bookstore.domain.item.SelfDevelopment;

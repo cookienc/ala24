@@ -1,6 +1,6 @@
 package com.ala24.bookstore.web.dtos.orderdto;
 
-import com.ala24.bookstore.domain.Member;
+import com.ala24.bookstore.domain.member.Member;
 import com.ala24.bookstore.domain.item.Item;
 import lombok.Builder;
 import lombok.Getter;

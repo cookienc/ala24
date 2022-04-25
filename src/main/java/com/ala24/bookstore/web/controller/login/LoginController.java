@@ -1,6 +1,6 @@
 package com.ala24.bookstore.web.controller.login;
 
-import com.ala24.bookstore.domain.Member;
+import com.ala24.bookstore.domain.member.Member;
 import com.ala24.bookstore.service.LoginService;
 import com.ala24.bookstore.web.dtos.logindto.LoginFormDto;
 import com.ala24.bookstore.web.session.SessionName;

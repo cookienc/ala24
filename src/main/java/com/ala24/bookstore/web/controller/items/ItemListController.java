@@ -1,7 +1,7 @@
 package com.ala24.bookstore.web.controller.items;
 
-import com.ala24.bookstore.domain.Member;
-import com.ala24.bookstore.repository.condition.ItemSearch;
+import com.ala24.bookstore.domain.member.Member;
+import com.ala24.bookstore.domain.item.condition.ItemSearch;
 import com.ala24.bookstore.service.ItemService;
 import com.ala24.bookstore.web.dtos.itemdto.ItemListDto;
 import lombok.RequiredArgsConstructor;
@@ -45,7 +45,6 @@ public class ItemListController {
 
 		Page<ItemListDto> items = itemService.search(condition, pageable);
 		model.addAttribute("items", items);
-		log.info("loginMember : {}" , loginMember);
 		model.addAttribute("loginMember", loginMember);
 		model.addAttribute("maxPage", DEFAULT_PAGE_BUTTON_RANGE.getPageNum());
 		return "items/list";

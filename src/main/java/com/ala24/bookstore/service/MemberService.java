@@ -1,7 +1,9 @@
 package com.ala24.bookstore.service;
 
-import com.ala24.bookstore.domain.Member;
-import com.ala24.bookstore.repository.MemberRepository;
+import com.ala24.bookstore.domain.member.Member;
+import com.ala24.bookstore.domain.member.condition.MemberSearch;
+import com.ala24.bookstore.domain.member.condition.MemberSearchCondition;
+import com.ala24.bookstore.repository.member.MemberRepository;
 import com.ala24.bookstore.web.dtos.memberdto.MemberListDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -61,8 +63,18 @@ public class MemberService {
 		}
 	}
 
-	public Page<MemberListDto> findAllWithCash(Pageable pageable) {
-		return memberRepository.findAllFetch(pageable)
+//	public Page<MemberListDto> findAllWithCash(Pageable pageable) {
+//		return memberRepository.findAllFetch(pageable)
+//				.map(MemberListDto::new);
+//	}
+
+	public Page<MemberListDto> findAllWithCash(MemberSearch condition, Pageable pageable) {
+
+		if (condition == null) {
+			condition.setCondition(MemberSearchCondition.NORMAL);
+		}
+
+		return memberRepository.searchPage(condition, pageable)
 				.map(MemberListDto::new);
 	}
 }

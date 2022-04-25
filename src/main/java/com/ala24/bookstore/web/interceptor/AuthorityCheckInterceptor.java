@@ -1,6 +1,6 @@
 package com.ala24.bookstore.web.interceptor;
 
-import com.ala24.bookstore.domain.Member;
+import com.ala24.bookstore.domain.member.Member;
 import com.ala24.bookstore.domain.type.MemberStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.HandlerInterceptor;

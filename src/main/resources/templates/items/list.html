@@ -14,10 +14,10 @@
     <!--정렬 기능-->
             <div class="form-group float-start" style="margin-top: 30px">
                 <a class="link-secondary" th:href="@{/items/list
-                (sortCondition=${T(com.ala24.bookstore.repository.condition.ItemSortCondition).PRICE}, sort='ASC')}"
+                (sortCondition=${T(com.ala24.bookstore.domain.item.condition.ItemSortCondition).PRICE}, sort='ASC')}"
                    th:text="최저가순"></a>
                 <a class="link-secondary" th:href="@{/items/list
-                (sortCondition=${T(com.ala24.bookstore.repository.condition.ItemSortCondition).PRICE}, sort='DESC')}"
+                (sortCondition=${T(com.ala24.bookstore.domain.item.condition.ItemSortCondition).PRICE}, sort='DESC')}"
                    th:text="최고가순"></a>
             </div>
 
@@ -28,7 +28,7 @@
                     <select th:field="*{condition}" class="btn btn-outline-secondary dropdown-toggle"
                             data-bs-toggle="dropdown" aria-expanded="false">
                         <option class="dropdown-menu" value="" selected hidden>검색</option>
-                        <option th:each="status : ${T(com.ala24.bookstore.repository.condition.ItemSearchCondition).values()}"
+                        <option th:each="status : ${T(com.ala24.bookstore.domain.item.condition.ItemSearchCondition).values()}"
                                 th:value="${status}" th:text="${status.description}">선택
                         </option>
                     </select>

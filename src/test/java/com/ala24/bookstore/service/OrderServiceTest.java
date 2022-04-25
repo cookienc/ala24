@@ -3,7 +3,7 @@ package com.ala24.bookstore.service;
 import com.ala24.bookstore.DataBaseCleanup;
 import com.ala24.bookstore.domain.Address;
 import com.ala24.bookstore.domain.Cash;
-import com.ala24.bookstore.domain.Member;
+import com.ala24.bookstore.domain.member.Member;
 import com.ala24.bookstore.domain.Order;
 import com.ala24.bookstore.domain.item.Item;
 import com.ala24.bookstore.domain.item.Poem;

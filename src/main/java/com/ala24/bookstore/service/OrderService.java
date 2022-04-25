@@ -1,11 +1,11 @@
 package com.ala24.bookstore.service;
 
 import com.ala24.bookstore.domain.Delivery;
-import com.ala24.bookstore.domain.Member;
+import com.ala24.bookstore.domain.member.Member;
 import com.ala24.bookstore.domain.Order;
 import com.ala24.bookstore.domain.OrderItem;
 import com.ala24.bookstore.domain.item.Item;
-import com.ala24.bookstore.repository.MemberRepository;
+import com.ala24.bookstore.repository.member.MemberRepository;
 import com.ala24.bookstore.repository.OrderRepository;
 import com.ala24.bookstore.repository.item.ItemRepository;
 import com.ala24.bookstore.web.dtos.orderdto.OrderListDto;

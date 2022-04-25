@@ -3,7 +3,7 @@ package com.ala24.bookstore.web.controller.login;
 import com.ala24.bookstore.DataBaseCleanup;
 import com.ala24.bookstore.domain.Address;
 import com.ala24.bookstore.domain.Cash;
-import com.ala24.bookstore.domain.Member;
+import com.ala24.bookstore.domain.member.Member;
 import com.ala24.bookstore.service.MemberService;
 import com.ala24.bookstore.web.dtos.logindto.LoginFormDto;
 import org.junit.jupiter.api.AfterEach;

@@ -1,4 +1,4 @@
-package com.ala24.bookstore.repository.condition;
+package com.ala24.bookstore.domain.item.condition;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

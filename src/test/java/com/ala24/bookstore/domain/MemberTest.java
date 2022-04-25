@@ -1,8 +1,9 @@
 package com.ala24.bookstore.domain;
 
 import com.ala24.bookstore.DataBaseCleanup;
+import com.ala24.bookstore.domain.member.Member;
 import com.ala24.bookstore.domain.type.MemberStatus;
-import com.ala24.bookstore.repository.MemberRepository;
+import com.ala24.bookstore.repository.member.MemberRepository;
 import com.ala24.bookstore.service.CashService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

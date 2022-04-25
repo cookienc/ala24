@@ -1,6 +1,6 @@
 package com.ala24.bookstore.web.controller.member;
 
-import com.ala24.bookstore.domain.Member;
+import com.ala24.bookstore.domain.member.Member;
 import com.ala24.bookstore.service.CashService;
 import com.ala24.bookstore.web.dtos.memberdto.CashFormDto;
 import lombok.RequiredArgsConstructor;
