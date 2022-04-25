@@ -11,7 +11,15 @@
         <h3 class="text-center">
             [상품 목록]
         </h3>
-        <!--검색 기능-->
+    <!--정렬 기능-->
+            <div class="form-group float-start" style="margin-top: 30px">
+                <a class="link-secondary" th:href="@{/items/list(sortCondition='PRICE',sort='ASC')}"
+                   th:text="최저가순"></a>
+                <a class="link-secondary" th:href="@{/items/list(sortCondition='PRICE',sort='DESC')}"
+                   th:text="최고가순"></a>
+            </div>
+
+    <!--검색 기능-->
         <div class="form-group pull-right">
             <form th:object="${condition}">
                 <div class="input-group mb-3">
@@ -39,7 +47,7 @@
         </thead>
         <tbody>
         <tr th:each="item : ${items}">
-            <td th:text="*{item.itemId}" hidden></td>
+            <td th:text="${item.itemId}" hidden></td>
             <td th:text="${itemStat.count} + ${items.getSize()} * ${items.getNumber()}"></td>
             <td th:text="${item.name}"></td>
             <td th:text="${item.author}"></td>

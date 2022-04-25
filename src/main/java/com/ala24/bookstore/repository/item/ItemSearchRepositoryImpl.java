@@ -3,8 +3,12 @@ package com.ala24.bookstore.repository.item;
 import com.ala24.bookstore.domain.item.Item;
 import com.ala24.bookstore.repository.condition.ItemSearch;
 import com.ala24.bookstore.repository.condition.ItemSearchCondition;
+import com.ala24.bookstore.repository.condition.ItemSortCondition;
 import com.querydsl.core.QueryResults;
+import com.querydsl.core.types.Order;
+import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -27,17 +31,36 @@ public class ItemSearchRepositoryImpl implements ItemSearchRepository{
 	@Override
 	public Page<Item> searchPage(ItemSearch condition, Pageable pageable) {
 
-		QueryResults<Item> results = queryFactory
+		JPAQuery<Item> query = queryFactory
 				.selectFrom(item)
 				.where(findName(condition), findAuthor(condition), findPublisher(condition))
 				.offset(pageable.getOffset())
-				.limit(pageable.getPageSize())
-				.fetchResults();
+				.limit(pageable.getPageSize());
 
+		if (condition.getSortCondition() != null) {
+			query.orderBy(sortMethod(condition));
+		}
+
+		QueryResults<Item> results = query.fetchResults();
 		List<Item> content = results.getResults();
 		long total = results.getTotal();
 
 		return new PageImpl<>(content, pageable, total);
+	}
+
+	private OrderSpecifier<?> sortMethod(ItemSearch condition) {
+		ItemSortCondition type = condition.getSortCondition();
+		Order method = findOrderMethod(condition.getSort());
+
+		switch (type) {
+			case PRICE:
+				return new OrderSpecifier<>(method, item.price);
+		}
+		return null;
+	}
+
+	private Order findOrderMethod(String sort) {
+		return sort.equals("ASC") ? Order.ASC : Order.DESC;
 	}
 
 	private BooleanExpression findName(ItemSearch condition) {

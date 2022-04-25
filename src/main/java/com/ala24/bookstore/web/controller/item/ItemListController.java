@@ -5,6 +5,7 @@ import com.ala24.bookstore.repository.condition.ItemSearch;
 import com.ala24.bookstore.service.ItemService;
 import com.ala24.bookstore.web.dtos.itemdto.ItemListDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import static com.ala24.bookstore.web.pages.DefaultPageButtonSize.DEFAULT_PAGE_B
 import static com.ala24.bookstore.web.session.SessionAttributeName.LOGIN_MEMBER;
 
 @Controller
+@Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/items")
 public class ItemListController {
@@ -38,8 +40,11 @@ public class ItemListController {
 //	}
 
 	@GetMapping("/list")
-	public String search(@ModelAttribute("condition") ItemSearch condition,
+	public String search(@ModelAttribute(value = "condition") ItemSearch condition,
 						 @SessionAttribute(name = LOGIN_MEMBER) Member loginMember, Pageable pageable, Model model) {
+
+		log.info("condition.sortCondition : {}", condition.getSortCondition().getDescription());
+		log.info("condition.sortName : {}", condition.getSort());
 
 		Page<ItemListDto> items = itemService.search(condition, pageable);
 		model.addAttribute("items", items);

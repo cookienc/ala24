@@ -10,5 +10,7 @@ import lombok.Setter;
 public class ItemSearch {
 
 	private ItemSearchCondition condition;
+	private ItemSortCondition sortCondition;
 	private String data;
+	private String sort;
 }
