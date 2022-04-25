@@ -31,13 +31,14 @@ public class OrderSearchRepositoryImpl implements OrderSearchRepository{
 	}
 
 	@Override
-	public Page<Order> searchPage(OrderSearch condition, Pageable pageable) {
+	public Page<Order> searchPage(OrderSearch condition, String loginId, Pageable pageable) {
 		QueryResults<Order> results = queryFactory.selectFrom(order)
 				.join(order.orderItems, orderItem).fetchJoin()
 				.join(order.delivery, delivery).fetchJoin()
 				.join(order.member, member).fetchJoin()
 				.join(orderItem.item, item).fetchJoin()
 				.where(findMemberName(condition),findItemName(condition), findDeliveryStatus(condition))
+				.where(findMemberId(loginId))
 				.offset(pageable.getOffset())
 				.limit(pageable.getPageSize())
 				.distinct()
@@ -47,6 +48,11 @@ public class OrderSearchRepositoryImpl implements OrderSearchRepository{
 		long total = results.getTotal();
 
 		return new PageImpl<>(content, pageable, total);
+	}
+
+	private BooleanExpression findMemberId(String loginId) {
+		return loginId != null ?
+				member.loginId.eq(loginId) : null;
 	}
 
 	private BooleanExpression findMemberName(OrderSearch condition) {

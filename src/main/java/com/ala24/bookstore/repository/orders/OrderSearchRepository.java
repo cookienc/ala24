@@ -7,5 +7,5 @@ import org.springframework.data.domain.Pageable;
 
 public interface OrderSearchRepository {
 
-	Page<Order> searchPage(OrderSearch condition, Pageable pageable);
+	Page<Order> searchPage(OrderSearch condition, String loginId, Pageable pageable);
 }

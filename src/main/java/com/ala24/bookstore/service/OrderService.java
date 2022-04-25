@@ -70,13 +70,18 @@ public class OrderService {
 				.map(OrderListDto::new);
 	}
 
-	public Page<OrderListDto> findAllFetch(OrderSearch condition, Pageable pageable) {
+	public Page<OrderListDto> findAllFetch(OrderSearch condition, String loginId, Pageable pageable) {
 
 		if (condition.getCondition() == null) {
 			condition.setCondition(NORMAL);
 		}
 
-		return orderRepository.searchPage(condition, pageable)
+		if (loginId == null) {
+			return orderRepository.searchPage(condition, null, pageable)
+					.map(OrderListDto::new);
+		}
+
+		return orderRepository.searchPage(condition, loginId, pageable)
 				.map(OrderListDto::new);
 	}
 
