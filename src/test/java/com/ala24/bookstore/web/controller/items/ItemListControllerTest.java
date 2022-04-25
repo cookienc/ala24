@@ -1,9 +1,10 @@
-package com.ala24.bookstore.web.controller.order;
+package com.ala24.bookstore.web.controller.items;
 
 import com.ala24.bookstore.DataBaseCleanup;
 import com.ala24.bookstore.domain.Address;
 import com.ala24.bookstore.domain.Cash;
 import com.ala24.bookstore.domain.Member;
+import com.ala24.bookstore.domain.type.MemberStatus;
 import com.ala24.bookstore.service.MemberService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,9 +21,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class OrderListControllerTest {
+class ItemListControllerTest {
 
-	private static Member test;
+	private static Member testMember;
+	private static Member admin;
 
 	@Autowired
 	MockMvc mvc;
@@ -35,19 +37,30 @@ class OrderListControllerTest {
 
 	@BeforeEach
 	void setUp() {
-		Address address = Address.builder()
-				.zipcode(12345)
-				.city("Seoul")
-				.specificAddress("Apartment")
+		admin = Member.builder()
+				.name("admin")
+				.loginId("admin")
+				.password("admin")
+				.cash(Cash.charge(100_000_000L))
+				.address(Address.builder()
+						.zipcode(12345)
+						.city("admin")
+						.specificAddress("admin")
+						.build())
 				.build();
+		admin.changeAuthority(MemberStatus.ADMIN);
 
-		test = Member.builder()
+		testMember = Member.builder()
 				.name("test")
 				.loginId("test")
-				.password("test")
+				.password("1234")
 				.cash(Cash.charge(0L))
-				.address(address)
-				.build();
+				.address(Address.builder()
+						.city("서울")
+						.specificAddress("강남")
+						.zipcode(12345)
+						.build()
+				).build();
 	}
 
 	@AfterEach
@@ -56,14 +69,26 @@ class OrderListControllerTest {
 	}
 
 	@Test
-	void 주문리스트_화면으로_이동() throws Exception {
-	    //given
-		memberService.join(test);
-	    //when
-		mvc.perform(get("/order/list")
-						.sessionAttr(LOGIN_MEMBER, test))
-		//then
+	void ADMIN_아이템_리스트_테스트() throws Exception {
+		//given
+		memberService.join(admin);
+
+		//when
+		mvc.perform(get("/items/list")
+						.sessionAttr(LOGIN_MEMBER, admin))
 				.andExpect(status().isOk())
-				.andExpect(view().name("order/list"));
+				.andExpect(view().name("items/list"));
+	}
+
+	@Test
+	void USER_아이템_리스트_테스트() throws Exception {
+		//given
+		memberService.join(testMember);
+
+		//when
+		mvc.perform(get("/items/list")
+						.sessionAttr(LOGIN_MEMBER, testMember))
+				.andExpect(status().isOk())
+				.andExpect(view().name("items/list"));
 	}
 }

@@ -1,4 +1,4 @@
-package com.ala24.bookstore.web.controller.order;
+package com.ala24.bookstore.web.controller.orders;
 
 import com.ala24.bookstore.DataBaseCleanup;
 import com.ala24.bookstore.domain.Address;
@@ -90,7 +90,7 @@ class OrderCancelControllerTest {
 		Long orderId = orderService.order(memberId, itemId, 2);
 
 		//when
-		mvc.perform(post("/order/" + orderId + "/cancel")
+		mvc.perform(post("/orders/" + orderId + "/cancel")
 						.sessionAttr("loginMember", test))
 		//then
 				.andExpect(status().is3xxRedirection())
@@ -108,7 +108,7 @@ class OrderCancelControllerTest {
 		Long orderId = orderService.order(memberId, itemId, 2);
 
 		//when
-		assertThatThrownBy(() -> mvc.perform(post("/order/" + orderId + 100 + "/cancel")
+		assertThatThrownBy(() -> mvc.perform(post("/orders/" + orderId + 100 + "/cancel")
 						.sessionAttr("loginMember", test))
 
 		//then

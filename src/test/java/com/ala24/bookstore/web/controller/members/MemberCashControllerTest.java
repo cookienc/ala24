@@ -1,4 +1,4 @@
-package com.ala24.bookstore.web.controller.member;
+package com.ala24.bookstore.web.controller.members;
 
 import com.ala24.bookstore.DataBaseCleanup;
 import com.ala24.bookstore.domain.Address;

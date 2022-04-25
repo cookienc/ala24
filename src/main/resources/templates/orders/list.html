@@ -33,7 +33,7 @@
              (${order.member.address.zipcode})|"></td>
             <td th:text="${order.delivery.deliveryStatus.getDescription()}"></td>
             <td>
-                <form role="form" th:action="@{/order/{orderId}/cancel (orderId=${order.orderId})}" method="post">
+                <form role="form" th:action="@{/orders/{orderId}/cancel (orderId=${order.orderId})}" method="post">
                     <button class="btn btn-danger" th:if="${!order.orderStatus.toString().equals('CANCEL')}"
                             th:text="#{button.cancel}"></button>
                 </form>
@@ -48,20 +48,20 @@
                 (start + (maxPage - 1) < orders.totalPages?
                 start + (maxPage - 1) : orders.totalPages)}">
             <li th:class="page-item" th:if="${start > 1}">
-                <a th:class="page-link" th:href="@{/order/list(page=0)}" th:text="'<<'"></a>
+                <a th:class="page-link" th:href="@{/orders/list(page=0)}" th:text="'<<'"></a>
             </li>
             <li th:class="page-item" th:if="${start > 1}">
-                <a th:class="page-link" th:href="@{/order/list(page=${start - maxPage})}" th:text="'<'"></a>
+                <a th:class="page-link" th:href="@{/orders/list(page=${start - maxPage})}" th:text="'<'"></a>
             </li>
             <li th:class="page-item" th:each="page: ${#numbers.sequence(start, end)}">
-                <a th:class="page-link" th:href="@{/order/list(page=(${page} - 1))}" th:text="${page}"></a>
+                <a th:class="page-link" th:href="@{/orders/list(page=(${page} - 1))}" th:text="${page}"></a>
             </li>
 
             <li th:class="page-item" th:if="${end < orders.totalPages}">
-                <a th:class="page-link" th:href="@{/order/list(page=${start + maxPage} - 1)}" th:text="'>'"></a>
+                <a th:class="page-link" th:href="@{/orders/list(page=${start + maxPage} - 1)}" th:text="'>'"></a>
             </li>
             <li th:class="page-item" th:if="${end < orders.totalPages}">
-                <a th:class="page-link" th:href="@{/order/list(page=(${orders.totalPages} - 1))}" th:text="'>>'"></a>>
+                <a th:class="page-link" th:href="@{/orders/list(page=(${orders.totalPages} - 1))}" th:text="'>>'"></a>>
             </li>
         </ul>
     </nav>

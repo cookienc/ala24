@@ -1,4 +1,4 @@
-package com.ala24.bookstore.web.controller.item;
+package com.ala24.bookstore.web.controller.items;
 
 import com.ala24.bookstore.web.dtos.itemdto.ItemCategory;
 import org.springframework.stereotype.Controller;

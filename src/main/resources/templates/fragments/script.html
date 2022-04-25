@@ -1,0 +1,7 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<script th:inline="javascript" th:fragment="goBack">
+    document.getElementById('go-back').addEventListener('click', () => {
+        window.history.back();
+    });
+</script>

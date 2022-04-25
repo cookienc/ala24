@@ -14,7 +14,7 @@ import static com.ala24.bookstore.web.pages.DefaultPageButtonSize.DEFAULT_PAGE_B
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/order")
+@RequestMapping("/orders")
 public class OrderListController {
 
 	private final OrderService orderService;
@@ -24,6 +24,6 @@ public class OrderListController {
 		Page<OrderListDto> orders = orderService.findAllFetch(pageable);
 		model.addAttribute("orders", orders);
 		model.addAttribute("maxPage", DEFAULT_PAGE_BUTTON_RANGE.getPageNum());
-		return "order/list";
+		return "orders/list";
 	}
 }

@@ -1,4 +1,4 @@
-package com.ala24.bookstore.web.controller.order;
+package com.ala24.bookstore.web.controller.orders;
 
 import com.ala24.bookstore.DataBaseCleanup;
 import com.ala24.bookstore.domain.Address;
@@ -112,11 +112,11 @@ class OrderControllerTest {
 		memberService.join(test);
 		Long itemId = itemService.saveItem(novel);
 		//when
-		mvc.perform(get("/order/" + itemId)
+		mvc.perform(get("/orders/" + itemId)
 						.sessionAttr("loginMember", test))
 				//then
 				.andExpect(status().isOk())
-				.andExpect(view().name("order/orderForm"));
+				.andExpect(view().name("orders/orderForm"));
 	}
 
 	@Test
@@ -140,7 +140,7 @@ class OrderControllerTest {
 		params.add("quantity", String.valueOf(1));
 
 		//when
-		mvc.perform(post("/order")
+		mvc.perform(post("/orders")
 						.sessionAttr("loginMember", test)
 						.params(params))
 		//then

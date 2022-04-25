@@ -1,4 +1,4 @@
-package com.ala24.bookstore.web.controller.item;
+package com.ala24.bookstore.web.controller.items;
 
 import com.ala24.bookstore.domain.Member;
 import com.ala24.bookstore.repository.condition.ItemSearch;

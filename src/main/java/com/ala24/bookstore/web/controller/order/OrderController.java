@@ -27,7 +27,7 @@ import static com.ala24.bookstore.web.session.SessionName.LOGIN_MEMBER;
 @Controller
 @Slf4j
 @RequiredArgsConstructor
-@RequestMapping("/order")
+@RequestMapping("/orders")
 public class OrderController {
 
 	public static final String NO_ID = "해당 아이디를 가진 멤버나 아이템이 없습니다.";
@@ -46,7 +46,7 @@ public class OrderController {
 
 		model.addAttribute("orderForm", new OrderFormDto().toDto(findItem, findMember));
 
-		return "order/orderForm";
+		return "orders/orderForm";
 	}
 
 	@PostMapping
@@ -54,7 +54,7 @@ public class OrderController {
 
 		if (result.hasErrors()) {
 			log.info("order 검증 오류 result = {}", result);
-			return "order/orderForm";
+			return "orders/orderForm";
 		}
 
 		OrderServiceDto serviceDto = new OrderServiceDto().toDto(orderForm);
@@ -71,18 +71,18 @@ public class OrderController {
 
 			result.reject("notEnoughMoney", NOT_ENOUGH_CASH.toString() +
 					LEFT_MONEY + left);
-			return "order/orderForm";
+			return "orders/orderForm";
 
 		} catch (NoSuchElementException e) {
 			log.info("아이템이나 멤버가 없습니다. error = {}", result);
 			result.reject("noId", NO_ID);
-			return "order/orderForm";
+			return "orders/orderForm";
 
 		} catch (NotEnoughItemException e) {
 			log.info("재고가 부족합니다. error = {}", result);
 			result.reject("notEnoughItem", NOT_ENOUGH_ITEM +
 					LEFT_ITEM + orderForm.getStockQuantity());
-			return "order/orderForm";
+			return "orders/orderForm";
 		}
 
 		return "redirect:/";

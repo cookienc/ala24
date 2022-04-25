@@ -10,7 +10,7 @@
     <div>
         <h3 class="text-center">[상품 주문]</h3>
     </div>
-    <form role="form" th:object="${orderForm}" th:action="@{/order}" method="post">
+    <form role="form" th:object="${orderForm}" th:action="@{/orders}" method="post">
         <input th:for="itemId" th:field="*{itemId}" hidden>
         <input th:for="stockQuantity" th:field="*{stockQuantity}" hidden>
         <div class="form-group">
@@ -53,8 +53,10 @@
         </div>
         <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">전체 오류 메시지</p>
         <button class="btn btn-sm btn-info" type="submit" th:text="#{button.order}">주문</button>
-        <button class="btn btn-sm btn-secondary" type="button" th:onclick="|location.href='history.back'|">취소</button>
+        <button class="btn btn-sm btn-secondary" type="button"
+                id="go-back">취소</button>
     </form>
+    <div th:replace="fragments/script :: goBack"/>
     <div th:replace="fragments/footer :: footer"/>
 </div>
 </body>
