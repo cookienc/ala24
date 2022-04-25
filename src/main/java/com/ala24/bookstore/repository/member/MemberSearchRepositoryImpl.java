@@ -45,32 +45,32 @@ public class MemberSearchRepositoryImpl implements MemberSearchRepository{
 	}
 
 	private BooleanExpression findName(MemberSearch condition) {
-		return isNoNullData(condition) && isItSameCondition(condition, NAME) ?
+		return isNotNullData(condition) && isItSameCondition(condition, NAME) ?
 				member.name.containsIgnoreCase(condition.getData()) : null;
 	}
 
 	private BooleanExpression findLoginId(MemberSearch condition) {
-		return isNoNullData(condition) && isItSameCondition(condition, LOGIN_ID) ?
+		return isNotNullData(condition) && isItSameCondition(condition, LOGIN_ID) ?
 				member.loginId.containsIgnoreCase(condition.getData()) : null;
 	}
 
 	private BooleanExpression findCity(MemberSearch condition) {
-		return isNoNullData(condition) && isItSameCondition(condition, CITY) ?
+		return isNotNullData(condition) && isItSameCondition(condition, CITY) ?
 				member.address.city.containsIgnoreCase(condition.getData()) : null;
 	}
 
 	private BooleanExpression findAddress(MemberSearch condition) {
-		return isNoNullData(condition) && isItSameCondition(condition, ADDRESS) ?
+		return isNotNullData(condition) && isItSameCondition(condition, ADDRESS) ?
 				member.address.specificAddress.containsIgnoreCase(condition.getData()) : null;
 	}
 
 	private BooleanExpression findZipcode(MemberSearch condition) {
-		return isNoNullData(condition) && isItSameCondition(condition, ZIPCODE) ?
+		return isNotNullData(condition) && isItSameCondition(condition, ZIPCODE) ?
 				member.address.zipcode.eq(Integer.parseInt(condition.getData())) : null;
 	}
 
 	private BooleanExpression findAuthority(MemberSearch condition) {
-		if (!isNoNullData(condition) || !isItSameCondition(condition, AUTHORITY)) {
+		if (!isNotNullData(condition) || !isItSameCondition(condition, AUTHORITY)) {
 			return null;
 		}
 
@@ -98,7 +98,7 @@ public class MemberSearchRepositoryImpl implements MemberSearchRepository{
 		return condition.getCondition().equals(cond);
 	}
 
-	private boolean isNoNullData(MemberSearch condition) {
+	private boolean isNotNullData(MemberSearch condition) {
 		return condition.getData() != null;
 	}
 }

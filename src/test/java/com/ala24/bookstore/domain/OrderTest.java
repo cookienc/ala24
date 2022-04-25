@@ -51,15 +51,15 @@ class OrderTest {
 		orderItem = OrderItem.builder()
 				.build();
 
-		delivery = Delivery.builder()
-				.address(new Address())
-				.order(new Order())
-				.build();
-
 		order = Order.builder()
 				.member(member)
 				.orderItem(Arrays.asList(orderItem))
 				.delivery(delivery)
+				.build();
+
+		delivery = Delivery.builder()
+				.address(new Address())
+				.order(order)
 				.build();
 	}
 

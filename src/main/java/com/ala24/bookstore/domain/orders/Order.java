@@ -3,7 +3,6 @@ package com.ala24.bookstore.domain.orders;
 import com.ala24.bookstore.domain.Delivery;
 import com.ala24.bookstore.domain.member.Member;
 import com.ala24.bookstore.domain.type.OrderStatus;
-import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,15 +12,16 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.ala24.bookstore.domain.type.DeliveryStatus.*;
-import static com.ala24.bookstore.domain.type.OrderStatus.*;
+import static com.ala24.bookstore.domain.type.DeliveryStatus.COMPLETE;
+import static com.ala24.bookstore.domain.type.DeliveryStatus.SHIPPING;
+import static com.ala24.bookstore.domain.type.OrderStatus.ORDER;
 import static com.ala24.bookstore.exception.utils.Sentence.ALREADY_CANCELD;
 import static com.ala24.bookstore.exception.utils.Sentence.NOW_DELIVERING;
 
 @Entity
 @Getter
 @Table(name = "orders")
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class Order {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)

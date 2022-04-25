@@ -1,13 +1,14 @@
 package com.ala24.bookstore.service;
 
 import com.ala24.bookstore.domain.Delivery;
+import com.ala24.bookstore.domain.item.Item;
 import com.ala24.bookstore.domain.member.Member;
 import com.ala24.bookstore.domain.orders.Order;
 import com.ala24.bookstore.domain.orders.OrderItem;
-import com.ala24.bookstore.domain.item.Item;
+import com.ala24.bookstore.domain.orders.condition.OrderSearch;
+import com.ala24.bookstore.repository.item.ItemRepository;
 import com.ala24.bookstore.repository.member.MemberRepository;
 import com.ala24.bookstore.repository.orders.OrderRepository;
-import com.ala24.bookstore.repository.item.ItemRepository;
 import com.ala24.bookstore.web.dtos.orderdto.OrderListDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -18,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import static com.ala24.bookstore.domain.orders.condition.OrderSearchCondition.NORMAL;
 import static com.ala24.bookstore.exception.utils.Sentence.*;
 
 @Service
@@ -65,6 +67,16 @@ public class OrderService {
 
 	public Page<OrderListDto> findAllFetch(Pageable pageable) {
 		return orderRepository.findAllFetch(pageable)
+				.map(OrderListDto::new);
+	}
+
+	public Page<OrderListDto> findAllFetch(OrderSearch condition, Pageable pageable) {
+
+		if (condition.getCondition() == null) {
+			condition.setCondition(NORMAL);
+		}
+
+		return orderRepository.searchPage(condition, pageable)
 				.map(OrderListDto::new);
 	}
 

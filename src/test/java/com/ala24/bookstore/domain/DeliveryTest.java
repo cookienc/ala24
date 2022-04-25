@@ -1,6 +1,7 @@
 package com.ala24.bookstore.domain;
 
 import com.ala24.bookstore.DataBaseCleanup;
+import com.ala24.bookstore.domain.member.Member;
 import com.ala24.bookstore.domain.orders.Order;
 import com.ala24.bookstore.repository.DeliveryRepository;
 import org.junit.jupiter.api.AfterEach;
@@ -35,6 +36,12 @@ class DeliveryTest {
 				.city("서울")
 				.zipcode(12345)
 				.specificAddress("은마아파트")
+				.build();
+
+		Member test = Member.builder()
+				.name("사나")
+				.address(address)
+				.cash(Cash.charge(1000L))
 				.build();
 
 		Delivery delivery = Delivery.builder()
