@@ -44,7 +44,7 @@
             <th>저자</th>
             <th>출판사</th>
             <th>가격</th>
-            <th th:if="${loginMember.authority.toString()} == 'ADMIN'">재고</th>
+            <th th:if="${loginMember} != null and ${loginMember.authority.toString()} == 'ADMIN'">재고</th>
         </tr>
         </thead>
         <tbody>
@@ -55,13 +55,13 @@
             <td th:text="${item.author}"></td>
             <td th:text="${item.publisher}"></td>
             <td th:text="${item.price}"></td>
-            <td th:if="${loginMember.authority.toString()} == 'ADMIN'" th:text="${item.stockQuantity}"></td>
+            <td th:if="${loginMember} != null and ${loginMember.authority.toString()} == 'ADMIN'" th:text="${item.stockQuantity}"></td>
             <td>
                 <a class="btn btn-info"
                    th:href="@{/orders/{itemId} (itemId=${item.itemId})}" th:text="#{button.order}" role="button">
                     주문
                 </a>
-                <a class="btn btn-warning" th:if="${loginMember.authority.toString()} == 'ADMIN'"
+                <a class="btn btn-warning" th:if="${loginMember} != null and ${loginMember.authority.toString()} == 'ADMIN'"
                    th:href="@{/items/{itemId}/edit (itemId=${item.itemId})}" th:text="#{button.update}" role="button">
                     수정
                 </a>

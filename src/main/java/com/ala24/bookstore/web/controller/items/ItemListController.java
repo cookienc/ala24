@@ -41,10 +41,11 @@ public class ItemListController {
 
 	@GetMapping("/list")
 	public String search(@ModelAttribute(value = "condition") ItemSearch condition,
-						 @SessionAttribute(name = LOGIN_MEMBER) Member loginMember, Pageable pageable, Model model) {
+						 @SessionAttribute(name = LOGIN_MEMBER, required = false) Member loginMember, Pageable pageable, Model model) {
 
 		Page<ItemListDto> items = itemService.search(condition, pageable);
 		model.addAttribute("items", items);
+		log.info("loginMember : {}" , loginMember);
 		model.addAttribute("loginMember", loginMember);
 		model.addAttribute("maxPage", DEFAULT_PAGE_BUTTON_RANGE.getPageNum());
 		return "items/list";
