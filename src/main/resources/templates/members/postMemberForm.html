@@ -45,8 +45,9 @@
             <p class="field-error" th:errors="*{specificAddress}">다시입력해주세요.</p>
         </div>
         <button class="btn btn-sm btn-info" type="submit">가입</button>
-        <button class="btn btn-sm btn-secondary" type="button" th:onclick="|location.href='@{/}'|">취소</button>
+        <button class="btn btn-sm btn-secondary" type="button" id="go-back">취소</button>
     </form>
+    <div th:replace="fragments/script :: goBack"/>
     <div th:replace="fragments/footer :: footer"/>
 </div>
 </body>

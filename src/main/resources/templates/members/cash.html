@@ -27,11 +27,11 @@
             <p class="field-error" th:errors="*{chargeMoney}">다시 입력해주세요.</p>
         </div>
         <button class="btn btn-sm btn-info" type="submit" th:text="#{button.charge}">수정</button>
-        <button class="btn btn-sm btn-secondary" th:onclick="|location.href='history.back'|"
+        <button type="button" class="btn btn-sm btn-secondary" id="go-back"
                 th:text="#{button.cancel}">취소</button>
     </form>
-
-    </div>
+    <div th:replace="fragments/script :: goBack"/>
+    <div th:replace="fragments/footer :: footer"/>
 </div>
 </body>
 </html>
