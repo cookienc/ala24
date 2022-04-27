@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import static com.ala24.bookstore.web.pages.DefaultPageButtonSize.DEFAULT_PAGE_BUTTON_RANGE;
 import static com.ala24.bookstore.web.session.SessionAttributeName.LOGIN_MEMBER;
 
+/**
+ * 아이템을 조회하는 컨트롤러
+ */
 @Controller
 @Slf4j
 @RequiredArgsConstructor
@@ -23,22 +26,15 @@ public class ItemListController {
 
 	private final ItemService itemService;
 
-//	@GetMapping("/list")
-//	public String list(Model model) {
-//		List<Item> items = itemService.findAll();
-//		model.addAttribute("items", new ItemListDto().toDto(items));
-//		return "items/list";
-//	}
-
-//	@GetMapping("/list")
-//	public String list(Pageable pageable, @SessionAttribute(name = LOGIN_MEMBER) Member loginMember, Model model) {
-//		Page<ItemListDto> items = itemService.findAll(pageable);
-//		model.addAttribute("items", items);
-//		model.addAttribute("maxPage", DEFAULT_PAGE_BUTTON_RANGE.getPageNum());
-//		model.addAttribute("loginMember", loginMember);
-//		return "items/list";
-//	}
-
+	/**
+	 * 아이템을 조회하는 함수
+	 * 회원의 권한이 ADMIN인 경우만 재고 목록을 보이게 함
+	 * @param condition 검색 조건
+	 * @param loginMember 로그인된 회원
+	 * @param pageable 페이징 조건
+	 * @param model 모델
+	 * @return 상품 리스트를 보여주는 view 경로
+	 */
 	@GetMapping("/list")
 	public String search(@ModelAttribute(value = "condition") ItemSearch condition,
 						 @SessionAttribute(name = LOGIN_MEMBER, required = false) Member loginMember, Pageable pageable, Model model) {

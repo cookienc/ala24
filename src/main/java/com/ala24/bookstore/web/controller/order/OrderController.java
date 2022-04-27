@@ -24,6 +24,9 @@ import static com.ala24.bookstore.exception.utils.Sentence.NOT_ENOUGH_CASH;
 import static com.ala24.bookstore.exception.utils.Sentence.NOT_ENOUGH_ITEM;
 import static com.ala24.bookstore.web.session.SessionName.LOGIN_MEMBER;
 
+/**
+ * 주문 기능을 하는 컨트롤러
+ */
 @Controller
 @Slf4j
 @RequiredArgsConstructor
@@ -37,6 +40,13 @@ public class OrderController {
 	private final OrderService orderService;
 	private final MemberService memberService;
 
+	/**
+	 * 주문 폼으로 이동하는 컨트롤러
+	 * @param itemId 주문할 상품의 아이디
+	 * @param request 주문할 회원 정보를 가져올 request
+	 * @param model 주문 폼의 화면 구성용 model
+	 * @return 주문 화면의 view 경로
+	 */
 	@GetMapping("/{itemId}")
 	public String createForm(@PathVariable("itemId") Long itemId, HttpServletRequest request, Model model) {
 
@@ -49,6 +59,12 @@ public class OrderController {
 		return "orders/orderForm";
 	}
 
+	/**
+	 * 주문기능을 하는 함수
+	 * @param orderForm 주문 상품의 정보 및 주문 개수
+	 * @param result 오류를 담을 파라미터
+	 * @return 주문이 성공하면 홈 화면의 view, 실패하면 주문 화면의 view 경로를 반환
+	 */
 	@PostMapping
 	public String order(@Valid @ModelAttribute("orderForm") OrderFormDto orderForm, BindingResult result) {
 

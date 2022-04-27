@@ -14,6 +14,9 @@ import javax.validation.Valid;
 
 import static com.ala24.bookstore.web.session.SessionAttributeName.LOGIN_MEMBER;
 
+/**
+ * 회원의 돈과 관련된 기능을 수행하는 컨트롤러
+ */
 @Controller
 @Slf4j
 @RequiredArgsConstructor
@@ -22,6 +25,12 @@ public class MemberCashController {
 
 	private final CashService cashService;
 
+	/**
+	 * 계좌 충전 화면으로 이동하는 함수
+	 * @param loginMember 기본적인 회원의 정보를 표시하기 위해서 사용
+	 * @param model 화면에 보여주는 용도
+	 * @return 계좌 충전 화면으로 이동
+	 */
 	@GetMapping
 	public String chargeForm(@SessionAttribute(name = LOGIN_MEMBER) Member loginMember, Model model) {
 
@@ -30,6 +39,13 @@ public class MemberCashController {
 		return "members/cash";
 	}
 
+	/**
+	 * 계좌에 돈을 충전하는 함수
+	 * @param loginMember 돈을 충전할 회원
+	 * @param cashForm 얼마만큼 돈을 충전할것인지
+	 * @param result 오류를 담는 파라미터
+	 * @return 실패하면 충전화면으로, 성공하면 홈으로 이동
+	 */
 	@PostMapping
 	public String charge(@SessionAttribute(name = LOGIN_MEMBER) Member loginMember,
 						 @Valid @ModelAttribute("cashForm") CashFormDto cashForm, BindingResult result) {

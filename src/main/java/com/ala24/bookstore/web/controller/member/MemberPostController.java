@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
+/**
+ * 회원등록을 하는 컨트롤러
+ */
 @Controller
 @Slf4j
 @RequiredArgsConstructor
@@ -23,7 +26,9 @@ public class MemberPostController {
 	private final MemberService memberService;
 
 	/**
-	 * 회원 등록
+	 * 회원등록 화면으로 이동하는 함수
+	 * @param model 화면에 보여줄 모델
+	 * @return 회원등록폼의 view
 	 */
 	@GetMapping("/post")
 	public String postForm(Model model) {
@@ -31,6 +36,12 @@ public class MemberPostController {
 		return "members/postMemberForm";
 	}
 
+	/**
+	 * 회원 등록 화면으로 이동하는 함수
+	 * @param memberForm 등록할 회원의 정보
+	 * @param result 오류를 담을 파라미터
+	 * @return 오류가 없으면 홈의 view 경로를 아니면 회원 등록 폼의 view 경로로 이동
+	 */
 	@PostMapping("/post")
 	public String save(@Valid @ModelAttribute("memberForm") MemberFormDto memberForm, BindingResult result) {
 		if (result.hasErrors()) {

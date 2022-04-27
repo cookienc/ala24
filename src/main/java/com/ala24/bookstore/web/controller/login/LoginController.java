@@ -20,6 +20,9 @@ import java.util.NoSuchElementException;
 import static com.ala24.bookstore.exception.utils.Sentence.DO_NOT_MATCH_PW;
 import static com.ala24.bookstore.exception.utils.Sentence.NO_MEMBER;
 
+/**
+ * 로그인을 담당하는 컨트롤러
+ */
 @Slf4j
 @Controller
 @RequiredArgsConstructor
@@ -27,11 +30,23 @@ public class LoginController {
 
 	private final LoginService loginService;
 
+	/**
+	 * 로그인 폼으로 이동하는 함수
+	 * @param loginForm 기본 로그인 폼
+	 * @return 로그인 화면의 view 경로
+	 */
 	@GetMapping("/login")
 	public String loginForm(@ModelAttribute("loginForm") LoginFormDto loginForm) {
 		return "login/loginForm";
 	}
 
+	/**
+	 * 로그인 기능을 구현하는 컨트롤러
+	 * @param loginForm 입력한 로그인 폼
+	 * @param result 오류가 들어갈 result
+	 * @param request request를 이용해서 session을 가져옴
+	 * @return 에러가 발생하면 loginForm, 아니면 loginHome의 view 경로를 반환
+	 */
 	@PostMapping("/login")
 	public String login(@Valid @ModelAttribute("loginForm") LoginFormDto loginForm, BindingResult result,
 						HttpServletRequest request) {
@@ -62,6 +77,11 @@ public class LoginController {
 		return "redirect:/";
 	}
 
+	/**
+	 * 로그아웃 기능을 수행하는 함수
+	 * @param request 로그인된 회원을 조회할 때 사용
+	 * @return home화면의 view 경로
+	 */
 	@PostMapping("/logout")
 	public String logout(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
