@@ -22,6 +22,9 @@ import java.util.NoSuchElementException;
 import static com.ala24.bookstore.domain.orders.condition.OrderSearchCondition.NORMAL;
 import static com.ala24.bookstore.exception.utils.Sentence.*;
 
+/**
+ * 주문과 관련된 함수를 가지고 있는 서비스 계층
+ */
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -32,7 +35,11 @@ public class OrderService {
 	private final MemberRepository memberRepository;
 
 	/**
-	 * 주문
+	 * 주문을 실행하는 함수
+	 * @param memberId 주문할 회원 아이디
+	 * @param itemId 주문할 아이템 아이디
+	 * @param count 주문할 아이템 개수
+	 * @return 주문 아이디
 	 */
 	@Transactional
 	public Long order(Long memberId, Long itemId, int count) {
@@ -54,22 +61,30 @@ public class OrderService {
 	}
 
 	/**
-	 * 조회
+	 * 주문 조회 홤수
+	 * @param orderId 주문 조회 아이디
+	 * @return 주문 내역
 	 */
 	public Order findOne(Long orderId) {
 		return orderRepository.findById(orderId)
 				.orElseThrow(() -> new NoSuchElementException(NO_ORDER.toString()));
 	}
 
+	/**
+	 * 주문 전체 조회
+	 * @return 주문 전체 내용의 리스트
+	 */
 	public List<Order> findAll() {
 		return orderRepository.findAll();
 	}
 
-	public Page<OrderListDto> findAllFetch(Pageable pageable) {
-		return orderRepository.findAllFetch(pageable)
-				.map(OrderListDto::new);
-	}
-
+	/**
+	 * 검색 조건을 이용하여 페이징된 주문을 조회, OrderListDto로 변환하여 반환
+	 * @param condition 주문 검색 조건
+	 * @param loginId 회원의 로그인 아이디 -> null이면 전체 조회
+	 * @param pageable 페이징 조건
+	 * @return 페이징된 주문 내역을 OrderListDto로 변환하여 반환
+	 */
 	public Page<OrderListDto> findAllFetch(OrderSearch condition, String loginId, Pageable pageable) {
 
 		if (condition.getCondition() == null) {
@@ -86,7 +101,8 @@ public class OrderService {
 	}
 
 	/**
-	 * 취소
+	 * 주문을 찾아서 취소
+	 * @param orderId 취소할 주문의 아이디
 	 */
 	@Transactional
 	public void cancel(Long orderId) {
