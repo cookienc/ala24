@@ -9,6 +9,9 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.Optional;
 
+/**
+ * 스프링 데이터 JPA를 활용하여 검색을 할 수 있게만든 회원 저장소
+ */
 public interface MemberRepository extends JpaRepository<Member, Long>, MemberSearchRepository{
 
 	@Query("select m from Member m where m.loginId = :loginId")
