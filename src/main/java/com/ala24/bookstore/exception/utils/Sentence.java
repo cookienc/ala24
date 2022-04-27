@@ -1,5 +1,8 @@
 package com.ala24.bookstore.exception.utils;
 
+/**
+ * 예외 메세지 클래스
+ */
 public enum Sentence {
 
 	ALREADY_CANCELD("이미 취소된 주문입니다."),
