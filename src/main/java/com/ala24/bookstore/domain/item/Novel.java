@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 
+/**
+ * 아이템 속성을 상속받는 Novel 클래스
+ */
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Novel extends Item{

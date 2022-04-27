@@ -2,6 +2,9 @@ package com.ala24.bookstore.domain.member.condition;
 
 import lombok.Getter;
 
+/**
+ * 회원 검색 기준을 나타내는 enum 클래스
+ */
 @Getter
 public enum MemberSearchCondition {
 	NORMAL("검색"), NAME("이름"), LOGIN_ID("아이디"),

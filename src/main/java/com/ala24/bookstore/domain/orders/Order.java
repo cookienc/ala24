@@ -18,6 +18,9 @@ import static com.ala24.bookstore.domain.type.OrderStatus.ORDER;
 import static com.ala24.bookstore.exception.utils.Sentence.ALREADY_CANCELD;
 import static com.ala24.bookstore.exception.utils.Sentence.NOW_DELIVERING;
 
+/**
+ * 주문을 나타내는 클래스
+ */
 @Entity
 @Getter
 @Table(name = "orders")

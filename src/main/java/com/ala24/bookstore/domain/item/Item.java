@@ -9,6 +9,9 @@ import javax.persistence.*;
 
 import static com.ala24.bookstore.exception.utils.Sentence.NOT_ENOUGH_ITEM;
 
+/**
+ * 상품들의 공통 속성들을 뽑아 놓은 추상 클래스
+ */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "category")

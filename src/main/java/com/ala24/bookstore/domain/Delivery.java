@@ -11,6 +11,9 @@ import javax.persistence.*;
 
 import static com.ala24.bookstore.domain.type.DeliveryStatus.*;
 
+/**
+ * 주문의 배송정보가 나타나 있는 클래스
+ */
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

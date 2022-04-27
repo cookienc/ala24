@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+/**
+ * 회원 계좌와 관련된 클래스
+ */
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Cash {
