@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
-	private static final String[] CHECKING_PATH_AUTHORITY = {"/members/list", "/items/post"};
+	private static final String[] CHECKING_PATH_AUTHORITY = {"/adminHome", "/members/list", "/items/post"};
 	private static final String CHECKING_PATH_LOGIN = "/**";
 	private static final String[] EXCLUDE_PATH_LOGIN = {"/", "/login", "/logout", "/items/list",
 				"/members/post", "/css/**", "/*.ico", "/error"};
