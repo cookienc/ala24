@@ -16,6 +16,9 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
+/**
+ * 테스트용 데이터가 입력된 함수
+ */
 @Profile("local")
 @Component
 @RequiredArgsConstructor

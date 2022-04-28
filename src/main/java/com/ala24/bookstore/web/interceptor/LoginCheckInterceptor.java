@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+/**
+ * 로그인 유무를 확인하는 컨트롤러
+ */
 @Slf4j
 public class LoginCheckInterceptor implements HandlerInterceptor {
 

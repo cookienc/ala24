@@ -11,6 +11,9 @@ import javax.servlet.http.HttpSession;
 
 import static com.ala24.bookstore.web.session.SessionName.LOGIN_MEMBER;
 
+/**
+ * 회원의 권한을 확인하는 컨트롤러
+ */
 @Slf4j
 public class AuthorityCheckInterceptor implements HandlerInterceptor {
 

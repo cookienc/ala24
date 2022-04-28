@@ -12,6 +12,9 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * 데이터 베이스를 초기화하는 테스트용 클래스
+ */
 @Service
 public class DataBaseCleanup implements InitializingBean {
 
@@ -20,6 +23,10 @@ public class DataBaseCleanup implements InitializingBean {
 
 	private List<String> tableNames;
 
+	/**
+	 * 테이블의 이름을 가져오는 함수
+	 * @throws Exception
+	 */
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		tableNames = entityManager.getMetamodel().getEntities().stream()
@@ -33,6 +40,9 @@ public class DataBaseCleanup implements InitializingBean {
 		tableNames.remove("order");
 	}
 
+	/**
+	 * 테이블을 초기화하는 함수
+	 */
 	@Transactional
 	public void execute() {
 		entityManager.flush();
