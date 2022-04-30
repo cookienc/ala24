@@ -1,8 +1,8 @@
 package com.ala24.bookstore.repository.member;
 
 import com.ala24.bookstore.domain.member.Member;
-import com.ala24.bookstore.domain.member.condition.MemberSearch;
-import com.ala24.bookstore.domain.member.condition.MemberSearchCondition;
+import com.ala24.bookstore.web.controller.search.member.MemberSearch;
+import com.ala24.bookstore.web.controller.search.member.MemberSearchCondition;
 import com.ala24.bookstore.domain.type.MemberStatus;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -17,7 +17,7 @@ import java.util.List;
 
 import static com.ala24.bookstore.domain.QCash.cash;
 import static com.ala24.bookstore.domain.member.QMember.member;
-import static com.ala24.bookstore.domain.member.condition.MemberSearchCondition.*;
+import static com.ala24.bookstore.web.controller.search.member.MemberSearchCondition.*;
 import static com.ala24.bookstore.domain.type.MemberStatus.*;
 
 /**

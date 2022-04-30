@@ -17,7 +17,7 @@
                 <select th:field="*{condition}" class="btn btn-outline-secondary dropdown-toggle"
                         data-bs-toggle="dropdown" aria-expanded="false">
                     <option class="dropdown-menu" value="" selected hidden>검색</option>
-                    <option th:each="status : ${T(com.ala24.bookstore.domain.orders.condition.OrderSearchCondition).values()}"
+                    <option th:each="status : ${T(com.ala24.bookstore.web.controller.search.order.OrderSearchCondition).values()}"
                             th:value="${status}" th:text="${status.description}">선택
                     </option>
                 </select>

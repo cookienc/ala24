@@ -1,4 +1,4 @@
-package com.ala24.bookstore.domain.orders.condition;
+package com.ala24.bookstore.web.controller.search.order;
 
 import lombok.Getter;
 

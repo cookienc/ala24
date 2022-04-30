@@ -1,4 +1,4 @@
-package com.ala24.bookstore.domain.member.condition;
+package com.ala24.bookstore.web.controller.search.member;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

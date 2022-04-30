@@ -1,7 +1,7 @@
 package com.ala24.bookstore.repository.item;
 
 import com.ala24.bookstore.domain.item.Item;
-import com.ala24.bookstore.domain.item.condition.ItemSearch;
+import com.ala24.bookstore.web.controller.search.item.ItemSearch;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

@@ -1,7 +1,7 @@
 package com.ala24.bookstore.web.controller.order;
 
 import com.ala24.bookstore.domain.member.Member;
-import com.ala24.bookstore.domain.orders.condition.OrderSearch;
+import com.ala24.bookstore.web.controller.search.order.OrderSearch;
 import com.ala24.bookstore.domain.type.MemberStatus;
 import com.ala24.bookstore.service.OrderService;
 import com.ala24.bookstore.web.dtos.orderdto.OrderListDto;

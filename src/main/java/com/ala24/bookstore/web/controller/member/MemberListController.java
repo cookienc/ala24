@@ -1,6 +1,6 @@
 package com.ala24.bookstore.web.controller.member;
 
-import com.ala24.bookstore.domain.member.condition.MemberSearch;
+import com.ala24.bookstore.web.controller.search.member.MemberSearch;
 import com.ala24.bookstore.service.MemberService;
 import com.ala24.bookstore.web.dtos.memberdto.MemberListDto;
 import lombok.RequiredArgsConstructor;

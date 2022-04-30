@@ -1,8 +1,8 @@
 package com.ala24.bookstore.service;
 
 import com.ala24.bookstore.domain.item.Item;
-import com.ala24.bookstore.domain.item.condition.ItemSearch;
-import com.ala24.bookstore.domain.item.condition.ItemSearchCondition;
+import com.ala24.bookstore.web.controller.search.item.ItemSearch;
+import com.ala24.bookstore.web.controller.search.item.ItemSearchCondition;
 import com.ala24.bookstore.repository.item.ItemRepository;
 import com.ala24.bookstore.web.dtos.itemdto.ItemListDto;
 import lombok.RequiredArgsConstructor;

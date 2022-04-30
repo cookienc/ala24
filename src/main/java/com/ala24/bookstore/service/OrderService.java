@@ -5,7 +5,7 @@ import com.ala24.bookstore.domain.item.Item;
 import com.ala24.bookstore.domain.member.Member;
 import com.ala24.bookstore.domain.orders.Order;
 import com.ala24.bookstore.domain.orders.OrderItem;
-import com.ala24.bookstore.domain.orders.condition.OrderSearch;
+import com.ala24.bookstore.web.controller.search.order.OrderSearch;
 import com.ala24.bookstore.repository.item.ItemRepository;
 import com.ala24.bookstore.repository.member.MemberRepository;
 import com.ala24.bookstore.repository.orders.OrderRepository;
@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import static com.ala24.bookstore.domain.orders.condition.OrderSearchCondition.NORMAL;
+import static com.ala24.bookstore.web.controller.search.order.OrderSearchCondition.NORMAL;
 import static com.ala24.bookstore.exception.utils.Sentence.*;
 
 /**

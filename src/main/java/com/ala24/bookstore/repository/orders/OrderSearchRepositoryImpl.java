@@ -1,8 +1,8 @@
 package com.ala24.bookstore.repository.orders;
 
 import com.ala24.bookstore.domain.orders.Order;
-import com.ala24.bookstore.domain.orders.condition.OrderSearch;
-import com.ala24.bookstore.domain.orders.condition.OrderSearchCondition;
+import com.ala24.bookstore.web.controller.search.order.OrderSearch;
+import com.ala24.bookstore.web.controller.search.order.OrderSearchCondition;
 import com.ala24.bookstore.domain.type.DeliveryStatus;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -19,7 +19,7 @@ import static com.ala24.bookstore.domain.item.QItem.item;
 import static com.ala24.bookstore.domain.member.QMember.member;
 import static com.ala24.bookstore.domain.orders.QOrder.order;
 import static com.ala24.bookstore.domain.orders.QOrderItem.orderItem;
-import static com.ala24.bookstore.domain.orders.condition.OrderSearchCondition.*;
+import static com.ala24.bookstore.web.controller.search.order.OrderSearchCondition.*;
 import static com.ala24.bookstore.domain.type.DeliveryStatus.*;
 
 /**

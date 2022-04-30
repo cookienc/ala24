@@ -1,9 +1,9 @@
 package com.ala24.bookstore.repository.item;
 
 import com.ala24.bookstore.domain.item.Item;
-import com.ala24.bookstore.domain.item.condition.ItemSearch;
-import com.ala24.bookstore.domain.item.condition.ItemSearchCondition;
-import com.ala24.bookstore.domain.item.condition.ItemSortCondition;
+import com.ala24.bookstore.web.controller.search.item.ItemSearch;
+import com.ala24.bookstore.web.controller.search.item.ItemSearchCondition;
+import com.ala24.bookstore.web.controller.search.item.ItemSortCondition;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
@@ -18,7 +18,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 import static com.ala24.bookstore.domain.item.QItem.item;
-import static com.ala24.bookstore.domain.item.condition.ItemSearchCondition.*;
+import static com.ala24.bookstore.web.controller.search.item.ItemSearchCondition.*;
 
 /**
  * ItemSearchRepository를 구현한 저장소 클래스
