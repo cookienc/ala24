@@ -55,11 +55,7 @@ public class OrderSearchRepositoryImpl implements OrderSearchRepository{
 				.fetchResults();
 
 		List<Order> content = results.getResults();
-		long total = queryFactory.selectFrom(order)
-				.join(order.member, member).fetchJoin()
-				.where(findMemberName(condition), findItemName(condition), findDeliveryStatus(condition))
-				.where(findMemberId(loginId))
-				.fetchCount();
+		long total = results.getTotal();
 
 		return new PageImpl<>(content, pageable, total);
 	}
