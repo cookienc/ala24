@@ -2,22 +2,14 @@ spring:
   messages:
     basename: messages, errors
 
-  jpa:
-    hibernate:
-      ddl-auto: create
-    properties:
-      hibernate:
-        format_sql: true
-        default_batch_fetch_size: 1000
-
   data:
     web:
       pageable:
         default-page-size: 10
 
   profiles:
-#    active: operation
-    active: local
+    active: operation
+#    active: local
 
 server:
   servlet:

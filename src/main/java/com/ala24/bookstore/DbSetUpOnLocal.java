@@ -22,7 +22,7 @@ import javax.annotation.PreDestroy;
 @Profile("local")
 @Component
 @RequiredArgsConstructor
-public class DbSetUp {
+public class DbSetUpOnLocal {
 
 	private final MemberService memberService;
 	private final ItemService itemService;

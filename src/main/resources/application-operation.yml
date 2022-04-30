@@ -4,3 +4,15 @@ spring:
     username: root
     password: 19970417
     driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+        default_batch_fetch_size: 1000
+
+  config:
+    activate:
+      on-profile: operation
