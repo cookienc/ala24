@@ -4,6 +4,9 @@
     <div>
         <ul class="nav pull-right">
             <li class="navbar">
+                <div th:if="${session.loginMember} != null"
+                     th:text="|${session.loginMember.name}님 환영합니다.|">
+                </div>
                 <a class="nav-link active" aria-current="page" th:href="@{/}">
                     Home
                 </a>
