@@ -1,4 +1,4 @@
-package com.ala24.bookstore.web.controller.items;
+package com.ala24.bookstore.web.controller.item;
 
 import com.ala24.bookstore.service.ItemService;
 import com.ala24.bookstore.web.dtos.itemdto.ItemFormDto;
