@@ -53,8 +53,9 @@
             <p class="field-error" th:errors="*{stockQuantity}">다시 입력해주세요.</p>
         </div>
         <button class="btn btn-sm btn-info" type="submit">등록</button>
-        <button class="btn btn-sm btn-secondary" type="button" th:onclick="|location.href='history.back'|">취소</button>
+        <button class="btn btn-sm btn-secondary" type="button" id="go-back">취소</button>
     </form>
+    <div th:replace="fragments/script :: goBack"/>
     <div th:replace="fragments/footer :: footer"/>
 </div>
 </body>

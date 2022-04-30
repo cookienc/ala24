@@ -40,18 +40,18 @@ public class DbSetUpOnLocal {
 	}
 
 	private void memberSetUp() {
-		Member test = Member.builder()
-				.name("test")
-				.loginId("test")
-				.password("test")
-				.cash(Cash.charge(100000L))
-				.address(Address.builder()
-						.zipcode(12345)
-						.city("Seoul")
-						.specificAddress("Apartment")
-						.build())
-				.build();
-		memberService.join(test);
+//		Member test = Member.builder()
+//				.name("test")
+//				.loginId("test")
+//				.password("test")
+//				.cash(Cash.charge(100000L))
+//				.address(Address.builder()
+//						.zipcode(12345)
+//						.city("Seoul")
+//						.specificAddress("Apartment")
+//						.build())
+//				.build();
+//		memberService.join(test);
 
 		Member admin = Member.builder()
 				.name("admin")

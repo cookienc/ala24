@@ -40,10 +40,11 @@
         <input type="text" th:field="*{stockQuantity}" class="form-control" placeholder="재고 수량을 입력하세요"/>
     </div>
     <button class="btn btn-sm btn-info" type="submit" th:text="#{button.update}">수정</button>
-    <button class="btn btn-sm btn-secondary" th:onclick="|location.href='history.back'|" th:text="#{button.cancel}">취소
+    <button class="btn btn-sm btn-secondary" type="button" id="go-back" th:text="#{button.cancel}">취소
     </button>
 </form>
-<div th:replace="fragments/footer :: footer"/>
+    <div th:replace="fragments/script :: goBack"/>
+    <div th:replace="fragments/footer :: footer"/>
 </div>
 </body>
 </html>

@@ -8,8 +8,8 @@ spring:
         default-page-size: 10
 
   profiles:
-    active: operation
-#    active: local
+#    active: operation
+    active: local
 
 server:
   servlet:
