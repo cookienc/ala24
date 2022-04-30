@@ -25,7 +25,7 @@ public class AuthorityCheckInterceptor implements HandlerInterceptor {
 		log.info("권한 체크 인터셉터 시작 : {}", requestURI);
 
 		HttpSession session = request.getSession(false);
-		Member member = (Member) session.getAttribute(LOGIN_MEMBER.getName());
+		Member member = (Member) session.getAttribute(LOGIN_MEMBER);
 
 		if (hasNotAuthority(member)) {
 			log.info("권한 없는 사용자 요청");

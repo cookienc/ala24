@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-import static com.ala24.bookstore.web.session.SessionAttributeName.LOGIN_MEMBER;
+import static com.ala24.bookstore.web.session.SessionName.LOGIN_MEMBER;
 
 /**
  * 회원의 돈과 관련된 기능을 수행하는 컨트롤러

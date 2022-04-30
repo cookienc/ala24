@@ -13,7 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import static com.ala24.bookstore.web.pages.DefaultPageButtonSize.DEFAULT_PAGE_BUTTON_RANGE;
-import static com.ala24.bookstore.web.session.SessionAttributeName.LOGIN_MEMBER;
+import static com.ala24.bookstore.web.session.SessionName.LOGIN_MEMBER;
 
 /**
  * 아이템을 조회하는 컨트롤러

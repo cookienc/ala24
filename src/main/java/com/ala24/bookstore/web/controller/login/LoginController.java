@@ -3,7 +3,6 @@ package com.ala24.bookstore.web.controller.login;
 import com.ala24.bookstore.domain.member.Member;
 import com.ala24.bookstore.service.LoginService;
 import com.ala24.bookstore.web.dtos.logindto.LoginFormDto;
-import com.ala24.bookstore.web.session.SessionName;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -19,6 +18,7 @@ import java.util.NoSuchElementException;
 
 import static com.ala24.bookstore.exception.utils.Sentence.DO_NOT_MATCH_PW;
 import static com.ala24.bookstore.exception.utils.Sentence.NO_MEMBER;
+import static com.ala24.bookstore.web.session.SessionName.LOGIN_MEMBER;
 
 /**
  * 로그인을 담당하는 컨트롤러
@@ -72,7 +72,7 @@ public class LoginController {
 		//로그인 성공
 
 		HttpSession session = request.getSession();
-		session.setAttribute(SessionName.LOGIN_MEMBER.getName(), loginMember);
+		session.setAttribute(LOGIN_MEMBER, loginMember);
 
 		return "redirect:/";
 	}

@@ -1,17 +1,8 @@
 package com.ala24.bookstore.web.session;
 
-import lombok.Getter;
-
 /**
- * 로그인 세션의 이름을 나타내는 enum class
+ * 로그인 세션의 이름을 나타내는 클래스
  */
-@Getter
-public enum SessionName {
-
-	LOGIN_MEMBER("loginMember");
-
-	private final String name;
-	private SessionName(String name) {
-		this.name = name;
-	}
+public class SessionName {
+	public static final String LOGIN_MEMBER = "loginMember";
 }

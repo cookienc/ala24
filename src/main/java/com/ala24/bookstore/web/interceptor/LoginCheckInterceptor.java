@@ -1,12 +1,13 @@
 package com.ala24.bookstore.web.interceptor;
 
-import com.ala24.bookstore.web.session.SessionName;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import static com.ala24.bookstore.web.session.SessionName.LOGIN_MEMBER;
 
 /**
  * 로그인 유무를 확인하는 컨트롤러
@@ -34,6 +35,6 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
 
 	private boolean hasNotPermission(HttpSession session) {
 		return session == null ||
-				session.getAttribute(SessionName.LOGIN_MEMBER.getName()) == null;
+				session.getAttribute(LOGIN_MEMBER) == null;
 	}
 }

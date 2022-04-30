@@ -1,7 +1,7 @@
 package com.ala24.bookstore.web.controller.order;
 
-import com.ala24.bookstore.domain.member.Member;
 import com.ala24.bookstore.domain.item.Item;
+import com.ala24.bookstore.domain.member.Member;
 import com.ala24.bookstore.exception.NotEnoughCashException;
 import com.ala24.bookstore.exception.NotEnoughItemException;
 import com.ala24.bookstore.service.ItemService;
@@ -52,7 +52,7 @@ public class OrderController {
 
 		Item findItem = itemService.findOne(itemId);
 		Member findMember = (Member) request.getSession(false)
-				.getAttribute(LOGIN_MEMBER.getName());
+				.getAttribute(LOGIN_MEMBER);
 
 		model.addAttribute("orderForm", new OrderFormDto().toDto(findItem, findMember));
 

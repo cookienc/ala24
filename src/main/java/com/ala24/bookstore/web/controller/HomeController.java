@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
-import static com.ala24.bookstore.web.session.SessionAttributeName.LOGIN_MEMBER;
+import static com.ala24.bookstore.web.session.SessionName.LOGIN_MEMBER;
 
 /**
  * 홈 화면과 관련된 컨트롤러
