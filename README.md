@@ -26,43 +26,54 @@
 ## 4. 구현 기능
 1. 회원 관련
     - 등록 <br/>
-    ![회원가입 mp4](https://user-images.githubusercontent.com/83010167/167323204-e4f316de-18d5-491c-87b4-88b4fe9c005e.gif)
+    ![회원가입 mp4](https://user-images.githubusercontent.com/83010167/167323204-e4f316de-18d5-491c-87b4-88b4fe9c005e.gif) <br/><br/>
 
     - 조회 <br/>
-    ![회원조회 mp4](https://user-images.githubusercontent.com/83010167/167323324-6c9f1504-8215-4618-b2e0-c20d1d03f421.gif)
+    ![회원조회 mp4](https://user-images.githubusercontent.com/83010167/167323324-6c9f1504-8215-4618-b2e0-c20d1d03f421.gif) <br/><br/>
+    
     - 계좌 관리 <br/>
-![계좌관리 mp4](https://user-images.githubusercontent.com/83010167/167323304-4176689d-0941-4f7c-8945-764de74e9a4.gif)
+    ![계좌관리 mp4](https://user-images.githubusercontent.com/83010167/167324636-695c8084-683e-4c76-af90-74f3da93f9f3.gif) <br/>
+
 
     - 검색 <br/>
-    ![회원검색 mp4](https://user-images.githubusercontent.com/83010167/167323339-53c53682-a83d-43c3-936c-b008e254d384.gif)
-3.gif)
+    ![회원검색 mp4](https://user-images.githubusercontent.com/83010167/167323339-53c53682-a83d-43c3-936c-b008e254d384.gif) <br/><br/>
+    
     - 로그인 및 로그아웃 <br/>
-    ![로그인 mp4](https://user-images.githubusercontent.com/83010167/167323326-930173c0-fd07-49df-95f1-2c6af5087182.gif)
-![로그아웃 mp4](https://user-images.githubusercontent.com/83010167/167323328-2c8fdccb-f6e2-4356-8ef7-d8d9a2290eee.gif)
+    ![로그인 mp4](https://user-images.githubusercontent.com/83010167/167323326-930173c0-fd07-49df-95f1-2c6af5087182.gif) <br/>
+    ![로그아웃 mp4](https://user-images.githubusercontent.com/83010167/167323328-2c8fdccb-f6e2-4356-8ef7-d8d9a2290eee.gif) 
+
+
 2. 상품 관련
-    - 등록 <br/>
 
-![상품 등록 mp4](https://user-images.githubusercontent.com/83010167/167323317-e8c45413-b863-453b-af7a-44982bd91b07.gif)
-    - 수정 <br/>
-    ![상품수정 mp4](https://user-images.githubusercontent.com/83010167/167324396-7844d06b-de94-47b2-b8aa-413d3370a79d.gif)
+    - 등록  <br/>
+    ![상품 등록 mp4](https://user-images.githubusercontent.com/83010167/167323317-e8c45413-b863-453b-af7a-44982bd91b07.gif) <br/><br/>
+    
+    - 수정  <br/>
+    ![상품수정 mp4](https://user-images.githubusercontent.com/83010167/167324396-7844d06b-de94-47b2-b8aa-413d3370a79d.gif) <br/><br/>
+    
+    - 조회  <br/>
+    ![상품조회 mp4](https://user-images.githubusercontent.com/83010167/167323323-02d49c2d-7f4a-459b-80ff-f9e1f257f4ee.gif) 
 
-    - 조회 <br/>
 
-![상품조회 mp4](https://user-images.githubusercontent.com/83010167/167323323-02d49c2d-7f4a-459b-80ff-f9e1f257f4ee.gif)
 3. 주문 관련
-    - 주문 <br/>
-    ![상품주문1 mp4](https://user-images.githubusercontent.com/83010167/167323313-32dc6dd0-4d38-448e-a630-c64591a07004.gif)
-![상품주문 mp4](https://user-images.githubusercontent.com/83010167/167323322-a0a03cfe-14b8-440a-be79-a51a5931bf59.gif)
+    - 주문  <br/>
+    ![상품주문1 mp4](https://user-images.githubusercontent.com/83010167/167323313-32dc6dd0-4d38-448e-a630-c64591a07004.gif) <br/>
+    ![상품주문 mp4](https://user-images.githubusercontent.com/83010167/167323322-a0a03cfe-14b8-440a-be79-a51a5931bf59.gif) <br/><br/>
+    
     - 검색 <br/>
-    ![주문검색 mp4](https://user-images.githubusercontent.com/83010167/167323312-170d5588-db5f-437d-a43a-a313489b93a0.gif)
+    ![주문검색 mp4](https://user-images.githubusercontent.com/83010167/167323312-170d5588-db5f-437d-a43a-a313489b93a0.gif) <br/><br/>
+    
     - 주문 취소 <br/>
-    ![주문취소 mp4](https://user-images.githubusercontent.com/83010167/167323319-6f796a25-3961-4de5-b7db-8d4a7b58399e.gif)
-    - 조회 <br/>
+    ![주문취소 mp4](https://user-images.githubusercontent.com/83010167/167323319-6f796a25-3961-4de5-b7db-8d4a7b58399e.gif) <br/><br/>
+    - 조회 
+    <br/>
+    <br/>
+
 4. 기타
-    - 회원 및 회원의 권한 별 화면 구성
-    - 페이징
-    - 검색 및 정렬<br/>
-  ![검색및 페이징 mp4](https://user-images.githubusercontent.com/83010167/167323332-40cd1e11-90bd-4f37-8930-af477a32b415.gif)
+    - 회원 및 회원의 권한 별 화면 구성 <br/>
+    - 페이징 <br/>
+    - 검색 및 정렬 <br/>
+   ![검색및 페이징 mp4](https://user-images.githubusercontent.com/83010167/167323332-40cd1e11-90bd-4f37-8930-af477a32b415.gif) <br/>
 
 ## 5. 배운점 및 아쉬운점
 - 배운점
